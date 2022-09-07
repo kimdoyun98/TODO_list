@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="categoryName">
+        <item>
+            개인
+        </item>
+
+        <item>
+            프로젝트
+        </item>
+    </string-array>
+</resources>
