@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.example.todo_list.data.ToDoEntity
 import com.example.todo_list.data.ToDoRepository
 import java.util.*
@@ -15,11 +16,12 @@ class RegistrationActivity : AppCompatActivity() {
     private var month = calendar.get(Calendar.MONTH)
     private var day = calendar.get(Calendar.DAY_OF_MONTH)
     lateinit var repository: ToDoRepository
+    private lateinit var viewmodel : ToDoViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
-        repository = ToDoRepository.getInstance()
+        viewmodel = ViewModelProvider(this).get(ToDoViewModel::class.java)
 
         val title = findViewById<EditText>(R.id.title)
         val content = findViewById<EditText>(R.id.content)
@@ -70,7 +72,7 @@ class RegistrationActivity : AppCompatActivity() {
                 importance = ratingbar.rating,
                 success = false
             )
-            repository.insert(newTodo)
+            viewmodel.insert(newTodo)
 
             finish()
         }

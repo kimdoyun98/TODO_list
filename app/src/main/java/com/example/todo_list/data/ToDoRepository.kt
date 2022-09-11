@@ -1,34 +1,17 @@
 package com.example.todo_list.data
 
-import android.annotation.SuppressLint
 import android.app.Application
-import android.os.AsyncTask
-import android.util.Log
-import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
-import com.example.todo_list.Adapter.PersonalAdapter
 import com.example.todo_list.MyApplication
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 class ToDoRepository(application: Application) {
-    private val todoDB = ToDoDB.getInstance(application)!!
-    private val todoDao = todoDB.todoDao()
+    private val todoDataBase = ToDoDataBase.getInstance(application)!!
+    private val todoDao = todoDataBase.todoDao()
     private var category: String? = null
-    private var list : List<ToDoEntity>? = null
-
-    init {
-        try {
-            CoroutineScope(Dispatchers.IO).launch {
-                list = todoDao.getMatchCategoryAll()
-                Log.e("try", list.toString())
-            }
-        }
-        catch (e: Exception){
-        }
-    }
+    private var list : LiveData<List<ToDoEntity>> = todoDao.getMatchCategoryAll()
 
     companion object{
         private var sInstance: ToDoRepository? = null
@@ -42,7 +25,7 @@ class ToDoRepository(application: Application) {
         }
     }
 
-    fun select (category: String): List<ToDoEntity>? {
+    fun select (): LiveData<List<ToDoEntity>> {
         return this.list
     }
 

@@ -8,7 +8,7 @@ interface ToDoDAO {
 //    @Query("SELECT *FROM todoentity WHERE category MATCH :category AND success MATCH :suc")
 //    fun getMatchCategoryAll(category:String?, suc:Boolean? = false): List<ToDoEntity>
     @Query("SELECT * FROM todoentity")
-    fun getMatchCategoryAll(): List<ToDoEntity>
+    fun getMatchCategoryAll(): LiveData<List<ToDoEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(toDoEntity: ToDoEntity)

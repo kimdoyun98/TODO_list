@@ -2,29 +2,32 @@ package com.example.todo_list.Fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.todo_list.Adapter.PersonalAdapter
 import com.example.todo_list.MyApplication
-import com.example.todo_list.R
 import com.example.todo_list.RegistrationActivity
-import com.example.todo_list.data.ToDoDB
+import com.example.todo_list.ToDoViewModel
+import com.example.todo_list.data.ToDoDataBase
 import com.example.todo_list.data.ToDoEntity
 import com.example.todo_list.data.ToDoRepository
+import com.example.todo_list.databinding.FragmentPersonalBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class PersonalFragment : Fragment() {
-    lateinit var repository: ToDoRepository
-    lateinit var database : ToDoDB
-    lateinit var recyclerView : RecyclerView
+    lateinit var database : ToDoDataBase
+    lateinit var binding : FragmentPersonalBinding
+    private lateinit var viewModel: ToDoViewModel
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,57 +37,29 @@ class PersonalFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view : View = inflater.inflate(R.layout.fragment_personal, container, false)
-        val add_button = view.findViewById<Button>(R.id.add_button)
-        /***
-         * repository using
-         */
-//        repository = ToDoRepository.getInstance()
-//        var list = repository.select("개인")
-//
-        recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
-//        var personalAdapter = PersonalAdapter(MyApplication.instance, list)
-//
-//        recyclerView.layoutManager = LinearLayoutManager(activity)
-//        recyclerView.adapter = personalAdapter
+        binding = FragmentPersonalBinding.inflate(layoutInflater)
 
-        /***
-         * Not use repository
+        /**
+         * use LiveData & ViewModel
          */
-        database = ToDoDB.getInstance(MyApplication.instance)!!
-        recyclerView.layoutManager = LinearLayoutManager(activity)
-        select(null)
+        val adapter = PersonalAdapter(MyApplication.instance)
+        val recyclerView = binding.recyclerView
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        viewModel = ViewModelProvider(this).get(ToDoViewModel::class.java)
+        viewModel.data.observe(viewLifecycleOwner, Observer { list ->
+            adapter.setData(list)
+        })
 
         /***
          * 추가 버튼
          */
-        add_button.setOnClickListener{
+        binding.addButton.setOnClickListener{
             val intent = Intent(context, RegistrationActivity::class.java)
             startActivity(intent)
         }
 
-        return view
-    }
-
-    fun select (category: String?){
-        try {
-            CoroutineScope(Dispatchers.IO).launch {
-                val list = database.todoDao().getMatchCategoryAll()
-                val personalAdapter = PersonalAdapter(MyApplication.instance, list)
-                recyclerView.adapter = personalAdapter
-            }
-        }
-        catch (e: Exception){
-        }
-    }
-
-    fun insert (toDoEntity: ToDoEntity){
-        try {
-            CoroutineScope(Dispatchers.IO).launch {
-                database.todoDao().insert(toDoEntity)
-            }
-        }
-        catch (e: Exception){
-        }
+        return binding.root
     }
 }

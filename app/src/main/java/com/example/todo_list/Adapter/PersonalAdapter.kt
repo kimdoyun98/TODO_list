@@ -10,8 +10,9 @@ import com.example.todo_list.Adapter.PersonalAdapter.MyViewHolder
 import com.example.todo_list.R
 import com.example.todo_list.data.ToDoEntity
 
-class PersonalAdapter(val context: Context,
-                      val list : List<ToDoEntity>) : RecyclerView.Adapter<MyViewHolder>(){
+class PersonalAdapter(val context: Context) : RecyclerView.Adapter<MyViewHolder>(){
+
+    private var list = emptyList<ToDoEntity>()
 
     // Controller
     inner class MyViewHolder(v: View) : RecyclerView.ViewHolder(v){
@@ -40,4 +41,10 @@ class PersonalAdapter(val context: Context,
     override fun getItemCount(): Int {
         return list.size
     }
+
+    fun setData(data: List<ToDoEntity>){
+        this.list = data
+        notifyDataSetChanged()
+    }
+
 }
