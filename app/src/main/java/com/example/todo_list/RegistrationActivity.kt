@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.todo_list.data.ToDoEntity
 import com.example.todo_list.data.ToDoRepository
+import com.example.todo_list.databinding.ActivityRegistrationBinding
 import java.util.*
 
 class RegistrationActivity : AppCompatActivity() {
@@ -15,61 +16,51 @@ class RegistrationActivity : AppCompatActivity() {
     private var year = calendar.get(Calendar.YEAR)
     private var month = calendar.get(Calendar.MONTH)
     private var day = calendar.get(Calendar.DAY_OF_MONTH)
-    lateinit var repository: ToDoRepository
     private lateinit var viewmodel : ToDoViewModel
+    private lateinit var binding : ActivityRegistrationBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_registration)
-        viewmodel = ViewModelProvider(this).get(ToDoViewModel::class.java)
+        binding = ActivityRegistrationBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val title = findViewById<EditText>(R.id.title)
-        val content = findViewById<EditText>(R.id.content)
-        val ratingbar = findViewById<RatingBar>(R.id.ratingBar)
+        viewmodel = ViewModelProvider(this).get(ToDoViewModel::class.java)
 
         /**
          * Spinner (카테고리) 설정
          */
-        val category = findViewById<Spinner>(R.id.category)
+        //val category = findViewById<Spinner>(R.id.category)
         var category_adapter = ArrayAdapter.createFromResource(this,
                                                         R.array.categoryName, android.R.layout.simple_spinner_item)
 
         category_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        category.adapter = category_adapter
+        binding.category.adapter = category_adapter
 
 
         /**
          * DatePicker 사용 / 날짜 선택 시 TextView에 해당 날짜 입력
          */
-        val startdate = findViewById<TextView>(R.id.start_date)
-        val deadlinedate = findViewById<TextView>(R.id.deadline_date)
-
-        val startimage = findViewById<ImageView>(R.id.start_image)
-        startimage.setOnClickListener{
-            Datepicker(startdate)
+        binding.startImage.setOnClickListener{
+            Datepicker(binding.startDate)
         }
 
-        val deadlineimage = findViewById<ImageView>(R.id.deadline_image)
-        deadlineimage.setOnClickListener{
-            Datepicker(deadlinedate)
+        binding.deadlineImage.setOnClickListener{
+            Datepicker(binding.deadlineDate)
         }
-
 
         // 취소 버튼
-        val cancel = findViewById<Button>(R.id.cancel_button)
-        cancel.setOnClickListener{ finish() }
+        binding.cancelButton.setOnClickListener{ finish() }
 
         // 등록 버튼
-        val register = findViewById<Button>(R.id.register_button)
-        register.setOnClickListener{
+        binding.registerButton.setOnClickListener{
 
             val newTodo = ToDoEntity(
-                category = category.selectedItem.toString(),
-                title = title.text.toString(),
-                content = content.text.toString(),
-                start_date = startdate.text.toString(),
-                deadline_date = deadlinedate.text.toString(),
-                importance = ratingbar.rating,
+                category = binding.category.selectedItem.toString(),
+                title = binding.title.text.toString(),
+                content = binding.content.text.toString(),
+                start_date = binding.startDate.text.toString(),
+                deadline_date = binding.deadlineDate.text.toString(),
+                importance = binding.ratingBar.rating,
                 success = false
             )
             viewmodel.insert(newTodo)

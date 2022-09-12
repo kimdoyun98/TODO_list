@@ -5,14 +5,15 @@ import androidx.room.*
 
 @Dao
 interface ToDoDAO {
-//    @Query("SELECT *FROM todoentity WHERE category MATCH :category AND success MATCH :suc")
-//    fun getMatchCategoryAll(category:String?, suc:Boolean? = false): List<ToDoEntity>
+    @Query("SELECT * FROM todoentity WHERE category = :category AND success = :suc")
+    fun getMatchCategory(category:String?, suc:Boolean? = false): LiveData<List<ToDoEntity>>
+
     @Query("SELECT * FROM todoentity")
-    fun getMatchCategoryAll(): LiveData<List<ToDoEntity>>
+    fun getAll(): LiveData<List<ToDoEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(toDoEntity: ToDoEntity)
 
-    @Delete
-    fun delete(toDoEntity: ToDoEntity)
+    @Query("Delete From todoentity WHERE id = :id")
+    fun delete(id : Int): Int
 }

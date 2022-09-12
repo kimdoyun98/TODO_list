@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <import type="com.example.todo_list.data.ToDoEntity"/>
+        <variable
+            name="todoEntity"
+            type="com.example.todo_list.data.ToDoEntity" />
+    </data>
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -63,7 +72,8 @@
             android:backgroundTint="#FFFFFF"
             android:ems="10"
             android:inputType="textPersonName"
-            android:paddingLeft="20dp" />
+            android:paddingLeft="20dp"
+            android:text="@{todoEntity.title}"/>
     </LinearLayout>
 
     <LinearLayout
@@ -93,6 +103,7 @@
             android:inputType="textMultiLine"
             android:lines="5"
             android:maxLines="5"
+            android:text="@{todoEntity.content}"
             android:textSize="20dp"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"/>
@@ -139,7 +150,8 @@
                 android:ems="10"
                 android:gravity="center"
                 android:inputType="textPersonName"
-                android:textSize="30dp" />
+                android:textSize="30dp"
+                android:text="@{todoEntity.start_date}"/>
 
             <ImageView
                 android:id="@+id/start_image"
@@ -181,7 +193,8 @@
                 android:ems="10"
                 android:gravity="center"
                 android:inputType="textPersonName"
-                android:textSize="30dp" />
+                android:textSize="30dp"
+                android:text="@{todoEntity.deadline_date}"/>
 
             <ImageView
                 android:id="@+id/deadline_image"
@@ -217,7 +230,9 @@
             android:isIndicator="false"
             android:numStars="5"
             android:stepSize="1"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:rating="@{todoEntity.importance}"/>
 
     </LinearLayout>
 </LinearLayout>
+</layout>

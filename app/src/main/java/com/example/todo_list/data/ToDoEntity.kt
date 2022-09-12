@@ -1,8 +1,10 @@
 package com.example.todo_list.data
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.io.Serializable
 
 @Entity
 data class ToDoEntity(
@@ -15,6 +17,4 @@ data class ToDoEntity(
     val deadline_date: String?,
     val importance: Float?,
     @ColumnInfo(defaultValue = "false") val success: Boolean?
-
-
-)
+): Serializable

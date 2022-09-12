@@ -2,6 +2,7 @@ package com.example.todo_list.Fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +11,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.ItemTouchHelper.SimpleCallback
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.todo_list.Adapter.PersonalAdapter
 import com.example.todo_list.MyApplication
 import com.example.todo_list.RegistrationActivity
@@ -24,8 +28,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class PersonalFragment : Fragment() {
-    lateinit var database : ToDoDataBase
-    lateinit var binding : FragmentPersonalBinding
+    private lateinit var binding : FragmentPersonalBinding
     private lateinit var viewModel: ToDoViewModel
 
 
@@ -39,18 +42,22 @@ class PersonalFragment : Fragment() {
     ): View? {
         binding = FragmentPersonalBinding.inflate(layoutInflater)
 
+
         /**
          * use LiveData & ViewModel
          */
-        val adapter = PersonalAdapter(MyApplication.instance)
+        viewModel = ViewModelProvider(this).get(ToDoViewModel::class.java)
+        val adapter = PersonalAdapter(requireContext(), viewModel)
         val recyclerView = binding.recyclerView
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        viewModel = ViewModelProvider(this).get(ToDoViewModel::class.java)
-        viewModel.data.observe(viewLifecycleOwner, Observer { list ->
+        viewModel.dataPersonal.observe(viewLifecycleOwner, Observer { list ->
+            Log.e("observer", list.toString())
             adapter.setData(list)
+            adapter.notifyDataSetChanged()
         })
+
 
         /***
          * 추가 버튼

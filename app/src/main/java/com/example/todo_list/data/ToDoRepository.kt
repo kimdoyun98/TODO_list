@@ -11,7 +11,9 @@ class ToDoRepository(application: Application) {
     private val todoDataBase = ToDoDataBase.getInstance(application)!!
     private val todoDao = todoDataBase.todoDao()
     private var category: String? = null
-    private var list : LiveData<List<ToDoEntity>> = todoDao.getMatchCategoryAll()
+    private var listAll : LiveData<List<ToDoEntity>> = todoDao.getAll()
+    private var listPersonal : LiveData<List<ToDoEntity>> = todoDao.getMatchCategory("개인")
+    private var listProject : LiveData<List<ToDoEntity>> = todoDao.getMatchCategory("프로젝트")
 
     companion object{
         private var sInstance: ToDoRepository? = null
@@ -25,8 +27,26 @@ class ToDoRepository(application: Application) {
         }
     }
 
-    fun select (): LiveData<List<ToDoEntity>> {
-        return this.list
+    fun selectAll (): LiveData<List<ToDoEntity>> {
+        return this.listAll
+    }
+
+    fun selectPersonal() : LiveData<List<ToDoEntity>>{
+        return this.listPersonal
+    }
+
+    fun selectProject() : LiveData<List<ToDoEntity>>{
+        return this.listProject
+    }
+
+    fun delete(id : Int) {
+        try {
+            CoroutineScope(Dispatchers.IO).launch {
+                todoDao.delete(id)
+            }
+        }
+        catch (e: Exception){
+        }
     }
 
     fun insert (toDoEntity: ToDoEntity){
