@@ -32,4 +32,12 @@ class ToDoViewModel(application: Application) : AndroidViewModel(application) {
         repository.delete(id)
     }
 
+    fun update(toDoEntity: ToDoEntity){
+        repository.update(toDoEntity)
+    }
+
+    fun success(id : Int){
+        repository.success(id)
+    }
+
 }

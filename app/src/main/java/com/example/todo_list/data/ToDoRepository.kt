@@ -58,4 +58,25 @@ class ToDoRepository(application: Application) {
         catch (e: Exception){
         }
     }
+
+    fun update (toDoEntity: ToDoEntity){
+        try {
+            CoroutineScope(Dispatchers.IO).launch {
+                todoDao.update(toDoEntity)
+            }
+        }
+        catch (e: Exception){
+        }
+    }
+
+    fun success(id: Int){
+        try {
+            CoroutineScope(Dispatchers.IO).launch {
+                todoDao.success(id)
+            }
+        }
+        catch (e: Exception){
+        }
+    }
+
 }

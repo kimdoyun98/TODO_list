@@ -53,9 +53,7 @@ class PersonalFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         viewModel.dataPersonal.observe(viewLifecycleOwner, Observer { list ->
-            Log.e("observer", list.toString())
             adapter.setData(list)
-            adapter.notifyDataSetChanged()
         })
 
 

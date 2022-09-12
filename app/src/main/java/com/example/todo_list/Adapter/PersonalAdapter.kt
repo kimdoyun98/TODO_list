@@ -4,7 +4,6 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +13,6 @@ import com.example.todo_list.DetailActivity
 import com.example.todo_list.ToDoViewModel
 import com.example.todo_list.data.ToDoEntity
 import com.example.todo_list.databinding.RecyclerviewBinding
-import java.io.Serializable
 
 class PersonalAdapter(val context: Context, val viewModel: ToDoViewModel) : RecyclerView.Adapter<MyViewHolder>(){
     private lateinit var binding : RecyclerviewBinding
@@ -31,18 +29,18 @@ class PersonalAdapter(val context: Context, val viewModel: ToDoViewModel) : Recy
                 builder.setItems(item,
                     DialogInterface.OnClickListener { dialog, which ->
                         when (which) {
-                            0 -> {
-                                Log.d("상세", list[pos].title.toString())
+                            0 -> { // 상세
                                 val intent = Intent(context, DetailActivity::class.java)
                                 intent.putExtra("data", list[pos])
                                 v.context.startActivity(intent)
                             }
-                            1 -> {
-                                viewModel!!.delete(list[pos].id)
+                            1 -> { // 삭제
+                                viewModel.delete(list[pos].id)
                                 notifyItemRemoved(pos)
-                                Log.d("delete", list[pos].title.toString())
                             }
-                            2 -> Log.d("when", "완료")
+                            2 -> { // 완료
+                                viewModel.success(list[pos].id)
+                            }
                         }
                     })
                 builder.show()
@@ -71,6 +69,7 @@ class PersonalAdapter(val context: Context, val viewModel: ToDoViewModel) : Recy
 
     fun setData(data: List<ToDoEntity>){
         this.list = data
+        notifyDataSetChanged()
     }
 
 }
