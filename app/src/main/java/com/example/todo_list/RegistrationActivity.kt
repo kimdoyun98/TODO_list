@@ -61,7 +61,7 @@ class RegistrationActivity : AppCompatActivity() {
                 success = false
             )
             viewmodel.insert(newTodo)
-
+            Log.e("RegistrationActivity", "등록")
             finish()
         }
     }

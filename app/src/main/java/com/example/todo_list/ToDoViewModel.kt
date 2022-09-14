@@ -1,20 +1,17 @@
 package com.example.todo_list
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import com.example.todo_list.data.ToDoEntity
 import com.example.todo_list.data.ToDoRepository
 
 class ToDoViewModel(application: Application) : AndroidViewModel(application) {
-    val dataAll : LiveData<List<ToDoEntity>>
-    val dataPersonal : LiveData<List<ToDoEntity>>
     private val repository : ToDoRepository = ToDoRepository.getInstance()
-
-    init {
-        dataAll = getAll()
-        dataPersonal = getPersonal()
-    }
+    var sortFilter: MutableLiveData<Int> = MutableLiveData<Int>(1)
 
     fun getAll() : LiveData<List<ToDoEntity>> {
         return repository.selectAll()
@@ -22,6 +19,10 @@ class ToDoViewModel(application: Application) : AndroidViewModel(application) {
 
     fun getPersonal() : LiveData<List<ToDoEntity>>{
         return repository.selectPersonal()
+    }
+
+    fun getProject() : LiveData<List<ToDoEntity>>{
+        return repository.selectProject()
     }
 
     fun insert(toDoEntity: ToDoEntity){
@@ -38,6 +39,25 @@ class ToDoViewModel(application: Application) : AndroidViewModel(application) {
 
     fun success(id : Int){
         repository.success(id)
+    }
+
+
+    fun onClickSetFilterLATEST() {
+        sortFilter.value = LATEST
+    }
+
+    fun onClickSetFilterDEADLINE() {
+        sortFilter.value = DEADLINE
+    }
+
+    fun onClickSetFilterRATING() {
+        sortFilter.value = RATING
+    }
+
+    companion object {
+        const val LATEST = 1
+        const val DEADLINE = 2
+        const val RATING = 3
     }
 
 }

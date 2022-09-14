@@ -5,11 +5,11 @@ import androidx.room.*
 
 @Dao
 interface ToDoDAO {
+    @Query("SELECT * FROM todoentity WHERE success = :suc")
+    fun getAll(suc:Boolean = false): LiveData<List<ToDoEntity>>
+
     @Query("SELECT * FROM todoentity WHERE category = :category AND success = :suc")
     fun getMatchCategory(category:String?, suc:Boolean = false): LiveData<List<ToDoEntity>>
-
-    @Query("SELECT * FROM todoentity")
-    fun getAll(): LiveData<List<ToDoEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(toDoEntity: ToDoEntity)

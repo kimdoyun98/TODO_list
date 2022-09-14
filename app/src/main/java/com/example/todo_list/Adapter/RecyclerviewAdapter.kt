@@ -4,19 +4,22 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.todo_list.Adapter.PersonalAdapter.MyViewHolder
+import com.example.todo_list.Adapter.RecyclerviewAdapter.MyViewHolder
+import com.example.todo_list.Common.DiffUtilCallBack
 import com.example.todo_list.DetailActivity
 import com.example.todo_list.ToDoViewModel
 import com.example.todo_list.data.ToDoEntity
 import com.example.todo_list.databinding.RecyclerviewBinding
 
-class PersonalAdapter(val context: Context, val viewModel: ToDoViewModel) : RecyclerView.Adapter<MyViewHolder>(){
+class RecyclerviewAdapter(val context: Context, val viewModel: ToDoViewModel) : RecyclerView.Adapter<MyViewHolder>(){
     private lateinit var binding : RecyclerviewBinding
-    private var list = emptyList<ToDoEntity>()
+    private var list : MutableList<ToDoEntity> = mutableListOf()
 
     // Controller
     inner class MyViewHolder(v: View) : RecyclerView.ViewHolder(v){
@@ -36,7 +39,6 @@ class PersonalAdapter(val context: Context, val viewModel: ToDoViewModel) : Recy
                             }
                             1 -> { // 삭제
                                 viewModel.delete(list[pos].id)
-                                notifyItemRemoved(pos)
                             }
                             2 -> { // 완료
                                 viewModel.success(list[pos].id)
@@ -67,9 +69,17 @@ class PersonalAdapter(val context: Context, val viewModel: ToDoViewModel) : Recy
         return list.size
     }
 
-    fun setData(data: List<ToDoEntity>){
-        this.list = data
-        notifyDataSetChanged()
+    fun setData(list: List<ToDoEntity>){
+        list?.let {
+            val diffCallback = DiffUtilCallBack(this.list, list)
+            val diffResult = DiffUtil.calculateDiff(diffCallback)
+
+            this.list.run {
+                clear()
+                addAll(list)
+                diffResult.dispatchUpdatesTo(this@RecyclerviewAdapter)
+            }
+        }
     }
 
 }
