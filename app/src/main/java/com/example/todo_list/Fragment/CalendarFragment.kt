@@ -5,11 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.todo_list.databinding.FragmentCalenderBinding
-import com.example.todo_list.databinding.FragmentTodoBinding
+import com.example.todo_list.databinding.FragmentCalendarBinding
 
-class CalenderFragment : Fragment() {
-    private lateinit var binding : FragmentCalenderBinding
+class CalendarFragment : Fragment() {
+    private lateinit var binding : FragmentCalendarBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -18,7 +17,7 @@ class CalenderFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentCalenderBinding.inflate(layoutInflater)
+        binding = FragmentCalendarBinding.inflate(layoutInflater)
 
         return binding.root
     }

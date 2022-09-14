@@ -16,12 +16,12 @@
         tools:layout="@layout/fragment_todo" />
     <fragment
         android:id="@+id/calendarFragment"
-        android:name="com.example.todo_list.Fragment.CalenderFragment"
+        android:name="com.example.todo_list.Fragment.CalendarFragment"
         android:label="fragment_project"
-        tools:layout="@layout/fragment_setting" />
+        tools:layout="@layout/fragment_calendar" />
     <fragment
         android:id="@+id/settingFragment"
         android:name="com.example.todo_list.Fragment.SettingFragment"
         android:label="fragment_calender"
-        tools:layout="@layout/fragment_calender" />
+        tools:layout="@layout/fragment_setting" />
 </navigation>
