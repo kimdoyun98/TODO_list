@@ -4,6 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
     <data>
+        <import type="androidx.core.content.ContextCompat" />
+        <import type="com.example.todo_list.R"/>
         <variable
             name="todoViewModel"
             type="com.example.todo_list.ToDoViewModel" />
@@ -40,7 +42,7 @@
                 android:background="?attr/selectableItemBackground"
                 android:onClick="@{()->todoViewModel.onClickSetFilterLATEST()}"
                 android:text="최신순"
-                android:textColor="@color/black"
+                android:textColor="@{todoViewModel.isSortedByLatest()? ContextCompat.getColor(context, R.color.filter):ContextCompat.getColor(context, R.color.black)}"
                 android:textStyle="bold" />
 
             <androidx.appcompat.widget.AppCompatButton
@@ -51,7 +53,7 @@
                 android:background="?attr/selectableItemBackground"
                 android:onClick="@{()->todoViewModel.onClickSetFilterDEADLINE()}"
                 android:text="마감순"
-                android:textColor="@color/black"
+                android:textColor="@{todoViewModel.isSortedByDeadline()? ContextCompat.getColor(context, R.color.filter):ContextCompat.getColor(context, R.color.black)}"
                 android:textStyle="bold" />
 
             <androidx.appcompat.widget.AppCompatButton
@@ -62,7 +64,7 @@
                 android:background="?attr/selectableItemBackground"
                 android:onClick="@{()->todoViewModel.onClickSetFilterRATING()}"
                 android:text="중요도순"
-                android:textColor="@color/black"
+                android:textColor="@{todoViewModel.isSortedByRating()? ContextCompat.getColor(context, R.color.filter):ContextCompat.getColor(context, R.color.black)}"
                 android:textStyle="bold" />
         </LinearLayout>
 

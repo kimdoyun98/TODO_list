@@ -28,7 +28,6 @@ class ToDoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentTodoBinding.inflate(layoutInflater)
-
         binding.todoViewModel = viewModel
 
 

@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        R.color.purple_500
         val navController = findNavController(R.id.main_fragment)
 
         binding.navBar.setupWithNavController(navController)
