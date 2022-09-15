@@ -20,6 +20,7 @@ abstract class BaseFragment(@LayoutRes layoutRes: Int) : Fragment(layoutRes) {
     val homeActivityToolbar: Toolbar
         get() = (requireActivity() as MainActivity).binding.toolbar
 
+
     override fun onStart() {
         super.onStart()
         if (this is HasToolbar) {
