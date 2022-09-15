@@ -1,27 +1,23 @@
 package com.example.todo_list.Fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
-import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
-import android.widget.FrameLayout
 import android.widget.TextView
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.view.children
-import androidx.core.view.isVisible
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todo_list.*
-import com.example.todo_list.Adapter.Example3EventsAdapter
+import com.example.todo_list.Adapter.EventsAdapter
+import com.example.todo_list.Common.DiffUtilCallBack
 import com.example.todo_list.data.Event
+import com.example.todo_list.data.ToDoEntity
 import com.example.todo_list.databinding.CalendarDayBinding
 import com.example.todo_list.databinding.CalendarHeaderBinding
 import com.example.todo_list.databinding.FragmentCalendarBinding
-import com.example.todo_list.inputMethodManager
-import com.example.todo_list.setTextColorRes
 import com.kizitonwose.calendarview.model.CalendarDay
 import com.kizitonwose.calendarview.model.CalendarMonth
 import com.kizitonwose.calendarview.model.DayOwner
@@ -31,55 +27,12 @@ import com.kizitonwose.calendarview.ui.ViewContainer
 import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
-import java.util.*
 
 class CalendarFragment : BaseFragment(R.layout.fragment_calendar) {
     private lateinit var binding : FragmentCalendarBinding
+    private val viewModel : ToDoViewModel by viewModels()
 
-    private val eventsAdapter = Example3EventsAdapter {
-        AlertDialog.Builder(requireContext())
-            .setMessage("Delete this event?")
-            .setPositiveButton("Delete") { _, _ ->
-                deleteEvent(it)
-            }
-            .setNegativeButton("Close", null)
-            .show()
-    }
-
-    private val inputDialog by lazy {
-        val editText = AppCompatEditText(requireContext())
-        val layout = FrameLayout(requireContext()).apply {
-            // Setting the padding on the EditText only pads the input area
-            // not the entire EditText so we wrap it in a FrameLayout.
-            val padding = dpToPx(20, requireContext())
-            setPadding(padding, padding, padding, padding)
-            addView(editText, FrameLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-            ))
-        }
-        AlertDialog.Builder(requireContext())
-            .setTitle("Enter event title")
-            .setView(layout)
-            .setPositiveButton("Save") { _, _ ->
-                saveEvent(editText.text.toString())
-                // Prepare EditText for reuse.
-                editText.setText("")
-            }
-            .setNegativeButton("Close", null)
-            .create()
-            .apply {
-                setOnShowListener {
-                    // Show the keyboard
-                    editText.requestFocus()
-                    context.inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
-                }
-                setOnDismissListener {
-                    // Hide the keyboard
-                    context.inputMethodManager.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
-                }
-            }
-    }
+    private val eventsAdapter = EventsAdapter {}
 
     private var selectedDate: LocalDate? = null
     private val today = LocalDate.now()
@@ -87,20 +40,27 @@ class CalendarFragment : BaseFragment(R.layout.fragment_calendar) {
     private val titleSameYearFormatter = DateTimeFormatter.ofPattern("MMMM")
     private val titleFormatter = DateTimeFormatter.ofPattern("MMM yyyy")
     private val selectionFormatter = DateTimeFormatter.ofPattern("d MMM yyyy")
-    private val events = mutableMapOf<LocalDate, List<Event>>()
+    private val selectionFormatter2 = DateTimeFormatter.ofPattern("yyyyMMdd ")
 
 
-
-    //TODO
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentCalendarBinding.bind(view)
+
+        /**
+         * 날짜에 해당하는 일정 표시 Recyclerview
+         */
         binding.exThreeRv.apply {
             layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
             adapter = eventsAdapter
             addItemDecoration(DividerItemDecoration(requireContext(), RecyclerView.VERTICAL))
         }
 
+
+        /**
+         * com.kizitonwose.calendarview.CalendarView
+         * Calendar setting
+         */
         val daysOfWeek = daysOfWeekFromLocale()
         val currentMonth = YearMonth.now()
         binding.exThreeCalendar.apply {
@@ -127,41 +87,55 @@ class CalendarFragment : BaseFragment(R.layout.fragment_calendar) {
                 }
             }
         }
+        /**
+         * com.kizitonwose.calendarview.CalendarView
+         * 선택한 날짜에 대한 xml setting
+         */
         binding.exThreeCalendar.dayBinder = object : DayBinder<DayViewContainer> {
             override fun create(view: View) = DayViewContainer(view)
             override fun bind(container: DayViewContainer, day: CalendarDay) {
                 container.day = day
                 val textView = container.binding.exThreeDayText
-                val dotView = container.binding.exThreeDotView
 
                 textView.text = day.date.dayOfMonth.toString()
 
                 if (day.owner == DayOwner.THIS_MONTH) {
                     textView.makeVisible()
+                    var date : String = selectionFormatter2.format(day.date)
                     when (day.date) {
                         today -> {
+                            date = date.substring(0 until 8) // date 마지막 인덱스가 공백, 제거 안해주면 마지막 날 표시가 안됨
                             textView.setTextColorRes(R.color.white)
                             textView.setBackgroundResource(R.drawable.today_bg)
-                            dotView.makeInVisible()
+                            viewModel.getOnDate(date).observe(viewLifecycleOwner) { data ->
+                                updateAdapterForDate(today!!, data)
+                            }
                         }
                         selectedDate -> {
+                            date = date.substring(0 until 8)
+                            viewModel.getOnDate(date).observe(viewLifecycleOwner) { data ->
+                                updateAdapterForDate(selectedDate!!, data)
+                            }
+
                             textView.setTextColorRes(R.color.blue)
                             textView.setBackgroundResource(R.drawable.selected_bg)
-                            dotView.makeInVisible()
                         }
+                        // 선택되지 않은 날짜들
                         else -> {
                             textView.setTextColorRes(R.color.black)
                             textView.background = null
-                            dotView.isVisible = events[day.date].orEmpty().isNotEmpty()
                         }
                     }
                 } else {
                     textView.makeInVisible()
-                    dotView.makeInVisible()
+                    //dotView.makeInVisible()
                 }
             }
         }
 
+        /**
+         * ActionBar 였던 곳
+         */
 //        binding.exThreeCalendar.monthScrollListener = {
 //            homeActivityToolbar.title = if (it.year == today.year) {
 //            "it.year == today.year"
@@ -179,6 +153,10 @@ class CalendarFragment : BaseFragment(R.layout.fragment_calendar) {
         class MonthViewContainer(view: View) : ViewContainer(view) {
             val legendLayout = CalendarHeaderBinding.bind(view).legendLayout.root
         }
+
+        /**
+         * com.kizitonwose.calendarview.CalendarView
+         */
         binding.exThreeCalendar.monthHeaderBinder = object :
             MonthHeaderFooterBinder<MonthViewContainer> {
             override fun create(view: View) = MonthViewContainer(view)
@@ -193,47 +171,30 @@ class CalendarFragment : BaseFragment(R.layout.fragment_calendar) {
                 }
             }
         }
-
-        binding.exThreeAddButton.setOnClickListener {
-            inputDialog.show()
-        }
     }
 
-
-
-    //TODO END
+    /**
+     * 날짜 선택 시 호출
+     */
     private fun selectDate(date: LocalDate) {
         if (selectedDate != date) {
             val oldDate = selectedDate
             selectedDate = date
             oldDate?.let { binding.exThreeCalendar.notifyDateChanged(it) }
             binding.exThreeCalendar.notifyDateChanged(date)
-            updateAdapterForDate(date)
         }
     }
 
-    private fun saveEvent(text: String) {
-        if (text.isBlank()) {
-            Toast.makeText(requireContext(), "Text is Empty", Toast.LENGTH_LONG).show()
-        } else {
-            selectedDate?.let {
-                events[it] = events[it].orEmpty().plus(Event(UUID.randomUUID().toString(), text, it))
-                updateAdapterForDate(it)
-            }
-        }
-    }
-
-    private fun deleteEvent(event: Event) {
-        val date = event.date
-        events[date] = events[date].orEmpty().minus(event)
-        updateAdapterForDate(date)
-    }
-
-    private fun updateAdapterForDate(date: LocalDate) {
+    /**
+     * EventAdapter 데이터 초기화
+     */
+    private fun updateAdapterForDate(date: LocalDate, data : List<ToDoEntity>) {
         eventsAdapter.apply {
-            events.clear()
-            events.addAll(this@CalendarFragment.events[date].orEmpty())
-            notifyDataSetChanged()
+            val diffCallback = DiffUtilCallBack(list, data)
+            val diffResult = DiffUtil.calculateDiff(diffCallback)
+            list.clear()
+            list.addAll(data)
+            diffResult.dispatchUpdatesTo(this@apply)
         }
         binding.exThreeSelectedDateText.text = selectionFormatter.format(date)
     }

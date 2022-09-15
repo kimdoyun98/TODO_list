@@ -52,13 +52,5 @@
 
     </androidx.core.widget.NestedScrollView>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/exThreeAddButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:layout_margin="20dp"
-        app:tint="@color/white"
-        app:srcCompat="@android:drawable/ic_input_add" />
 
 </FrameLayout>
