@@ -10,25 +10,23 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.example.todo_list.Adapter.ViewpagerAdapter
+import com.example.todo_list.R
 import com.example.todo_list.RegistrationActivity
 import com.example.todo_list.ToDoViewModel
+import com.example.todo_list.databinding.FragmentHomeBinding
 import com.example.todo_list.databinding.FragmentTodoBinding
 import com.google.android.material.tabs.TabLayoutMediator
 
-class ToDoFragment : Fragment() {
+class ToDoFragment : BaseFragment(R.layout.fragment_todo) {
     private lateinit var binding : FragmentTodoBinding
     private val viewModel : ToDoViewModel by viewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentTodoBinding.inflate(layoutInflater)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding = FragmentTodoBinding.bind(view)
         binding.todoViewModel = viewModel
+
+        homeActivityToolbar.title = "ToDo List"
 
 
         /**
@@ -47,7 +45,5 @@ class ToDoFragment : Fragment() {
             val intent = Intent(context, RegistrationActivity::class.java)
             startActivity(intent)
         }
-
-        return binding.root
     }
 }

@@ -11,6 +11,9 @@ interface ToDoDAO {
     @Query("SELECT * FROM todoentity WHERE category = :category AND success = :suc")
     fun getMatchCategory(category:String?, suc:Boolean = false): LiveData<List<ToDoEntity>>
 
+    @Query("SELECT * FROM todoentity WHERE start_date <= :date AND deadline_date >= :date AND success = :suc")
+    fun getCalumOnDate(date:String?, suc: Boolean = false) : LiveData<List<ToDoEntity>>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(toDoEntity: ToDoEntity)
 

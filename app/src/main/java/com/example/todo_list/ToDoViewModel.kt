@@ -31,6 +31,10 @@ class ToDoViewModel(application: Application) : AndroidViewModel(application) {
         return repository.selectProject()
     }
 
+    fun getOnDate(date : String?) : LiveData<List<ToDoEntity>>{
+        return repository.selectOnDate(date)
+    }
+
     fun insert(toDoEntity: ToDoEntity){
         repository.insert(toDoEntity)
     }

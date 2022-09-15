@@ -5,10 +5,17 @@
       <map>
         <entry key="..\:/Users/KDOY/AndroidStudioProjects/TODO_List/app/src/main/res/drawable/menu_selector.xml" value="0.1295" />
         <entry key="..\:/Users/KDOY/AndroidStudioProjects/TODO_List/app/src/main/res/drawable/rectangle.xml" value="0.1295" />
+        <entry key="..\:/Users/KDOY/AndroidStudioProjects/TODO_List/app/src/main/res/drawable/selected_bg.xml" value="0.113" />
+        <entry key="..\:/Users/KDOY/AndroidStudioProjects/TODO_List/app/src/main/res/drawable/today_bg.xml" value="0.113" />
         <entry key="..\:/Users/KDOY/AndroidStudioProjects/TODO_List/app/src/main/res/layout/activity_datail.xml" value="0.2526041666666667" />
         <entry key="..\:/Users/KDOY/AndroidStudioProjects/TODO_List/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/KDOY/AndroidStudioProjects/TODO_List/app/src/main/res/layout/activity_registration.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/KDOY/AndroidStudioProjects/TODO_List/app/src/main/res/layout/calendar_day.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/KDOY/AndroidStudioProjects/TODO_List/app/src/main/res/layout/calendar_day_legend.xml" value="0.2526041666666667" />
+        <entry key="..\:/Users/KDOY/AndroidStudioProjects/TODO_List/app/src/main/res/layout/calendar_header.xml" value="0.2526041666666667" />
         <entry key="..\:/Users/KDOY/AndroidStudioProjects/TODO_List/app/src/main/res/layout/calender_fragment.xml" value="0.2526041666666667" />
+        <entry key="..\:/Users/KDOY/AndroidStudioProjects/TODO_List/app/src/main/res/layout/event_item_view.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/KDOY/AndroidStudioProjects/TODO_List/app/src/main/res/layout/fragment_calendar.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/KDOY/AndroidStudioProjects/TODO_List/app/src/main/res/layout/fragment_calender.xml" value="0.20729166666666668" />
         <entry key="..\:/Users/KDOY/AndroidStudioProjects/TODO_List/app/src/main/res/layout/fragment_home.xml" value="0.20729166666666668" />
         <entry key="..\:/Users/KDOY/AndroidStudioProjects/TODO_List/app/src/main/res/layout/fragment_personal.xml" value="0.25364583333333335" />
