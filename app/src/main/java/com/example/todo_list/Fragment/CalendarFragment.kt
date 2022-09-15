@@ -1,5 +1,6 @@
 package com.example.todo_list.Fragment
 
+import android.app.ActionBar
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -42,6 +43,7 @@ class CalendarFragment : BaseFragment(R.layout.fragment_calendar) {
     private val selectionFormatter = DateTimeFormatter.ofPattern("d MMM yyyy")
     private val selectionFormatter2 = DateTimeFormatter.ofPattern("yyyyMMdd ")
 
+    //override val titleRes: Int = R.string.calender_title
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -134,21 +136,19 @@ class CalendarFragment : BaseFragment(R.layout.fragment_calendar) {
         }
 
         /**
-         * ActionBar 였던 곳
+         * Toolbar setting
          */
-//        binding.exThreeCalendar.monthScrollListener = {
-//            homeActivityToolbar.title = if (it.year == today.year) {
-//            "it.year == today.year"
-//            //titleSameYearFormatter.format(it.yearMonth)
-//            } else {
-//                "else"
-//                //titleFormatter.format(it.yearMonth)
-//            }
-//
-//            // Select the first day of the month when
-//            // we scroll to a new month.
-//            selectDate(it.yearMonth.atDay(1))
-//        }
+        binding.exThreeCalendar.monthScrollListener = {
+            homeActivityToolbar.title = if (it.year == today.year) {
+            titleSameYearFormatter.format(it.yearMonth)
+            } else {
+                titleFormatter.format(it.yearMonth)
+            }
+
+            // Select the first day of the month when
+            // we scroll to a new month.
+            selectDate(it.yearMonth.atDay(1))
+        }
 
         class MonthViewContainer(view: View) : ViewContainer(view) {
             val legendLayout = CalendarHeaderBinding.bind(view).legendLayout.root

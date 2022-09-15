@@ -15,7 +15,9 @@ import androidx.core.content.ContextCompat
 import java.time.DayOfWeek
 import java.time.temporal.WeekFields
 import java.util.*
-
+/**
+ * com.kizitonwose.calendarview.CalendarView
+ */
 fun View.makeVisible() {
     visibility = View.VISIBLE
 }

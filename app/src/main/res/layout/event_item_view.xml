@@ -23,6 +23,7 @@
             android:layout_height="wrap_content"
             android:text="@{todoEntity.title}"
             android:textSize="16sp"
+            android:paddingBottom="10dp"
             tools:text="Play football with friends" />
 
         <LinearLayout
@@ -34,15 +35,21 @@
                 android:id="@+id/itemEventText2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:text="@{todoEntity.start_date}"
                 android:textSize="16sp" />
+            <TextView
+                android:id="@+id/itemEventText3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="~"
+                android:textSize="16sp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"/>
 
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:textSize="16sp"
                 android:text="@{todoEntity.deadline_date}" />
         </LinearLayout>

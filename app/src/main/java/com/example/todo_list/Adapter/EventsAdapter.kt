@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.todo_list.data.Event
 import com.example.todo_list.data.ToDoEntity
 import com.example.todo_list.databinding.EventItemViewBinding
-
+/**
+ * com.kizitonwose.calendarview.CalendarView
+ */
 class EventsAdapter (val onClick: (Event) -> Unit) :
     RecyclerView.Adapter<EventsAdapter.Example3EventsViewHolder>() {
 
