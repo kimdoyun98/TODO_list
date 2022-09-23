@@ -21,7 +21,7 @@
             android:layout_height="match_parent"
             android:orientation="horizontal"
             android:background="@drawable/rectangle"
-            android:backgroundTint="#EDDFB4"
+            android:backgroundTint="@color/todo"
             android:padding="5dp">
 
             <LinearLayout

@@ -12,6 +12,15 @@
         android:icon="@drawable/project"
         android:title="Todo"
         />
+
+    <item
+        android:id="@+id/cycleFragment"
+        android:enabled="true"
+        android:title="Cycle"
+        android:icon="@drawable/cycle"
+        />
+
+
     <item
         android:id="@+id/calendarFragment"
         android:enabled="true"

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <import type="androidx.core.content.ContextCompat" />
+        <import type="com.example.todo_list.R"/>
+        <import type="com.example.todo_list.data.CycleEntity"/>
+        <variable
+            name="cycleEntity"
+            type="com.example.todo_list.data.CycleEntity" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:background="@drawable/rectangle"
+            android:backgroundTint="@{cycleEntity.success? ContextCompat.getColor(context, R.color.todo_done):ContextCompat.getColor(context, R.color.todo)}"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/recycler_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@{cycleEntity.title}"
+                android:textColor="@color/black"
+                android:textSize="25dp"
+                android:padding="10dp"/>
+
+            <Button
+                android:id="@+id/successButton"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="완료"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:background="?attr/selectableItemBackground"
+                android:visibility="gone"/>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

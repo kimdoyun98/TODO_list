@@ -18,3 +18,12 @@ data class ToDoEntity(
     val importance: Float?,
     @ColumnInfo(defaultValue = "false") val success: Boolean?
 ): Serializable
+
+@Entity
+data class CycleEntity(
+    @PrimaryKey(autoGenerate = true)
+    val id : Int = 0,
+    val title : String?,
+    val day : List<Boolean>?,
+    val success: Boolean?
+)

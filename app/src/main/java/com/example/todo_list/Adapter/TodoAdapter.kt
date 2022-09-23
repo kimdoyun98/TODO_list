@@ -4,21 +4,20 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.todo_list.Adapter.RecyclerviewAdapter.MyViewHolder
-import com.example.todo_list.Common.DiffUtilCallBack
-import com.example.todo_list.DetailActivity
+import com.example.todo_list.Activity.DetailActivity
+import com.example.todo_list.Adapter.TodoAdapter.MyViewHolder
+import com.example.todo_list.Common.DiffUtilCallBackTODO
 import com.example.todo_list.ToDoViewModel
 import com.example.todo_list.data.ToDoEntity
-import com.example.todo_list.databinding.RecyclerviewBinding
+import com.example.todo_list.databinding.RecyclerviewTodoItemBinding
 
-class RecyclerviewAdapter(val context: Context, val viewModel: ToDoViewModel) : RecyclerView.Adapter<MyViewHolder>(){
-    private lateinit var binding : RecyclerviewBinding
+class TodoAdapter(val context: Context, val viewModel: ToDoViewModel) : RecyclerView.Adapter<MyViewHolder>(){
+    private lateinit var binding : RecyclerviewTodoItemBinding
     private var list : MutableList<ToDoEntity> = mutableListOf()
 
     // Controller
@@ -30,7 +29,7 @@ class RecyclerviewAdapter(val context: Context, val viewModel: ToDoViewModel) : 
 
                 val builder = AlertDialog.Builder(context)
                 builder.setItems(item,
-                    DialogInterface.OnClickListener { dialog, which ->
+                    DialogInterface.OnClickListener { _, which ->
                         when (which) {
                             0 -> { // 상세
                                 val intent = Intent(context, DetailActivity::class.java)
@@ -61,7 +60,7 @@ class RecyclerviewAdapter(val context: Context, val viewModel: ToDoViewModel) : 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        binding = RecyclerviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        binding = RecyclerviewTodoItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MyViewHolder(binding.root)
     }
 
@@ -71,13 +70,13 @@ class RecyclerviewAdapter(val context: Context, val viewModel: ToDoViewModel) : 
 
     fun setData(list: List<ToDoEntity>){
         list?.let {
-            val diffCallback = DiffUtilCallBack(this.list, list)
+            val diffCallback = DiffUtilCallBackTODO(this.list, list)
             val diffResult = DiffUtil.calculateDiff(diffCallback)
 
             this.list.run {
                 clear()
                 addAll(list)
-                diffResult.dispatchUpdatesTo(this@RecyclerviewAdapter)
+                diffResult.dispatchUpdatesTo(this@TodoAdapter)
             }
         }
     }

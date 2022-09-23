@@ -26,3 +26,18 @@ interface ToDoDAO {
     @Query("Update todoentity SET success = :suc WHERE id = :id")
     fun success(id : Int, suc : Boolean = true)
 }
+
+@Dao
+interface CycleDAO {
+    @Query("SELECT * FROM cycleentity")
+    fun getAll():LiveData<List<CycleEntity>>
+
+    @Insert
+    fun insert(cycleEntity: CycleEntity)
+
+    @Query("UPDATE cycleentity SET success =:suc")
+    fun update(suc: Boolean = false)
+
+    @Query("UPDATE cycleentity SET success =:suc WHERE id =:id")
+    fun todaySuccess(id: Int, suc: Boolean = true)
+}

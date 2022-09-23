@@ -4,8 +4,7 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
-import com.example.todo_list.MainActivity
-import com.example.todo_list.R
+import com.example.todo_list.Activity.MainActivity
 import com.example.todo_list.makeGone
 import com.example.todo_list.makeVisible
 

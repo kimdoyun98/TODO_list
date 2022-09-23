@@ -4,10 +4,13 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 
-@Database(entities = [ToDoEntity::class], version = 1)
+@Database(entities = arrayOf(ToDoEntity::class, CycleEntity::class), version = 1)
+@TypeConverters(DayListConverter::class)
 abstract class ToDoDataBase : RoomDatabase() {
     abstract fun todoDao(): ToDoDAO
+    abstract fun cycleDao(): CycleDAO
 
     companion object {
         private var INSTANCE: ToDoDataBase? = null

@@ -1,14 +1,13 @@
 package com.example.todo_list.Fragment.Todo
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.todo_list.Adapter.RecyclerviewAdapter
+import com.example.todo_list.Adapter.TodoAdapter
 import com.example.todo_list.ToDoViewModel
 import com.example.todo_list.databinding.FragmentTabBinding
 
@@ -24,7 +23,7 @@ class TotalFragment : Fragment() {
     ): View? {
         binding = FragmentTabBinding.inflate(layoutInflater)
 
-        val adapter = RecyclerviewAdapter(requireContext(), viewModel)
+        val adapter = TodoAdapter(requireContext(), viewModel)
         val recyclerView = binding.recyclerview
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())

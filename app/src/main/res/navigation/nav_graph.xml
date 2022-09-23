@@ -24,4 +24,9 @@
         android:name="com.example.todo_list.Fragment.SettingFragment"
         android:label="fragment_calender"
         tools:layout="@layout/fragment_setting" />
+    <fragment
+        android:id="@+id/cycleFragment"
+        android:name="com.example.todo_list.Fragment.CycleFragment"
+        android:label="fragment_cycle"
+        tools:layout="@layout/fragment_cycle" />
 </navigation>

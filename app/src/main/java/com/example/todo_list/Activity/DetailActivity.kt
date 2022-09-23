@@ -1,19 +1,17 @@
-package com.example.todo_list
+package com.example.todo_list.Activity
 
-import android.app.DatePickerDialog
 import android.os.Bundle
 import android.util.Log
-import android.widget.*
+import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.todo_list.Common.DatePicker
+import com.example.todo_list.R
+import com.example.todo_list.ToDoViewModel
 import com.example.todo_list.data.ToDoEntity
-import com.example.todo_list.data.ToDoRepository
 import com.example.todo_list.databinding.ActivityRegistrationBinding
-import java.util.*
 
-class RegistrationActivity : AppCompatActivity() {
-    private lateinit var viewmodel : ToDoViewModel
+class DetailActivity : AppCompatActivity() {
     private lateinit var binding : ActivityRegistrationBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,37 +19,33 @@ class RegistrationActivity : AppCompatActivity() {
         binding = ActivityRegistrationBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewmodel = ViewModelProvider(this).get(ToDoViewModel::class.java)
+        val data = intent.getSerializableExtra("data") as ToDoEntity
 
-        /**
-         * Spinner (카테고리) 설정
-         */
-        //val category = findViewById<Spinner>(R.id.category)
         var category_adapter = ArrayAdapter.createFromResource(this,
-                                                        R.array.categoryName, android.R.layout.simple_spinner_item)
+            R.array.categoryName, android.R.layout.simple_spinner_item)
 
         category_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.category.adapter = category_adapter
+        when (data.category){
+            "개인" -> binding.category.setSelection(0)
+            "프로젝트" -> binding.category.setSelection(1)
+        }
 
+        binding.todoEntity = data
 
-        /**
-         * DatePicker 사용 / 날짜 선택 시 TextView에 해당 날짜 입력
-         */
         binding.startImage.setOnClickListener{
-            DatePicker(RegistrationActivity@this, binding.startDate)
+            DatePicker(DetailActivity@this, binding.startDate)
         }
 
         binding.deadlineImage.setOnClickListener{
-            DatePicker(RegistrationActivity@this, binding.deadlineDate)
+            DatePicker(DetailActivity@this, binding.deadlineDate)
         }
 
-        // 취소 버튼
         binding.cancelButton.setOnClickListener{ finish() }
-
-        // 등록 버튼
-        binding.registerButton.setOnClickListener{
-
-            val newTodo = ToDoEntity(
+        binding.registerButton.setOnClickListener {
+            val viewModel = ViewModelProvider(this).get(ToDoViewModel::class.java)
+            val UpdateTodo = ToDoEntity(
+                id = data.id,
                 category = binding.category.selectedItem.toString(),
                 title = binding.title.text.toString(),
                 content = binding.content.text.toString(),
@@ -60,8 +54,8 @@ class RegistrationActivity : AppCompatActivity() {
                 importance = binding.ratingBar.rating,
                 success = false
             )
-            viewmodel.insert(newTodo)
-            Log.e("RegistrationActivity", "등록")
+            Log.d("Update", UpdateTodo.toString())
+            viewModel.update(UpdateTodo)
             finish()
         }
     }

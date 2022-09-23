@@ -1,8 +1,6 @@
 package com.example.todo_list.Fragment
 
-import android.app.ActionBar
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.core.view.children
@@ -12,9 +10,8 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todo_list.*
-import com.example.todo_list.Adapter.EventsAdapter
-import com.example.todo_list.Common.DiffUtilCallBack
-import com.example.todo_list.data.Event
+import com.example.todo_list.Adapter.CalendarEventsAdapter
+import com.example.todo_list.Common.DiffUtilCallBackTODO
 import com.example.todo_list.data.ToDoEntity
 import com.example.todo_list.databinding.CalendarDayBinding
 import com.example.todo_list.databinding.CalendarHeaderBinding
@@ -33,7 +30,7 @@ class CalendarFragment : BaseFragment(R.layout.fragment_calendar) {
     private lateinit var binding : FragmentCalendarBinding
     private val viewModel : ToDoViewModel by viewModels()
 
-    private val eventsAdapter = EventsAdapter {}
+    private val calendarEventsAdapter = CalendarEventsAdapter {}
 
     private var selectedDate: LocalDate? = null
     private val today = LocalDate.now()
@@ -54,7 +51,7 @@ class CalendarFragment : BaseFragment(R.layout.fragment_calendar) {
          */
         binding.exThreeRv.apply {
             layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
-            adapter = eventsAdapter
+            adapter = calendarEventsAdapter
             addItemDecoration(DividerItemDecoration(requireContext(), RecyclerView.VERTICAL))
         }
 
@@ -189,8 +186,8 @@ class CalendarFragment : BaseFragment(R.layout.fragment_calendar) {
      * EventAdapter 데이터 초기화
      */
     private fun updateAdapterForDate(date: LocalDate, data : List<ToDoEntity>) {
-        eventsAdapter.apply {
-            val diffCallback = DiffUtilCallBack(list, data)
+        calendarEventsAdapter.apply {
+            val diffCallback = DiffUtilCallBackTODO(list, data)
             val diffResult = DiffUtil.calculateDiff(diffCallback)
             list.clear()
             list.addAll(data)

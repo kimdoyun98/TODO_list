@@ -3,16 +3,15 @@ package com.example.todo_list.Adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
 import androidx.recyclerview.widget.RecyclerView
-import com.example.todo_list.data.Event
+import com.example.todo_list.data.CalendarEvent
 import com.example.todo_list.data.ToDoEntity
 import com.example.todo_list.databinding.EventItemViewBinding
 /**
  * com.kizitonwose.calendarview.CalendarView
  */
-class EventsAdapter (val onClick: (Event) -> Unit) :
-    RecyclerView.Adapter<EventsAdapter.Example3EventsViewHolder>() {
+class CalendarEventsAdapter (val onClick: (CalendarEvent) -> Unit) :
+    RecyclerView.Adapter<CalendarEventsAdapter.Example3EventsViewHolder>() {
 
     private lateinit var binding : EventItemViewBinding
     var list : MutableList<ToDoEntity> = mutableListOf()

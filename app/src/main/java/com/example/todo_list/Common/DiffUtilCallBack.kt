@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.DiffUtil
 import com.example.todo_list.data.ToDoEntity
 
-class DiffUtilCallBack(private val oldList: List<ToDoEntity>, private val newList: List<ToDoEntity>)
+class DiffUtilCallBackTODO(private val oldList: List<ToDoEntity>, private val newList: List<ToDoEntity>)
     : DiffUtil.Callback() {
 
     override fun getOldListSize(): Int = oldList.size
