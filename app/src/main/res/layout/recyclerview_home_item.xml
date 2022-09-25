@@ -7,7 +7,7 @@
         <import type="com.example.todo_list.R"/>
         <import type="com.example.todo_list.data.CycleEntity"/>
         <variable
-            name="cycleEntity"
+            name="homeEntity"
             type="com.example.todo_list.data.CycleEntity" />
     </data>
 
@@ -21,16 +21,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:background="@drawable/rectangle"
-            android:padding="5dp"
-            >
+            android:padding="5dp">
 
             <TextView
                 android:id="@+id/recycler_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@{cycleEntity.title}"
+                android:text="@{homeEntity.title}"
                 android:textColor="@color/black"
                 android:textSize="15dp"
                 android:padding="10dp"/>

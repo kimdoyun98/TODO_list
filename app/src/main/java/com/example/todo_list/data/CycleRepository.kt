@@ -57,4 +57,14 @@ class CycleRepository(application: Application) {
         catch (e: Exception){
         }
     }
+
+    fun delete(id : Int) {
+        try {
+            CoroutineScope(Dispatchers.IO).launch {
+                cycleDao.delete(id)
+            }
+        }
+        catch (e: Exception){
+        }
+    }
 }

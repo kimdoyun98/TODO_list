@@ -1,157 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/purple_200"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="10dp">
 
-    <TextView
-        android:id="@+id/choice_day"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:padding="10dp"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="5dp">
-
-        <ToggleButton
-            android:id="@+id/sunday"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:textOn="일"
-            android:textOff="일"
-            android:textStyle="bold"
-            android:textSize="18dp"
-            android:textColor="@color/red"
-            android:background="@drawable/toggle"
-            android:layout_margin="5dp"
-            />
-
-        <ToggleButton
-            android:id="@+id/monday"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:textOn="월"
-            android:textOff="월"
-            android:textStyle="bold"
-            android:textSize="18dp"
-            android:background="@drawable/toggle"
-            android:layout_margin="5dp"/>
-
-        <ToggleButton
-            android:id="@+id/tuesday"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:textOn="화"
-            android:textOff="화"
-            android:textStyle="bold"
-            android:textSize="18dp"
-            android:background="@drawable/toggle"
-            android:layout_margin="5dp"/>
-
-        <ToggleButton
-            android:id="@+id/wednesday"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:textOn="수"
-            android:textOff="수"
-            android:textStyle="bold"
-            android:textSize="18dp"
-            android:background="@drawable/toggle"
-            android:layout_margin="5dp"/>
-
-        <ToggleButton
-            android:id="@+id/thursday"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:textOn="목"
-            android:textOff="목"
-            android:textStyle="bold"
-            android:textSize="18dp"
-            android:background="@drawable/toggle"
-            android:layout_margin="5dp"/>
-
-        <ToggleButton
-            android:id="@+id/friday"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:textOn="금"
-            android:textOff="금"
-            android:textStyle="bold"
-            android:textSize="18dp"
-            android:background="@drawable/toggle"
-            android:layout_margin="5dp"/>
-
-        <ToggleButton
-            android:id="@+id/saturday"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:textOn="토"
-            android:textOff="토"
-            android:textStyle="bold"
-            android:textSize="18dp"
-            android:textColor="@color/blue"
-            android:background="@drawable/toggle"
-            android:layout_margin="5dp"/>
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="20dp"
-        android:paddingTop="20dp"
-        android:paddingBottom="5dp"
-        android:text="제목"
-        android:textColor="@color/black"
-        android:textSize="20dp"
-        android:textStyle="bold" />
-    <EditText
-        android:id="@+id/title"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:background="@drawable/rectangle"
-        android:backgroundTint="#FFFFFF"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:paddingLeft="20dp"/>
-
-    <LinearLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="bottom"
-        >
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/cycle_cancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="취소"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:background="?attr/selectableItemBackground"/>
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="9dp"
+        android:layout_marginBottom="9dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/cycleRegister"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="등록"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:background="?attr/selectableItemBackground"/>
-    </LinearLayout>
-</LinearLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:src="@android:drawable/ic_input_add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.94"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.96" />
+</androidx.constraintlayout.widget.ConstraintLayout>

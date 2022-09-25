@@ -5,8 +5,7 @@ import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.todo_list.Adapter.CycleAdapter
-import com.example.todo_list.Adapter.TodoAdapter
+import com.example.todo_list.Adapter.HomeAdapter
 import com.example.todo_list.CycleViewModel
 import com.example.todo_list.R
 import com.example.todo_list.data.CycleEntity
@@ -30,7 +29,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         try { homeActivityToolbar.title = "정각에 해야지" }
         catch (e : Exception){}
 
-        val adapter = CycleAdapter(requireContext(), viewModel)
+        val adapter = HomeAdapter(requireContext(), viewModel)
         val recyclerView = binding.todayRecyclerview
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())

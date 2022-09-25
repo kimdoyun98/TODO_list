@@ -44,4 +44,8 @@ class CycleViewModel(application: Application) : AndroidViewModel(application) {
     fun insert(cycleEntity : CycleEntity) {
         repository.insert(cycleEntity)
     }
+
+    fun delete(id : Int){
+        repository.delete(id)
+    }
 }

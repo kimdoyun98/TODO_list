@@ -3,6 +3,7 @@ package com.example.todo_list.Activity
 import android.os.Bundle
 import android.util.Log
 import android.widget.*
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.todo_list.Common.DatePicker
@@ -12,7 +13,7 @@ import com.example.todo_list.data.ToDoEntity
 import com.example.todo_list.databinding.ActivityRegistrationBinding
 
 class RegistrationActivity : AppCompatActivity() {
-    private lateinit var viewmodel : ToDoViewModel
+    private val viewModel : ToDoViewModel by viewModels()
     private lateinit var binding : ActivityRegistrationBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,7 +21,7 @@ class RegistrationActivity : AppCompatActivity() {
         binding = ActivityRegistrationBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewmodel = ViewModelProvider(this).get(ToDoViewModel::class.java)
+
 
         /**
          * Spinner (카테고리) 설정
@@ -59,7 +60,7 @@ class RegistrationActivity : AppCompatActivity() {
                 importance = binding.ratingBar.rating,
                 success = false
             )
-            viewmodel.insert(newTodo)
+            viewModel.insert(newTodo)
             Log.e("RegistrationActivity", "등록")
             finish()
         }
