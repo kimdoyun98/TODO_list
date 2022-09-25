@@ -38,6 +38,7 @@ class CycleRegisterActivity : AppCompatActivity() {
                 success = false
             )
             viewModel.insert(newEntity)
+            finish()
         }
     }
     inner class DayToggle: CompoundButton.OnCheckedChangeListener{
