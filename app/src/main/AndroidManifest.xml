@@ -8,7 +8,7 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/todo_icon"
         android:label="정각에 해야지"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -26,6 +26,7 @@
 
         <activity android:name=".Activity.RegistrationActivity"/>
         <activity android:name=".Activity.DetailActivity"/>
+        <activity android:name=".Activity.CycleRegisterActivity"/>
 
     </application>
 
