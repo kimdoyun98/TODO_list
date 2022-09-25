@@ -6,7 +6,6 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.todo_list.Activity.CycleRegisterActivity
-import com.example.todo_list.Activity.RegistrationActivity
 import com.example.todo_list.Adapter.CycleAdapter
 import com.example.todo_list.CycleViewModel
 import com.example.todo_list.R

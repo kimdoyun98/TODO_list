@@ -6,7 +6,7 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import com.example.todo_list.Adapter.ViewpagerAdapter
 import com.example.todo_list.R
-import com.example.todo_list.Activity.RegistrationActivity
+import com.example.todo_list.Activity.TodoRegisterActivity
 import com.example.todo_list.ToDoViewModel
 import com.example.todo_list.databinding.FragmentTodoBinding
 import com.google.android.material.tabs.TabLayoutMediator
@@ -36,7 +36,7 @@ class ToDoFragment : BaseFragment(R.layout.fragment_todo) {
          * 추가 버튼
          */
         binding.addButton.setOnClickListener{
-            val intent = Intent(context, RegistrationActivity::class.java)
+            val intent = Intent(context, TodoRegisterActivity::class.java)
             startActivity(intent)
         }
     }

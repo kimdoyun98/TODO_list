@@ -24,7 +24,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".Activity.RegistrationActivity"/>
+        <activity android:name=".Activity.TodoRegisterActivity"/>
         <activity android:name=".Activity.DetailActivity"/>
         <activity android:name=".Activity.CycleRegisterActivity"/>
 
