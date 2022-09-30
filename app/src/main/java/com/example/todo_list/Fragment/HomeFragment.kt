@@ -5,15 +5,18 @@ import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.todo_list.Adapter.HomeAdapter
+import com.example.todo_list.Adapter.HomeCycleAdapter
+import com.example.todo_list.Adapter.HomePersonalAdapter
+import com.example.todo_list.Adapter.HomeProjectAdapter
 import com.example.todo_list.CycleViewModel
+import com.example.todo_list.HomeViewModel
 import com.example.todo_list.R
 import com.example.todo_list.data.CycleEntity
 import com.example.todo_list.databinding.FragmentHomeBinding
 
 class HomeFragment : BaseFragment(R.layout.fragment_home) {
     private lateinit var binding : FragmentHomeBinding
-    private val viewModel : CycleViewModel by viewModels()
+    private val viewModel : HomeViewModel by viewModels()
     private var todayData : MutableList<CycleEntity> = mutableListOf()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -29,13 +32,15 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         try { homeActivityToolbar.title = "정각에 해야지" }
         catch (e : Exception){}
 
-        val adapter = HomeAdapter(requireContext(), viewModel)
-        val recyclerView = binding.todayRecyclerview
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        /**
+         * 오늘 할 일
+         */
+        val adapter = HomeCycleAdapter(requireContext(), viewModel)
+        val todayRecyclerView = binding.todayRecyclerview
+        todayRecyclerView.adapter = adapter
+        todayRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         viewModel.getDay().observe(viewLifecycleOwner){
-
             viewModel.getAll().observe(viewLifecycleOwner) { dataList ->
                 Log.e("getAll", "Observe")
                 todayData.clear()
@@ -52,6 +57,30 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
                 }
                 adapter.setData(todayData)
             }
+        }
+        /**
+         * 개인 일정
+         */
+        val personalAdapter = HomePersonalAdapter(requireContext(), viewModel)
+        val personalRecyclerView = binding.personalRecyclerview
+        personalRecyclerView.adapter = personalAdapter
+        personalRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        viewModel.getPersonal().observe(viewLifecycleOwner){ dataList ->
+            personalAdapter.setData(dataList)
+        }
+
+        /**
+         * 프로젝트 일정
+         */
+        val projectAdapter = HomeProjectAdapter(requireContext(), viewModel)
+        val projectRecyclerView = binding.projectRecyclerview
+        projectRecyclerView.adapter = projectAdapter
+        projectRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        viewModel.getProject().observe(viewLifecycleOwner){ dataList ->
+            Log.d("project data", dataList.size.toString())
+            projectAdapter.setData(dataList)
         }
     }
 }

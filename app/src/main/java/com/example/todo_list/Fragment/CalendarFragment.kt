@@ -38,7 +38,7 @@ class CalendarFragment : BaseFragment(R.layout.fragment_calendar) {
     private val titleSameYearFormatter = DateTimeFormatter.ofPattern("MMMM")
     private val titleFormatter = DateTimeFormatter.ofPattern("MMM yyyy")
     private val selectionFormatter = DateTimeFormatter.ofPattern("d MMM yyyy")
-    private val selectionFormatter2 = DateTimeFormatter.ofPattern("yyyyMMdd ")
+    private val selectionFormatter2 = DateTimeFormatter.ofPattern("yyyyMMdd")
 
     //override val titleRes: Int = R.string.calender_title
 
@@ -103,7 +103,6 @@ class CalendarFragment : BaseFragment(R.layout.fragment_calendar) {
                     var date : String = selectionFormatter2.format(day.date)
                     when (day.date) {
                         today -> {
-                            date = date.substring(0 until 8) // date 마지막 인덱스가 공백, 제거 안해주면 마지막 날 표시가 안됨
                             textView.setTextColorRes(R.color.white)
                             textView.setBackgroundResource(R.drawable.today_bg)
                             viewModel.getOnDate(date).observe(viewLifecycleOwner) { data ->

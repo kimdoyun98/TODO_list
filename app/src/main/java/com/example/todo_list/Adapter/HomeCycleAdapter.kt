@@ -6,23 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todo_list.CycleViewModel
+import com.example.todo_list.HomeViewModel
 import com.example.todo_list.data.CycleEntity
 import com.example.todo_list.databinding.RecyclerviewHomeItemBinding
 
-class HomeAdapter(val context: Context, val viewModel: CycleViewModel) : RecyclerView.Adapter<HomeAdapter.MyViewHolder>() {
+class HomeCycleAdapter(val context: Context, val viewModel: HomeViewModel) : RecyclerView.Adapter<HomeCycleAdapter.MyViewHolder>() {
     private lateinit var binding : RecyclerviewHomeItemBinding
     private var list : MutableList<CycleEntity> = mutableListOf()
 
     // Controller
     inner class MyViewHolder(v: View) : RecyclerView.ViewHolder(v){
-        init {
-//            binding.successButton.setOnClickListener{
-//                Log.e("CycleAdapter", "Click button")
-//                var pos : Int = adapterPosition
-//                viewModel.todaySuccess(list[pos].id)
-//                list.clear()
-//            }
-        }
 
         fun bind(cycleEntity: CycleEntity){
             binding.homeEntity = cycleEntity
@@ -56,5 +49,4 @@ class HomeAdapter(val context: Context, val viewModel: CycleViewModel) : Recycle
             }
         }
     }
-
 }
