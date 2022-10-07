@@ -6,9 +6,7 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.todo_list.Adapter.HomeCycleAdapter
-import com.example.todo_list.Adapter.HomePersonalAdapter
-import com.example.todo_list.Adapter.HomeProjectAdapter
-import com.example.todo_list.CycleViewModel
+import com.example.todo_list.Adapter.HomeTodoAdapter
 import com.example.todo_list.HomeViewModel
 import com.example.todo_list.R
 import com.example.todo_list.data.CycleEntity
@@ -61,7 +59,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         /**
          * 개인 일정
          */
-        val personalAdapter = HomePersonalAdapter(requireContext(), viewModel)
+        val personalAdapter = HomeTodoAdapter(requireContext(), viewModel)
         val personalRecyclerView = binding.personalRecyclerview
         personalRecyclerView.adapter = personalAdapter
         personalRecyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -73,7 +71,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         /**
          * 프로젝트 일정
          */
-        val projectAdapter = HomeProjectAdapter(requireContext(), viewModel)
+        val projectAdapter = HomeTodoAdapter(requireContext(), viewModel)
         val projectRecyclerView = binding.projectRecyclerview
         projectRecyclerView.adapter = projectAdapter
         projectRecyclerView.layoutManager = LinearLayoutManager(requireContext())

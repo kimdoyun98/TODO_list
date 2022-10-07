@@ -1,19 +1,15 @@
 package com.example.todo_list.Adapter
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.todo_list.CycleViewModel
 import com.example.todo_list.HomeViewModel
 import com.example.todo_list.data.ToDoEntity
 import com.example.todo_list.databinding.RecyclerviewHometodoItemBinding
-import java.time.LocalDate
-import java.util.*
 
-class HomePersonalAdapter (val context: Context, val viewModel: HomeViewModel) : RecyclerView.Adapter<HomePersonalAdapter.MyViewHolder>() {
+class HomeTodoAdapter (val context: Context, val viewModel: HomeViewModel) : RecyclerView.Adapter<HomeTodoAdapter.MyViewHolder>() {
     private lateinit var binding : RecyclerviewHometodoItemBinding
     private var list : MutableList<ToDoEntity> = mutableListOf()
 
