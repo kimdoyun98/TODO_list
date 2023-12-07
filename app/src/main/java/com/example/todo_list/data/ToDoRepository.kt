@@ -11,9 +11,6 @@ class ToDoRepository(application: Application) {
     private val todoDataBase = ToDoDataBase.getInstance(application)!!
     private val todoDao = todoDataBase.todoDao()
     private var listAll : LiveData<List<ToDoEntity>> = todoDao.getAll()
-    private var listPersonal : LiveData<List<ToDoEntity>> = todoDao.getMatchCategory("개인")
-    private var listProject : LiveData<List<ToDoEntity>> = todoDao.getMatchCategory("프로젝트")
-   // private var InDate : LiveData<List<ToDoEntity>> = todoDao.getCalumOnDate()
 
     companion object{
         private var sInstance: ToDoRepository? = null
@@ -29,14 +26,6 @@ class ToDoRepository(application: Application) {
 
     fun selectAll (): LiveData<List<ToDoEntity>> {
         return this.listAll
-    }
-
-    fun selectPersonal() : LiveData<List<ToDoEntity>>{
-        return this.listPersonal
-    }
-
-    fun selectProject() : LiveData<List<ToDoEntity>>{
-        return this.listProject
     }
 
     fun selectOnDate(date : String?) : LiveData<List<ToDoEntity>>{

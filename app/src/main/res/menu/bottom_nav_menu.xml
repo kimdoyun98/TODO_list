@@ -10,13 +10,13 @@
         android:id="@+id/todoFragment"
         android:enabled="true"
         android:icon="@drawable/project"
-        android:title="Todo"
+        android:title="Schedule"
         />
 
     <item
         android:id="@+id/cycleFragment"
         android:enabled="true"
-        android:title="Cycle"
+        android:title="Routine"
         android:icon="@drawable/cycle"
         />
 

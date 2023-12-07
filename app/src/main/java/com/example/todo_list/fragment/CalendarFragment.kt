@@ -1,4 +1,4 @@
-package com.example.todo_list.Fragment
+package com.example.todo_list.fragment
 
 import android.os.Bundle
 import android.view.View
@@ -30,7 +30,7 @@ class CalendarFragment : BaseFragment(R.layout.fragment_calendar) {
     private lateinit var binding : FragmentCalendarBinding
     private val viewModel : ToDoViewModel by viewModels()
 
-    private val calendarEventsAdapter = CalendarEventsAdapter {}
+    private val calendarEventsAdapter = CalendarEventsAdapter()
 
     private var selectedDate: LocalDate? = null
     private val today = LocalDate.now()
@@ -39,8 +39,6 @@ class CalendarFragment : BaseFragment(R.layout.fragment_calendar) {
     private val titleFormatter = DateTimeFormatter.ofPattern("MMM yyyy")
     private val selectionFormatter = DateTimeFormatter.ofPattern("d MMM yyyy")
     private val selectionFormatter2 = DateTimeFormatter.ofPattern("yyyyMMdd")
-
-    //override val titleRes: Int = R.string.calender_title
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

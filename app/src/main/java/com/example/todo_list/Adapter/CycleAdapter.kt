@@ -14,7 +14,6 @@ import com.example.todo_list.CycleViewModel
 import com.example.todo_list.data.CycleEntity
 import com.example.todo_list.databinding.RecyclerviewCycleItemBinding
 
-
 class CycleAdapter (val context: Context, val viewModel: CycleViewModel) : RecyclerView.Adapter<CycleAdapter.MyViewHolder>() {
     private lateinit var binding : RecyclerviewCycleItemBinding
     private var list : MutableList<CycleEntity> = mutableListOf()
@@ -22,8 +21,8 @@ class CycleAdapter (val context: Context, val viewModel: CycleViewModel) : Recyc
     // Controller
     inner class MyViewHolder(v: View) : RecyclerView.ViewHolder(v){
         init {
-            binding.root.setOnClickListener(View.OnClickListener {
-                var pos : Int = adapterPosition
+            binding.root.setOnClickListener{
+                val pos : Int = adapterPosition
 
                 val builder = AlertDialog.Builder(context)
                 builder.setTitle("다음 내용을 삭제하시겠습니까?").setMessage(list[pos].title)
@@ -34,7 +33,7 @@ class CycleAdapter (val context: Context, val viewModel: CycleViewModel) : Recyc
 
                 }
                 builder.show()
-            })
+            }
         }
 
         fun bind(cycleEntity: CycleEntity){
@@ -53,7 +52,7 @@ class CycleAdapter (val context: Context, val viewModel: CycleViewModel) : Recyc
         val content = " 월 화 수 목 금 토 일"
         val spannableString = SpannableString(content)
 
-        var saveIndex = ArrayList<Int>()
+        val saveIndex = ArrayList<Int>()
         for ( i: Int in 0..6){
             if(data.day?.get(i) == true){
                 saveIndex.add(i)
@@ -66,7 +65,7 @@ class CycleAdapter (val context: Context, val viewModel: CycleViewModel) : Recyc
         }
         else{
             for(i:Int in saveIndex){
-                var index : Int = 0
+                var index = 0
                 when(i){
                     0 -> index = 0
                     1 -> index = 2
@@ -95,10 +94,7 @@ class CycleAdapter (val context: Context, val viewModel: CycleViewModel) : Recyc
     }
 
     fun setData(list: List<CycleEntity>){
-        list?.let {
-//            val diffCallback = DiffUtilCallBack(this.list, list)
-//            val diffResult = DiffUtil.calculateDiff(diffCallback)
-
+        list.let {
             this.list.run {
                 clear()
                 addAll(list)

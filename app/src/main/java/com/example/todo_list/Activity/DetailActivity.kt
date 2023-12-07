@@ -1,7 +1,6 @@
 package com.example.todo_list.Activity
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -21,41 +20,32 @@ class DetailActivity : AppCompatActivity() {
 
         val data = intent.getSerializableExtra("data") as ToDoEntity
 
-        var category_adapter = ArrayAdapter.createFromResource(this,
+        val categoryAdapter = ArrayAdapter.createFromResource(this,
             R.array.categoryName, android.R.layout.simple_spinner_item)
 
-        category_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.category.adapter = category_adapter
-        when (data.category){
-            "개인" -> binding.category.setSelection(0)
-            "프로젝트" -> binding.category.setSelection(1)
-        }
+        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
 
         binding.todoEntity = data
 
-        binding.startImage.setOnClickListener{
-            DatePicker(DetailActivity@this, binding.startDate)
-        }
-
-        binding.deadlineImage.setOnClickListener{
-            DatePicker(DetailActivity@this, binding.deadlineDate)
+        binding.calendar.setOnClickListener{
+            DatePicker(this, binding.startDate)
         }
 
         binding.cancelButton.setOnClickListener{ finish() }
         binding.registerButton.setOnClickListener {
-            val viewModel = ViewModelProvider(this).get(ToDoViewModel::class.java)
-            val UpdateTodo = ToDoEntity(
-                id = data.id,
-                category = binding.category.selectedItem.toString(),
-                title = binding.title.text.toString(),
-                content = binding.content.text.toString(),
-                start_date = binding.startDate.text.toString(),
-                deadline_date = binding.deadlineDate.text.toString(),
-                importance = binding.ratingBar.rating,
-                success = false
+            val viewModel = ViewModelProvider(this)[ToDoViewModel::class.java]
+
+            viewModel.update(
+                ToDoEntity(
+                    id = data.id,
+                    title = binding.title.text.toString(),
+                    content = binding.content.text.toString(),
+                    start_date = binding.startDate.text.toString(),
+                    deadline_date = binding.endDate.text.toString(),
+                    success = false
+                )
             )
-            Log.d("Update", UpdateTodo.toString())
-            viewModel.update(UpdateTodo)
             finish()
         }
     }

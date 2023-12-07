@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.todo_list.CycleViewModel
 import com.example.todo_list.HomeViewModel
 import com.example.todo_list.data.CycleEntity
 import com.example.todo_list.databinding.RecyclerviewHomeItemBinding
@@ -38,10 +37,7 @@ class HomeCycleAdapter(val context: Context, val viewModel: HomeViewModel) : Rec
     }
 
     fun setData(list: List<CycleEntity>){
-        list?.let {
-//            val diffCallback = DiffUtilCallBack(this.list, list)
-//            val diffResult = DiffUtil.calculateDiff(diffCallback)
-
+        list.let {
             this.list.run {
                 clear()
                 addAll(list)

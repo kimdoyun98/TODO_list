@@ -1,10 +1,8 @@
-package com.example.todo_list.Fragment
+package com.example.todo_list.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.todo_list.Adapter.HomeCycleAdapter
 import com.example.todo_list.Adapter.HomeTodoAdapter
 import com.example.todo_list.HomeViewModel
@@ -36,49 +34,26 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         val adapter = HomeCycleAdapter(requireContext(), viewModel)
         val todayRecyclerView = binding.todayRecyclerview
         todayRecyclerView.adapter = adapter
-        todayRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         viewModel.getDay().observe(viewLifecycleOwner){
             viewModel.getAll().observe(viewLifecycleOwner) { dataList ->
-                Log.e("getAll", "Observe")
                 todayData.clear()
                 for (data in dataList){
-                    when(it){
-                        1 -> if(data.day?.get(0) == true) todayData.add(data)
-                        2 -> if(data.day?.get(1) == true) todayData.add(data)
-                        3 -> if(data.day?.get(2) == true) todayData.add(data)
-                        4 -> if(data.day?.get(3) == true) todayData.add(data)
-                        5 -> if(data.day?.get(4) == true) todayData.add(data)
-                        6 -> if(data.day?.get(5) == true) todayData.add(data)
-                        7 -> if(data.day?.get(6) == true) todayData.add(data)
-                    }
+                    if(data.day?.get(it-1) == true) todayData.add(data)
                 }
                 adapter.setData(todayData)
             }
         }
         /**
-         * 개인 일정
+         * 일정
          */
         val personalAdapter = HomeTodoAdapter(requireContext(), viewModel)
         val personalRecyclerView = binding.personalRecyclerview
         personalRecyclerView.adapter = personalAdapter
-        personalRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        viewModel.getPersonal().observe(viewLifecycleOwner){ dataList ->
+        viewModel.todoAll().observe(viewLifecycleOwner){ dataList ->
             personalAdapter.setData(dataList)
         }
 
-        /**
-         * 프로젝트 일정
-         */
-        val projectAdapter = HomeTodoAdapter(requireContext(), viewModel)
-        val projectRecyclerView = binding.projectRecyclerview
-        projectRecyclerView.adapter = projectAdapter
-        projectRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-
-        viewModel.getProject().observe(viewLifecycleOwner){ dataList ->
-            Log.d("project data", dataList.size.toString())
-            projectAdapter.setData(dataList)
-        }
     }
 }

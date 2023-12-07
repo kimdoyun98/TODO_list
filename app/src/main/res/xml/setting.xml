@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="알림 설정">
+        <SwitchPreference
+            android:key="pushAlert"
+            android:summary="하루 남은 일정 푸시 알림"
+            android:title="푸시 알림" />
+        <CheckBoxPreference
+            android:dependency="pushAlert"
+            android:key="vibrate"
+            android:summary="진동 울림으로 알림을 받으려면 체크하세요"
+            android:title="진동" />
+        <EditTextPreference
+            android:dependency="pushAlert"
+            android:dialogTitle="알림 시간 설정"
+            android:key="Alert_time"
+            android:title="알림 시간"
+            android:summary="00:00"
+            />
+    </PreferenceCategory>
+</PreferenceScreen>

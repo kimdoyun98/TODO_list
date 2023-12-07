@@ -1,15 +1,15 @@
-package com.example.todo_list.Fragment
+package com.example.todo_list.fragment
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import com.example.todo_list.Adapter.ViewpagerAdapter
-import com.example.todo_list.R
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.todo_list.Activity.TodoRegisterActivity
+import com.example.todo_list.Adapter.TodoAdapter
+import com.example.todo_list.R
 import com.example.todo_list.ToDoViewModel
 import com.example.todo_list.databinding.FragmentTodoBinding
-import com.google.android.material.tabs.TabLayoutMediator
 
 class ToDoFragment : BaseFragment(R.layout.fragment_todo) {
     private lateinit var binding : FragmentTodoBinding
@@ -20,17 +20,22 @@ class ToDoFragment : BaseFragment(R.layout.fragment_todo) {
         binding = FragmentTodoBinding.bind(view)
         binding.todoViewModel = viewModel
 
-        homeActivityToolbar.title = "ToDo List"
+        homeActivityToolbar.title = "Schedule"
 
+        val adapter = TodoAdapter(requireContext(), viewModel)
+        val recyclerView = binding.recyclerview
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        /**
-         * Tab + ViewPager
-         */
-        val tabItem = arrayOf("전체", "개인", "프로젝트")
-        binding.viewpager2.adapter = ViewpagerAdapter(childFragmentManager, lifecycle)
-        TabLayoutMediator(binding.tablayout, binding.viewpager2){ tab, position ->
-            tab.text = tabItem[position]
-        }.attach()
+        viewModel.getAll().observe(viewLifecycleOwner) { list ->
+            // 정렬
+            viewModel.sortFilter.observe(viewLifecycleOwner) { filter ->
+                when(filter) {
+                    ToDoViewModel.LATEST -> adapter.setData(list.sortedByDescending { it.id })
+                    ToDoViewModel.DEADLINE -> adapter.setData(list.sortedByDescending { it.deadline_date}.reversed())
+                }
+            }
+        }
 
         /***
          * 추가 버튼

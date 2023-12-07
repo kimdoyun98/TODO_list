@@ -38,7 +38,7 @@ class HomeTodoAdapter (val context: Context, val viewModel: HomeViewModel) : Rec
     }
 
     fun setData(list: List<ToDoEntity>){
-        list?.let {
+        list.let {
 
             this.list.run {
                 clear()

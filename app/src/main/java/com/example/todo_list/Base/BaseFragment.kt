@@ -1,4 +1,4 @@
-package com.example.todo_list.Fragment
+package com.example.todo_list.fragment
 
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity

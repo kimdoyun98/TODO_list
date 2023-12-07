@@ -1,6 +1,5 @@
 package com.example.todo_list.Common
 
-import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.DiffUtil
 import com.example.todo_list.data.ToDoEntity
 

@@ -1,12 +1,10 @@
 package com.example.todo_list
 
 import android.app.Application
-import android.util.Log
 import androidx.databinding.ObservableField
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.SavedStateHandle
 import com.example.todo_list.data.ToDoEntity
 import com.example.todo_list.data.ToDoRepository
 
@@ -21,14 +19,6 @@ class ToDoViewModel(application: Application) : AndroidViewModel(application) {
 
     fun getAll() : LiveData<List<ToDoEntity>> {
         return repository.selectAll()
-    }
-
-    fun getPersonal() : LiveData<List<ToDoEntity>>{
-        return repository.selectPersonal()
-    }
-
-    fun getProject() : LiveData<List<ToDoEntity>>{
-        return repository.selectProject()
     }
 
     fun getOnDate(date : String?) : LiveData<List<ToDoEntity>>{

@@ -2,7 +2,6 @@ package com.example.todo_list.Adapter
 
 import android.app.AlertDialog
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
@@ -23,29 +22,28 @@ class TodoAdapter(val context: Context, val viewModel: ToDoViewModel) : Recycler
     // Controller
     inner class MyViewHolder(v: View) : RecyclerView.ViewHolder(v){
         init {
-            binding.root.setOnClickListener(View.OnClickListener {
+            binding.root.setOnClickListener{
                 var pos : Int = adapterPosition
-                val item : Array<String> = arrayOf("상세", "삭제", "완료")
+                val item : Array<String> = arrayOf("수정", "삭제", "완료")
 
                 val builder = AlertDialog.Builder(context)
-                builder.setItems(item,
-                    DialogInterface.OnClickListener { _, which ->
-                        when (which) {
-                            0 -> { // 상세
-                                val intent = Intent(context, DetailActivity::class.java)
-                                intent.putExtra("data", list[pos])
-                                v.context.startActivity(intent)
-                            }
-                            1 -> { // 삭제
-                                viewModel.delete(list[pos].id)
-                            }
-                            2 -> { // 완료
-                                viewModel.success(list[pos].id)
-                            }
+                builder.setItems(item) { _, which ->
+                    when (which) {
+                        0 -> { // 상세
+                            val intent = Intent(context, DetailActivity::class.java)
+                            intent.putExtra("data", list[pos])
+                            v.context.startActivity(intent)
                         }
-                    })
+                        1 -> { // 삭제
+                            viewModel.delete(list[pos].id)
+                        }
+                        2 -> { // 완료
+                            viewModel.success(list[pos].id)
+                        }
+                    }
+                }
                 builder.show()
-            })
+            }
         }
 
         fun bind(toDoEntity: ToDoEntity){
@@ -69,7 +67,7 @@ class TodoAdapter(val context: Context, val viewModel: ToDoViewModel) : Recycler
     }
 
     fun setData(list: List<ToDoEntity>){
-        list?.let {
+        list.let {
             val diffCallback = DiffUtilCallBackTODO(this.list, list)
             val diffResult = DiffUtil.calculateDiff(diffCallback)
 

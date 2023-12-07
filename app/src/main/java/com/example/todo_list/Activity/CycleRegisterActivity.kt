@@ -2,42 +2,64 @@ package com.example.todo_list.Activity
 
 import android.os.Bundle
 import android.widget.CompoundButton
+import android.widget.TimePicker
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.todo_list.CycleViewModel
 import com.example.todo_list.data.CycleEntity
 import com.example.todo_list.databinding.ActivityCycleRegisterBinding
+import java.util.*
 
-class CycleRegisterActivity : AppCompatActivity() {
+class CycleRegisterActivity : AppCompatActivity(), TimePicker.OnTimeChangedListener {
     private val viewModel : CycleViewModel by viewModels()
     private lateinit var binding : ActivityCycleRegisterBinding
-    private var checkedDayList = MutableList<Boolean>(7) { _ -> false}
-    private lateinit var text : String
+    private var checkedDayList = MutableList(7) {false}
+    private val time = Array(2){-1}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCycleRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.sunday.setOnCheckedChangeListener(DayToggle())
-        binding.monday.setOnCheckedChangeListener(DayToggle())
-        binding.tuesday.setOnCheckedChangeListener(DayToggle())
-        binding.wednesday.setOnCheckedChangeListener(DayToggle())
-        binding.thursday.setOnCheckedChangeListener(DayToggle())
-        binding.friday.setOnCheckedChangeListener(DayToggle())
-        binding.saturday.setOnCheckedChangeListener(DayToggle())
+        /**
+         * Toggle
+         */
+        val toggle = arrayOf(binding.sunday, binding.monday, binding.tuesday,
+            binding.wednesday, binding.thursday, binding.friday, binding.saturday
+        )
 
+        toggle.forEach{
+            it.setOnCheckedChangeListener(DayToggle())
+        }
+
+        /**
+         * TimePicker
+         */
+        binding.timePicker.setOnTimeChangedListener(this)
+
+
+        /**
+         * 취소 & 등록
+         */
         binding.cycleCancel.setOnClickListener{
             finish()
         }
 
         binding.cycleRegister.setOnClickListener{
-            val newEntity = CycleEntity(
-                title  = binding.title.text.toString(),
-                day = checkedDayList,
-                success = false
+            if(time.contains(-1)){
+                val cal = Calendar.getInstance()
+                time[0] = cal.get(Calendar.HOUR_OF_DAY)
+                time[1] = cal.get(Calendar.MINUTE)
+            }
+            val time2 = time.map { "%02d".format(it) }
+            viewModel.insert(
+                CycleEntity(
+                    title  = binding.title.text.toString(),
+                    day = checkedDayList,
+                    success = false,
+                    time = "${time2[0]}:${time2[1]}"
+                )
             )
-            viewModel.insert(newEntity)
             finish()
         }
     }
@@ -66,7 +88,7 @@ class CycleRegisterActivity : AppCompatActivity() {
                     checkedDayList[6] = isChecked
                 }
             }
-            text = ""
+            var text = ""
             if (checkedDayList.count{ it } == 7) text = "매일"
             else {
                 for (i in 0 until checkedDayList.size) {
@@ -86,5 +108,10 @@ class CycleRegisterActivity : AppCompatActivity() {
             binding.choiceDay.text = text
         }
 
+    }
+
+    override fun onTimeChanged(view: TimePicker?, hourOfDay: Int, minute: Int) {
+        time[0] = hourOfDay
+        time[1] = minute
     }
 }

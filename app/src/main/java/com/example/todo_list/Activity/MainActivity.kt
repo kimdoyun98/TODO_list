@@ -16,6 +16,10 @@ class MainActivity : AppCompatActivity() {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         binding = ActivityMainBinding.inflate(layoutInflater)
 
+        binding.swiperefreshlayout.setOnRefreshListener {
+            binding.swiperefreshlayout.isRefreshing = false
+        }
+
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar)

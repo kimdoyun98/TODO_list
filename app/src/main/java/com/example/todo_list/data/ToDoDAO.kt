@@ -8,9 +8,6 @@ interface ToDoDAO {
     @Query("SELECT * FROM todoEntity WHERE success = :suc")
     fun getAll(suc:Boolean = false): LiveData<List<ToDoEntity>>
 
-    @Query("SELECT * FROM todoEntity WHERE category = :category AND success = :suc")
-    fun getMatchCategory(category:String?, suc:Boolean = false): LiveData<List<ToDoEntity>>
-
     @Query("SELECT * FROM todoEntity WHERE start_date <= :date AND deadline_date >= :date AND success = :suc")
     fun getCalumOnDate(date:String?, suc: Boolean = false) : LiveData<List<ToDoEntity>>
 

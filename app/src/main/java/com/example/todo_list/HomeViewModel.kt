@@ -1,7 +1,6 @@
 package com.example.todo_list
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -30,6 +29,10 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
         return cycleRepository.selectAll()
     }
 
+    fun todoAll() : LiveData<List<ToDoEntity>> {
+        return todoRepository.selectAll()
+    }
+
     fun getDay() : MutableLiveData<Int> {
         return this.today
     }
@@ -40,18 +43,10 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
         val today = selectionFormatter.format(LocalDate.now())
 
         return if (today == deadline) "D-Day"
+               else if (today.toInt() > deadline.toInt()) "기간 지남"
                else {
                    val D_Day = (endDate - todayDate) / (24 * 60 * 60 * 1000) + 1
-                   Log.d("D-Day", D_Day.toString())
                    "D-$D_Day"
                }
-    }
-
-    fun getPersonal() : LiveData<List<ToDoEntity>> {
-        return todoRepository.selectPersonal()
-    }
-
-    fun getProject() : LiveData<List<ToDoEntity>> {
-        return todoRepository.selectProject()
     }
 }

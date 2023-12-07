@@ -3,7 +3,6 @@ package com.example.todo_list.Common
 import android.app.DatePickerDialog
 import android.content.Context
 import android.widget.TextView
-import com.example.todo_list.MyApplication
 import java.util.*
 
 class DatePicker(context: Context, textView: TextView) {

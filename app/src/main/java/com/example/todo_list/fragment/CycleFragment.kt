@@ -1,10 +1,9 @@
-package com.example.todo_list.Fragment
+package com.example.todo_list.fragment
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.todo_list.Activity.CycleRegisterActivity
 import com.example.todo_list.Adapter.CycleAdapter
 import com.example.todo_list.CycleViewModel
@@ -19,12 +18,11 @@ class CycleFragment :BaseFragment(R.layout.fragment_cycle){
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentCycleBinding.bind(view)
 
-        homeActivityToolbar.title = "Cycle"
+        homeActivityToolbar.title = "Routine"
 
         val adapter = CycleAdapter(requireContext(), viewModel)
         val recyclerView = binding.recyclerview
         recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         viewModel.getAll().observe(viewLifecycleOwner){ data ->
             adapter.setData(data)
