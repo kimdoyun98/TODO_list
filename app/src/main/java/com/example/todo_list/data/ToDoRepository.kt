@@ -2,7 +2,7 @@ package com.example.todo_list.data
 
 import android.app.Application
 import androidx.lifecycle.LiveData
-import com.example.todo_list.MyApplication
+import com.example.todo_list.common.MyApplication
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

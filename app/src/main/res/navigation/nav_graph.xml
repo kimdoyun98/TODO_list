@@ -11,9 +11,9 @@
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/todoFragment"
-        android:name="com.example.todo_list.fragment.ToDoFragment"
+        android:name="com.example.todo_list.fragment.ScheduleFragment"
         android:label="fragment_personal"
-        tools:layout="@layout/fragment_todo" />
+        tools:layout="@layout/fragment_schedule" />
     <fragment
         android:id="@+id/calendarFragment"
         android:name="com.example.todo_list.fragment.CalendarFragment"
@@ -26,7 +26,7 @@
         tools:layout="@layout/fragment_setting" />
     <fragment
         android:id="@+id/cycleFragment"
-        android:name="com.example.todo_list.fragment.CycleFragment"
+        android:name="com.example.todo_list.fragment.RoutineFragment"
         android:label="fragment_cycle"
-        tools:layout="@layout/fragment_cycle" />
+        tools:layout="@layout/fragment_routine" />
 </navigation>

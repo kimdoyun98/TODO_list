@@ -2,25 +2,24 @@ package com.example.todo_list.fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.todo_list.Activity.TodoRegisterActivity
-import com.example.todo_list.Adapter.TodoAdapter
-import com.example.todo_list.R
 import com.example.todo_list.ToDoViewModel
-import com.example.todo_list.databinding.FragmentTodoBinding
+import com.example.todo_list.activity.TodoRegisterActivity
+import com.example.todo_list.adapter.TodoAdapter
+import com.example.todo_list.databinding.FragmentScheduleBinding
 
-class ToDoFragment : BaseFragment(R.layout.fragment_todo) {
-    private lateinit var binding : FragmentTodoBinding
+class ScheduleFragment : Fragment() {
+    private lateinit var binding : FragmentScheduleBinding
     private val viewModel : ToDoViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentTodoBinding.bind(view)
         binding.todoViewModel = viewModel
-
-        homeActivityToolbar.title = "Schedule"
 
         val adapter = TodoAdapter(requireContext(), viewModel)
         val recyclerView = binding.recyclerview
@@ -44,5 +43,10 @@ class ToDoFragment : BaseFragment(R.layout.fragment_todo) {
             val intent = Intent(context, TodoRegisterActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        binding = FragmentScheduleBinding.inflate(layoutInflater, container, false)
+        return binding.root
     }
 }

@@ -1,4 +1,4 @@
-package com.example.todo_list.Adapter
+package com.example.todo_list.adapter
 
 import android.app.AlertDialog
 import android.content.Context
@@ -8,10 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.todo_list.Activity.DetailActivity
-import com.example.todo_list.Adapter.TodoAdapter.MyViewHolder
-import com.example.todo_list.Common.DiffUtilCallBackTODO
 import com.example.todo_list.ToDoViewModel
+import com.example.todo_list.activity.DetailActivity
+import com.example.todo_list.adapter.TodoAdapter.MyViewHolder
+import com.example.todo_list.common.DiffUtilCallBackTODO
 import com.example.todo_list.data.ToDoEntity
 import com.example.todo_list.databinding.RecyclerviewTodoItemBinding
 

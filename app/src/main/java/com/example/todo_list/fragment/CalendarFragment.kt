@@ -1,17 +1,20 @@
 package com.example.todo_list.fragment
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.view.children
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todo_list.*
-import com.example.todo_list.Adapter.CalendarEventsAdapter
-import com.example.todo_list.Common.DiffUtilCallBackTODO
+import com.example.todo_list.adapter.CalendarEventsAdapter
+import com.example.todo_list.common.DiffUtilCallBackTODO
 import com.example.todo_list.data.ToDoEntity
 import com.example.todo_list.databinding.CalendarDayBinding
 import com.example.todo_list.databinding.CalendarHeaderBinding
@@ -26,7 +29,7 @@ import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 
-class CalendarFragment : BaseFragment(R.layout.fragment_calendar) {
+class CalendarFragment : Fragment(){
     private lateinit var binding : FragmentCalendarBinding
     private val viewModel : ToDoViewModel by viewModels()
 
@@ -133,8 +136,8 @@ class CalendarFragment : BaseFragment(R.layout.fragment_calendar) {
          * Toolbar setting
          */
         binding.exThreeCalendar.monthScrollListener = {
-            homeActivityToolbar.title = if (it.year == today.year) {
-            titleSameYearFormatter.format(it.yearMonth)
+            binding.calendarToolbar.title = if (it.year == today.year) {
+                titleSameYearFormatter.format(it.yearMonth)
             } else {
                 titleFormatter.format(it.yearMonth)
             }
@@ -191,5 +194,9 @@ class CalendarFragment : BaseFragment(R.layout.fragment_calendar) {
             diffResult.dispatchUpdatesTo(this@apply)
         }
         binding.exThreeSelectedDateText.text = selectionFormatter.format(date)
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return FragmentCalendarBinding.inflate(layoutInflater).root
     }
 }

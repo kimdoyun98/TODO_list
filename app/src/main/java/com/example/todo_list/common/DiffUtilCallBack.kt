@@ -1,4 +1,4 @@
-package com.example.todo_list.Common
+package com.example.todo_list.common
 
 import androidx.recyclerview.widget.DiffUtil
 import com.example.todo_list.data.ToDoEntity

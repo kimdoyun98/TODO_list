@@ -1,10 +1,10 @@
-package com.example.todo_list.Activity
+package com.example.todo_list.activity
 
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.example.todo_list.Common.DatePicker
+import com.example.todo_list.common.DatePicker
 import com.example.todo_list.R
 import com.example.todo_list.ToDoViewModel
 import com.example.todo_list.data.ToDoEntity

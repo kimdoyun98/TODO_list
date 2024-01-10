@@ -1,4 +1,4 @@
-package com.example.todo_list
+package com.example.todo_list.common
 
 import android.app.Application
 import android.content.Context
@@ -11,6 +11,7 @@ class MyApplication : Application() {
 
     companion object {
         lateinit var instance: MyApplication
+        lateinit var prefs: PreferenceUtil
         fun applicationContext(): Context {
             return instance.applicationContext
         }
@@ -19,6 +20,9 @@ class MyApplication : Application() {
         }
     }
     override fun onCreate() {
+        prefs = PreferenceUtil(applicationContext)
         super.onCreate()
+
+
     }
 }

@@ -1,4 +1,4 @@
-package com.example.todo_list.Common
+package com.example.todo_list.common
 
 import android.app.DatePickerDialog
 import android.content.Context

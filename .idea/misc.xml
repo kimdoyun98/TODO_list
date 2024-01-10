@@ -25,10 +25,12 @@
         <entry key="..\:/Users/KDOY/AndroidStudioProjects/TODO_List/app/src/main/res/layout/event_item_view.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/KDOY/AndroidStudioProjects/TODO_List/app/src/main/res/layout/fragment_calendar.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/KDOY/AndroidStudioProjects/TODO_List/app/src/main/res/layout/fragment_calender.xml" value="0.20729166666666668" />
-        <entry key="..\:/Users/KDOY/AndroidStudioProjects/TODO_List/app/src/main/res/layout/fragment_cycle.xml" value="0.1" />
+        <entry key="..\:/Users/KDOY/AndroidStudioProjects/TODO_List/app/src/main/res/layout/fragment_cycle.xml" value="0.264" />
         <entry key="..\:/Users/KDOY/AndroidStudioProjects/TODO_List/app/src/main/res/layout/fragment_home.xml" value="0.20729166666666668" />
         <entry key="..\:/Users/KDOY/AndroidStudioProjects/TODO_List/app/src/main/res/layout/fragment_personal.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/KDOY/AndroidStudioProjects/TODO_List/app/src/main/res/layout/fragment_project.xml" value="0.20729166666666668" />
+        <entry key="..\:/Users/KDOY/AndroidStudioProjects/TODO_List/app/src/main/res/layout/fragment_routine.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/KDOY/AndroidStudioProjects/TODO_List/app/src/main/res/layout/fragment_schedule.xml" value="0.11979166666666667" />
         <entry key="..\:/Users/KDOY/AndroidStudioProjects/TODO_List/app/src/main/res/layout/fragment_setting.xml" value="0.121875" />
         <entry key="..\:/Users/KDOY/AndroidStudioProjects/TODO_List/app/src/main/res/layout/fragment_tab.xml" value="0.2" />
         <entry key="..\:/Users/KDOY/AndroidStudioProjects/TODO_List/app/src/main/res/layout/fragment_todo.xml" value="0.2" />
@@ -38,7 +40,7 @@
         <entry key="..\:/Users/KDOY/AndroidStudioProjects/TODO_List/app/src/main/res/layout/project_fragment.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/KDOY/AndroidStudioProjects/TODO_List/app/src/main/res/layout/recyclerview.xml" value="0.2526041666666667" />
         <entry key="..\:/Users/KDOY/AndroidStudioProjects/TODO_List/app/src/main/res/layout/recyclerview_cycle_item.xml" value="0.2526041666666667" />
-        <entry key="..\:/Users/KDOY/AndroidStudioProjects/TODO_List/app/src/main/res/layout/recyclerview_home_item.xml" value="0.1" />
+        <entry key="..\:/Users/KDOY/AndroidStudioProjects/TODO_List/app/src/main/res/layout/recyclerview_home_item.xml" value="0.264" />
         <entry key="..\:/Users/KDOY/AndroidStudioProjects/TODO_List/app/src/main/res/layout/recyclerview_hometodo_item.xml" value="0.2526041666666667" />
         <entry key="..\:/Users/KDOY/AndroidStudioProjects/TODO_List/app/src/main/res/layout/recyclerview_todo_item.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/KDOY/AndroidStudioProjects/TODO_List/app/src/main/res/menu/bottom_nav.xml" value="0.25364583333333335" />

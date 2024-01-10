@@ -1,4 +1,4 @@
-package com.example.todo_list.Activity
+package com.example.todo_list.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -15,14 +15,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         binding.swiperefreshlayout.setOnRefreshListener {
             binding.swiperefreshlayout.isRefreshing = false
         }
 
-        setContentView(binding.root)
-
-        setSupportActionBar(binding.toolbar)
 
         val navController = findNavController(R.id.main_fragment)
 

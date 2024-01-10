@@ -1,4 +1,4 @@
-package com.example.todo_list.Activity
+package com.example.todo_list.activity
 
 import android.annotation.SuppressLint
 import android.os.Bundle
