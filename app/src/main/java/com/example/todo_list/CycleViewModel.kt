@@ -14,12 +14,15 @@ class CycleViewModel(application: Application) : AndroidViewModel(application) {
         return cycleRepository.selectAll()
     }
 
+    fun setAlarm(title: String):LiveData<Int>{
+        return cycleRepository.setAlarm(title)
+    }
+
     fun update() {
         cycleRepository.update()
     }
 
     fun todaySuccess(id:Int) {
-        Log.d("todaySuccess", id.toString())
         cycleRepository.todaySuccess(id)
     }
 

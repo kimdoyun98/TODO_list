@@ -29,6 +29,9 @@ interface CycleDAO {
     @Query("SELECT * FROM cycleEntity")
     fun getAll():LiveData<List<CycleEntity>>
 
+    @Query("SELECT id FROM cycleEntity WHERE title =:title")
+    fun getId(title: String):LiveData<Int>
+
     @Insert
     fun insert(cycleEntity: CycleEntity)
 

@@ -6,11 +6,13 @@ import android.graphics.Color
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todo_list.CycleViewModel
+import com.example.todo_list.common.Alarm
 import com.example.todo_list.data.CycleEntity
 import com.example.todo_list.databinding.RecyclerviewCycleItemBinding
 
@@ -28,6 +30,7 @@ class CycleAdapter (val context: Context, val viewModel: CycleViewModel) : Recyc
                 builder.setTitle("다음 내용을 삭제하시겠습니까?").setMessage(list[pos].title)
                 builder.setPositiveButton("확인") { _, _ ->
                     viewModel.delete(list[pos].id)
+                    Alarm(context).cancelAlarm(list[pos].id)
                 }
                 builder.setNegativeButton("취소") {_,_ ->
 
@@ -53,10 +56,8 @@ class CycleAdapter (val context: Context, val viewModel: CycleViewModel) : Recyc
         val spannableString = SpannableString(content)
 
         val saveIndex = ArrayList<Int>()
-        for ( i: Int in 0..6){
-            if(data.day?.get(i) == true){
-                saveIndex.add(i)
-            }
+        for (i in 0..6){
+            if(data.day?.get(i)!!) saveIndex.add(i)
         }
 
         if (saveIndex.size == 7) {
@@ -64,10 +65,10 @@ class CycleAdapter (val context: Context, val viewModel: CycleViewModel) : Recyc
             binding.showDay.setTextColor(Color.BLUE)
         }
         else{
-            for(i:Int in saveIndex){
+            for(i in saveIndex){
                 var index = 0
                 when(i){
-                    0 -> index = 0
+                    0 -> index = 14
                     1 -> index = 2
                     2 -> index = 4
                     3 -> index = 6

@@ -1,7 +1,9 @@
 package com.example.todo_list.data
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.LiveData
+import com.example.todo_list.common.Alarm
 import com.example.todo_list.common.MyApplication
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -26,6 +28,10 @@ class CycleRepository(application: Application) {
 
     fun selectAll() : LiveData<List<CycleEntity>>{
         return this.cycleAll
+    }
+
+    fun setAlarm(title: String):LiveData<Int>{
+        return cycleDao.getId(title)
     }
 
     fun update() {

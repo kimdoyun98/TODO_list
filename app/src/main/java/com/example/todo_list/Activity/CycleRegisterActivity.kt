@@ -1,10 +1,12 @@
-package com.example.todo_list.Activity
+package com.example.todo_list.activity
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.CompoundButton
 import android.widget.TimePicker
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.example.todo_list.common.Alarm
 import com.example.todo_list.CycleViewModel
 import com.example.todo_list.data.CycleEntity
 import com.example.todo_list.databinding.ActivityCycleRegisterBinding
@@ -60,6 +62,12 @@ class CycleRegisterActivity : AppCompatActivity(), TimePicker.OnTimeChangedListe
                     time = "${time2[0]}:${time2[1]}"
                 )
             )
+
+            //TODO alarmCode는 기본키로 하여 중첩 방지해야 함
+            viewModel.setAlarm(binding.title.text.toString()).observe(this){
+                if(it != null) Alarm(this).setAlarm(time2[0].toInt(), time2[1].toInt(), it, binding.title.text.toString(), checkedDayList)
+            }
+
             finish()
         }
     }
