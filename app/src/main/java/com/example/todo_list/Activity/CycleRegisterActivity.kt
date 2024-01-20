@@ -1,13 +1,12 @@
 package com.example.todo_list.activity
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.CompoundButton
 import android.widget.TimePicker
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.example.todo_list.common.Alarm
 import com.example.todo_list.CycleViewModel
+import com.example.todo_list.common.Alarm
 import com.example.todo_list.data.CycleEntity
 import com.example.todo_list.databinding.ActivityCycleRegisterBinding
 import java.util.*

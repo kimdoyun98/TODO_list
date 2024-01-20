@@ -25,7 +25,7 @@ class AlarmReceiver : BroadcastReceiver() {
         val today = Calendar.getInstance().get(Calendar.DAY_OF_WEEK)
         val checkedDayList = intent?.extras!!.getBooleanArray("checkedDayList")
 
-        if(!checkedDayList!![today-1]) return
+        if(!checkedDayList!![today-1] || !MyApplication.prefs.getAlarm("pushAlarm")) return
 
         val notificationManager: NotificationManager =
             context?.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -59,6 +59,9 @@ class AlarmReceiver : BroadcastReceiver() {
             .build()
 
         notificationManager.notify(1, builder)
+    }
 
+    object MyReceiver{
+        val myReceiver = "Asdasd"
     }
 }

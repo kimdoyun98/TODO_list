@@ -23,7 +23,7 @@ class Alarm(private val context: Context) {
         }else{
             PendingIntent.getBroadcast(context,alarm_code,intent,PendingIntent.FLAG_UPDATE_CURRENT)
         }
-
+        AlarmReceiver.MyReceiver.myReceiver
         val calendar : Calendar = Calendar.getInstance().apply {
             timeInMillis = System.currentTimeMillis()
             set(Calendar.HOUR_OF_DAY, hour)
