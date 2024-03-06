@@ -7,11 +7,9 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.os.Build
-import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import com.example.todo_list.R
-import com.example.todo_list.activity.MainActivity
 import java.util.*
 
 /**
@@ -59,9 +57,5 @@ class AlarmReceiver : BroadcastReceiver() {
             .build()
 
         notificationManager.notify(1, builder)
-    }
-
-    object MyReceiver{
-        val myReceiver = "Asdasd"
     }
 }

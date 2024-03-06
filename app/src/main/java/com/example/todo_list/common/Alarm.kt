@@ -5,8 +5,7 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
-import android.util.Log
-import java.util.*
+import java.util.Calendar
 
 class Alarm(private val context: Context) {
     private val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as? AlarmManager
@@ -23,7 +22,7 @@ class Alarm(private val context: Context) {
         }else{
             PendingIntent.getBroadcast(context,alarm_code,intent,PendingIntent.FLAG_UPDATE_CURRENT)
         }
-        AlarmReceiver.MyReceiver.myReceiver
+
         val calendar : Calendar = Calendar.getInstance().apply {
             timeInMillis = System.currentTimeMillis()
             set(Calendar.HOUR_OF_DAY, hour)

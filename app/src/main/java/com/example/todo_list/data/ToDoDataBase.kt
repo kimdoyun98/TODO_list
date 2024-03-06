@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 
-@Database(entities = [ToDoEntity::class, CycleEntity::class], version = 3)
+@Database(entities = [ToDoEntity::class, CycleEntity::class], version = 3, exportSchema = false)
 @TypeConverters(DayListConverter::class)
 abstract class ToDoDataBase : RoomDatabase() {
     abstract fun todoDao(): ToDoDAO
