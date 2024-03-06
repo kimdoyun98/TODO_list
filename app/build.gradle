@@ -6,12 +6,12 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.example.todo_list"
         minSdk 21
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -97,4 +97,6 @@ dependencies {
     // 설정
     implementation 'androidx.preference:preference-ktx:1.1.1'
 
+    //permission
+    implementation 'io.github.ParkSangGwon:tedpermission-normal:3.3.0'
 }

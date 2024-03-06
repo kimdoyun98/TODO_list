@@ -4,6 +4,8 @@
     package="com.example.todo_list">
 
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    
     <application
         android:name=".common.MyApplication"
         android:allowBackup="true"
