@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import java.util.Calendar
+import java.util.Date
 
 class Alarm(private val context: Context) {
     private val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as? AlarmManager
@@ -30,13 +31,23 @@ class Alarm(private val context: Context) {
             set(Calendar.SECOND, 0)
         }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            alarmManager?.setExactAndAllowWhileIdle(
-                AlarmManager.RTC_WAKEUP,
-                calendar.timeInMillis,
-                pendingIntent
-            )
+        /**
+         * Date 보다 이전 시간으로 등록 시 등록 즉시 알림 발생
+         */
+        if (calendar.time < Date()) {
+            calendar.add(Calendar.DAY_OF_MONTH, 1)
         }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//            alarmManager?.setExactAndAllowWhileIdle(
+//                AlarmManager.RTC_WAKEUP,
+//                calendar.timeInMillis,
+//                pendingIntent
+//            )
+            val alarmClock = AlarmManager.AlarmClockInfo(calendar.timeInMillis, pendingIntent)
+            alarmManager?.setAlarmClock(alarmClock, pendingIntent)
+        }
+
     }
 
     fun cancelAlarm(alarm_code : Int){
