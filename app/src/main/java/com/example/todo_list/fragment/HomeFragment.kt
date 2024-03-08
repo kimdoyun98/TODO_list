@@ -6,16 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.example.todo_list.adapter.HomeCycleAdapter
-import com.example.todo_list.adapter.HomeTodoAdapter
 import com.example.todo_list.HomeViewModel
-import com.example.todo_list.data.CycleEntity
+import com.example.todo_list.adapter.HomeRoutineAdapter
+import com.example.todo_list.adapter.HomeScheduleAdapter
+import com.example.todo_list.data.RoutineEntity
 import com.example.todo_list.databinding.FragmentHomeBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
     private lateinit var binding : FragmentHomeBinding
     private val viewModel : HomeViewModel by viewModels()
-    private var todayData : MutableList<CycleEntity> = mutableListOf()
+    private var todayData : MutableList<RoutineEntity> = mutableListOf()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -24,7 +26,7 @@ class HomeFragment : Fragment() {
         /**
          * 오늘 할 일
          */
-        val adapter = HomeCycleAdapter(requireContext(), viewModel)
+        val adapter = HomeRoutineAdapter(requireContext(), viewModel)
         val todayRecyclerView = binding.todayRecyclerview
         todayRecyclerView.adapter = adapter
 
@@ -40,7 +42,7 @@ class HomeFragment : Fragment() {
         /**
          * 일정
          */
-        val personalAdapter = HomeTodoAdapter(requireContext(), viewModel)
+        val personalAdapter = HomeScheduleAdapter(requireContext(), viewModel)
         val personalRecyclerView = binding.personalRecyclerview
         personalRecyclerView.adapter = personalAdapter
 

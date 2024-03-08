@@ -6,8 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.todo_list.common.DatePicker
 import com.example.todo_list.R
-import com.example.todo_list.ToDoViewModel
-import com.example.todo_list.data.ToDoEntity
+import com.example.todo_list.ScheduleViewModel
+import com.example.todo_list.data.ScheduleEntity
 import com.example.todo_list.databinding.ActivityRegisterBinding
 
 class DetailActivity : AppCompatActivity() {
@@ -18,7 +18,7 @@ class DetailActivity : AppCompatActivity() {
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val data = intent.getSerializableExtra("data") as ToDoEntity
+        val data = intent.getSerializableExtra("data") as ScheduleEntity
 
         val categoryAdapter = ArrayAdapter.createFromResource(this,
             R.array.categoryName, android.R.layout.simple_spinner_item)
@@ -34,10 +34,10 @@ class DetailActivity : AppCompatActivity() {
 
         binding.cancelButton.setOnClickListener{ finish() }
         binding.registerButton.setOnClickListener {
-            val viewModel = ViewModelProvider(this)[ToDoViewModel::class.java]
+            val viewModel = ViewModelProvider(this)[ScheduleViewModel::class.java]
 
             viewModel.update(
-                ToDoEntity(
+                ScheduleEntity(
                     id = data.id,
                     title = binding.title.text.toString(),
                     content = binding.content.text.toString(),

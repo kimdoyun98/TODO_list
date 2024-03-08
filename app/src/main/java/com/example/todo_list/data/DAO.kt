@@ -4,43 +4,43 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 
 @Dao
-interface ToDoDAO {
-    @Query("SELECT * FROM todoEntity WHERE success = :suc")
-    fun getAll(suc:Boolean = false): LiveData<List<ToDoEntity>>
+interface ScheduleDAO {
+    @Query("SELECT * FROM scheduleEntity WHERE success = :suc")
+    suspend fun getAll(suc:Boolean = false): List<ScheduleEntity>
 
-    @Query("SELECT * FROM todoEntity WHERE start_date <= :date AND deadline_date >= :date AND success = :suc")
-    fun getCalumOnDate(date:String?, suc: Boolean = false) : LiveData<List<ToDoEntity>>
+    @Query("SELECT * FROM scheduleEntity WHERE start_date <= :date AND deadline_date >= :date AND success = :suc")
+    suspend fun getCalumOnDate(date:String?, suc: Boolean = false) : List<ScheduleEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(toDoEntity: ToDoEntity)
+    suspend fun insert(toDoEntity: ScheduleEntity)
 
-    @Query("Delete From todoEntity WHERE id = :id")
-    fun delete(id : Int): Int
+    @Query("Delete From scheduleEntity WHERE id = :id")
+    suspend fun delete(id : Int): Int
 
     @Update
-    fun update(toDoEntity: ToDoEntity)
+    suspend fun update(toDoEntity: ScheduleEntity)
 
-    @Query("Update todoEntity SET success = :suc WHERE id = :id")
-    fun success(id : Int, suc : Boolean = true)
+    @Query("Update scheduleEntity SET success = :suc WHERE id = :id")
+    suspend fun success(id : Int, suc : Boolean = true)
 }
 
 @Dao
-interface CycleDAO {
-    @Query("SELECT * FROM cycleEntity")
-    fun getAll():LiveData<List<CycleEntity>>
+interface RoutineDAO {
+    @Query("SELECT * FROM routineEntity")
+    suspend fun getAll(): List<RoutineEntity>
 
-    @Query("SELECT id FROM cycleEntity WHERE title =:title")
-    fun getId(title: String):LiveData<Int>
+    @Query("SELECT id FROM routineEntity WHERE title =:title")
+    suspend fun getId(title: String): Int
 
     @Insert
-    fun insert(cycleEntity: CycleEntity)
+    suspend fun insert(routineEntity: RoutineEntity)
 
-    @Query("UPDATE cycleEntity SET success =:suc")
-    fun update(suc: Boolean = false)
+    @Query("UPDATE RoutineEntity SET success =:suc")
+    suspend fun update(suc: Boolean = false)
 
-    @Query("UPDATE cycleEntity SET success =:suc WHERE id =:id")
-    fun todaySuccess(id: Int, suc: Boolean = true)
+    @Query("UPDATE RoutineEntity SET success =:suc WHERE id =:id")
+    suspend fun todaySuccess(id: Int, suc: Boolean = true)
 
-    @Query("Delete From cycleEntity WHERE id = :id")
-    fun delete(id : Int): Int
+    @Query("Delete From RoutineEntity WHERE id = :id")
+    suspend fun delete(id : Int): Int
 }

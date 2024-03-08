@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.todo_list.data.ToDoEntity
+import com.example.todo_list.data.ScheduleEntity
 import com.example.todo_list.databinding.EventItemViewBinding
 
 /**
@@ -13,12 +13,12 @@ import com.example.todo_list.databinding.EventItemViewBinding
 class CalendarEventsAdapter: RecyclerView.Adapter<CalendarEventsAdapter.CalendarEventsAdapterViewHolder>() {
 
     private lateinit var binding : EventItemViewBinding
-    var list : MutableList<ToDoEntity> = mutableListOf()
+    var list : MutableList<ScheduleEntity> = mutableListOf()
 
     inner class CalendarEventsAdapterViewHolder(v: View) :
         RecyclerView.ViewHolder(v) {
 
-        fun bind(toDoEntity: ToDoEntity){
+        fun bind(toDoEntity: ScheduleEntity){
             binding.todoEntity = toDoEntity
         }
     }
@@ -29,7 +29,7 @@ class CalendarEventsAdapter: RecyclerView.Adapter<CalendarEventsAdapter.Calendar
     }
 
     override fun onBindViewHolder(holder: CalendarEventsAdapterViewHolder, position: Int) {
-        val data: ToDoEntity = list[position]
+        val data: ScheduleEntity = list[position]
         holder.bind(data)
     }
 

@@ -4,15 +4,17 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.example.todo_list.ToDoViewModel
-import com.example.todo_list.data.ToDoEntity
+import com.example.todo_list.ScheduleViewModel
+import com.example.todo_list.data.ScheduleEntity
 import com.example.todo_list.databinding.ActivityRegisterBinding
 import com.google.android.material.datepicker.MaterialDatePicker
+import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
 
-class TodoRegisterActivity : AppCompatActivity() {
-    private val viewModel : ToDoViewModel by viewModels()
+@AndroidEntryPoint
+class ScheduleRegisterActivity : AppCompatActivity() {
+    private val viewModel : ScheduleViewModel by viewModels()
     private lateinit var binding : ActivityRegisterBinding
 
     @SuppressLint("SimpleDateFormat")
@@ -45,7 +47,7 @@ class TodoRegisterActivity : AppCompatActivity() {
         // 등록 버튼
         binding.registerButton.setOnClickListener{
 
-            val newTodo = ToDoEntity(
+            val newTodo = ScheduleEntity(
                 title = binding.title.text.toString(),
                 content = binding.content.text.toString(),
                 start_date = binding.startDate.text.toString(),

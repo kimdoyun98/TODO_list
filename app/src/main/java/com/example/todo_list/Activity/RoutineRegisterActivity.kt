@@ -1,18 +1,21 @@
 package com.example.todo_list.activity
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.CompoundButton
 import android.widget.TimePicker
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.example.todo_list.CycleViewModel
+import com.example.todo_list.RoutineViewModel
 import com.example.todo_list.common.Alarm
-import com.example.todo_list.data.CycleEntity
+import com.example.todo_list.data.RoutineEntity
 import com.example.todo_list.databinding.ActivityCycleRegisterBinding
-import java.util.*
+import dagger.hilt.android.AndroidEntryPoint
+import java.util.Calendar
 
-class CycleRegisterActivity : AppCompatActivity(), TimePicker.OnTimeChangedListener {
-    private val viewModel : CycleViewModel by viewModels()
+@AndroidEntryPoint
+class RoutineRegisterActivity : AppCompatActivity(), TimePicker.OnTimeChangedListener {
+    private val viewModel : RoutineViewModel by viewModels()
     private lateinit var binding : ActivityCycleRegisterBinding
     private var checkedDayList = MutableList(7) {false}
     private val time = Array(2){-1}
@@ -54,7 +57,7 @@ class CycleRegisterActivity : AppCompatActivity(), TimePicker.OnTimeChangedListe
             }
             val time2 = time.map { "%02d".format(it) }
             viewModel.insert(
-                CycleEntity(
+                RoutineEntity(
                     title  = binding.title.text.toString(),
                     day = checkedDayList,
                     success = false,
