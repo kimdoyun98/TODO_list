@@ -25,7 +25,7 @@
  
 
 # Tech Stack
-`Kotlin` `Jetpack` `AAC` `Databinding` `LiveData` `ViewModel` `Room DB` `Coroutine` `Navigation Component` `Alarm Manager` 
+`Kotlin` `Jetpack` `AAC` `Databinding` `LiveData` `ViewModel` `Room DB` `Coroutine` `Flow` `Navigation Component` `Alarm Manager` `Hilt`
 <br>
 
 
@@ -36,3 +36,8 @@
 
 # Learn
 * Service를 사용한 백그라운드 작업에 대해 알게 됨
+* AlarmManager를 통한 스케줄링에 대해 알게 됨
+* Coroutine을 이용한 비동기 처리를 알게 됨
+* Flow 사용법에 대해 알게 됨
+* Hilt을 사용한 의존성 관리에 대해 알게 됨
+  
