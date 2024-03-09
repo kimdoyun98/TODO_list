@@ -6,12 +6,13 @@ import com.example.todo_list.common.MyApplication
 import com.example.todo_list.data.DataBase
 import com.example.todo_list.data.RoutineDAO
 import com.example.todo_list.data.RoutineEntity
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class RoutineRepository @Inject constructor(private val routineDAO: RoutineDAO): Routine {
-    override suspend fun selectAll() : List<RoutineEntity> = routineDAO.getAll()
+    override fun selectAll() : Flow<List<RoutineEntity>> = routineDAO.getAll()
 
-    override suspend fun setAlarm(title: String):Int = routineDAO.getId(title)
+    override suspend fun getId(title: String):Int = routineDAO.getId(title)
 
     override suspend fun update() = routineDAO.update()
 

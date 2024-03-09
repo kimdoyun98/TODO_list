@@ -4,6 +4,7 @@ import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.todo_list.data.ScheduleEntity
 import com.example.todo_list.data.schedule.ScheduleRepository
@@ -13,24 +14,16 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ScheduleViewModel @Inject constructor(private val repository: ScheduleRepository): ViewModel() {
-    private val _scheduleAllData = MutableLiveData<List<ScheduleEntity>>()
-    val scheduleAllData : LiveData<List<ScheduleEntity>> = _scheduleAllData
-
-    private val _selectOnData = MutableLiveData<List<ScheduleEntity>>()
-    //private val selectOnData : LiveData<List<ScheduleEntity>> = _selectOnData
-
     var sortFilter: MutableLiveData<Int> = MutableLiveData<Int>(1)
 
     // Data Binding 을 위한 Boolean 변수들 (TextStyle, TextColor)
     var isSortedByLatest: ObservableField<Boolean> = ObservableField<Boolean>(true)
     var isSortedByDeadline: ObservableField<Boolean> = ObservableField<Boolean>(false)
     var isSortedByRating: ObservableField<Boolean> = ObservableField<Boolean>(false)
-    fun getAll() = viewModelScope.launch { _scheduleAllData.value = repository.selectAll() }
 
-    fun getOnDate(date : String?) : LiveData<List<ScheduleEntity>>{
-        viewModelScope.launch { _selectOnData.value = repository.selectOnDate(date) }
-        return _selectOnData
-    }
+    val getAll: LiveData<List<ScheduleEntity>> = repository.selectAll().asLiveData()
+    fun getOnDate(date: String?): LiveData<List<ScheduleEntity>> = repository.selectOnDate(date).asLiveData()
+
 
     fun insert(scheduleEntity: ScheduleEntity) = viewModelScope.launch{ repository.insert(scheduleEntity) }
 

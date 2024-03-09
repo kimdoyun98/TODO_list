@@ -3,6 +3,7 @@ package com.example.todo_list
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.todo_list.data.RoutineEntity
 import com.example.todo_list.data.routine.RoutineRepository
@@ -25,22 +26,12 @@ class HomeViewModel @Inject constructor
     private val day = calendar.get(Calendar.DAY_OF_WEEK)
     private val selectionFormatter = DateTimeFormatter.ofPattern("yyyyMMdd")
 
-    private val _routineAll = MutableLiveData<List<RoutineEntity>>()
-    private val _scheduleAll = MutableLiveData<List<ScheduleEntity>>()
-
     init {
         today.value = day
     }
 
-    fun getAll() : LiveData<List<RoutineEntity>>{
-        viewModelScope.launch { _routineAll.value = routineRepository.selectAll() }
-        return _routineAll
-    }
-
-    fun todoAll() : LiveData<List<ScheduleEntity>> {
-        viewModelScope.launch { _scheduleAll.value =  scheduleRepository.selectAll()}
-        return _scheduleAll
-    }
+    val getRoutineAll: LiveData<List<RoutineEntity>> = routineRepository.selectAll().asLiveData()
+    val getScheduleAll: LiveData<List<ScheduleEntity>> = scheduleRepository.selectAll().asLiveData()
 
     fun getDay() : MutableLiveData<Int> {
         return this.today

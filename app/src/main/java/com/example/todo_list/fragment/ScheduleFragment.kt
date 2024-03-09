@@ -28,7 +28,7 @@ class ScheduleFragment : Fragment() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        viewModel.scheduleAllData.observe(viewLifecycleOwner) { list ->
+        viewModel.getAll.observe(viewLifecycleOwner) { list ->
             // 정렬
             viewModel.sortFilter.observe(viewLifecycleOwner) { filter ->
                 when(filter) {
@@ -50,10 +50,5 @@ class ScheduleFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentScheduleBinding.inflate(layoutInflater, container, false)
         return binding.root
-    }
-
-    override fun onResume() {
-        super.onResume()
-        viewModel.getAll()
     }
 }

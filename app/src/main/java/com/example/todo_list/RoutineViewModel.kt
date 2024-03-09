@@ -1,26 +1,26 @@
 package com.example.todo_list
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.todo_list.data.RoutineEntity
 import com.example.todo_list.data.routine.RoutineRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class RoutineViewModel @Inject constructor(private val repository: RoutineRepository) : ViewModel() {
-    private val _selectAll = MutableLiveData<List<RoutineEntity>>()
-    var selectAll: LiveData<List<RoutineEntity>> = _selectAll
+    val getAll: LiveData<List<RoutineEntity>> = repository.selectAll().asLiveData()
 
-    private val _alarmCode = MutableLiveData<Int>()
-    fun getAll() = viewModelScope.launch { _selectAll.value = repository.selectAll() }
-
-    fun setAlarm(title: String):LiveData<Int>{
-        viewModelScope.launch { _alarmCode.value = repository.setAlarm(title) }
-        return _alarmCode
+    private val _id = MutableStateFlow<Int>(-1)
+    val id: StateFlow<Int> = _id
+    fun getId(title: String):StateFlow<Int>{
+        viewModelScope.launch { _id.emit(repository.getId(title)) }
+        return id
     }
 
     fun update() = viewModelScope.launch{ repository.update() }

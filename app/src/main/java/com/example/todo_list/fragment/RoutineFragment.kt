@@ -27,7 +27,7 @@ class RoutineFragment :Fragment(){
         val recyclerView = binding.recyclerview
         recyclerView.adapter = adapter
 
-        viewModel.selectAll.observe(viewLifecycleOwner){ data ->
+        viewModel.getAll.observe(viewLifecycleOwner){ data ->
             adapter.setData(data)
         }
 
@@ -44,8 +44,8 @@ class RoutineFragment :Fragment(){
         return FragmentRoutineBinding.inflate(layoutInflater).root
     }
 
-    override fun onResume() {
-        super.onResume()
-        viewModel.getAll()
-    }
+//    override fun onResume() {
+//        super.onResume()
+//        viewModel.getAll()
+//    }
 }

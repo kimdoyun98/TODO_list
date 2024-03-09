@@ -2,14 +2,15 @@ package com.example.todo_list.data
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ScheduleDAO {
     @Query("SELECT * FROM scheduleEntity WHERE success = :suc")
-    suspend fun getAll(suc:Boolean = false): List<ScheduleEntity>
+    fun getAll(suc:Boolean = false): Flow<List<ScheduleEntity>>
 
     @Query("SELECT * FROM scheduleEntity WHERE start_date <= :date AND deadline_date >= :date AND success = :suc")
-    suspend fun getCalumOnDate(date:String?, suc: Boolean = false) : List<ScheduleEntity>
+    fun getCalumOnDate(date:String?, suc: Boolean = false) : Flow<List<ScheduleEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(toDoEntity: ScheduleEntity)
@@ -27,7 +28,7 @@ interface ScheduleDAO {
 @Dao
 interface RoutineDAO {
     @Query("SELECT * FROM routineEntity")
-    suspend fun getAll(): List<RoutineEntity>
+    fun getAll(): Flow<List<RoutineEntity>>
 
     @Query("SELECT id FROM routineEntity WHERE title =:title")
     suspend fun getId(title: String): Int

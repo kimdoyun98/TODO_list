@@ -31,7 +31,7 @@ class HomeFragment : Fragment() {
         todayRecyclerView.adapter = adapter
 
         viewModel.getDay().observe(viewLifecycleOwner){
-            viewModel.getAll().observe(viewLifecycleOwner) { dataList ->
+            viewModel.getRoutineAll.observe(viewLifecycleOwner) { dataList ->
                 todayData.clear()
                 for (data in dataList){
                     if(data.day?.get(it-1) == true) todayData.add(data)
@@ -46,7 +46,7 @@ class HomeFragment : Fragment() {
         val personalRecyclerView = binding.personalRecyclerview
         personalRecyclerView.adapter = personalAdapter
 
-        viewModel.todoAll().observe(viewLifecycleOwner){ dataList ->
+        viewModel.getScheduleAll.observe(viewLifecycleOwner){ dataList ->
             personalAdapter.setData(dataList)
         }
 
