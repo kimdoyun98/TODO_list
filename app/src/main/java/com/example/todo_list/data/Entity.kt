@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 import java.io.Serializable
 
 @Entity
-data class ToDoEntity(
+data class ScheduleEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     val title: String?,
@@ -17,7 +17,7 @@ data class ToDoEntity(
 ): Serializable
 
 @Entity
-data class CycleEntity(
+data class RoutineEntity(
     @PrimaryKey(autoGenerate = true)
     val id : Int = 0,
     val title : String?,

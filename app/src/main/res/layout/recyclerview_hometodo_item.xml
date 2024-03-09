@@ -5,10 +5,10 @@
     <data>
         <import type="androidx.core.content.ContextCompat" />
         <import type="com.example.todo_list.R"/>
-        <import type="com.example.todo_list.data.CycleEntity"/>
+        <import type="com.example.todo_list.data.RoutineEntity"/>
         <variable
             name="ToDoEntity"
-            type="com.example.todo_list.data.ToDoEntity" />
+            type="com.example.todo_list.data.ScheduleEntity" />
         <variable
             name="viewModel"
             type="com.example.todo_list.HomeViewModel" />

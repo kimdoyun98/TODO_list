@@ -6,19 +6,18 @@ import android.graphics.Color
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.todo_list.CycleViewModel
+import com.example.todo_list.RoutineViewModel
 import com.example.todo_list.common.Alarm
-import com.example.todo_list.data.CycleEntity
+import com.example.todo_list.data.RoutineEntity
 import com.example.todo_list.databinding.RecyclerviewCycleItemBinding
 
-class CycleAdapter (val context: Context, val viewModel: CycleViewModel) : RecyclerView.Adapter<CycleAdapter.MyViewHolder>() {
+class RoutineAdapter (val context: Context, val viewModel: RoutineViewModel) : RecyclerView.Adapter<RoutineAdapter.MyViewHolder>() {
     private lateinit var binding : RecyclerviewCycleItemBinding
-    private var list : MutableList<CycleEntity> = mutableListOf()
+    private var list : MutableList<RoutineEntity> = mutableListOf()
 
     // Controller
     inner class MyViewHolder(v: View) : RecyclerView.ViewHolder(v){
@@ -39,14 +38,14 @@ class CycleAdapter (val context: Context, val viewModel: CycleViewModel) : Recyc
             }
         }
 
-        fun bind(cycleEntity: CycleEntity){
+        fun bind(cycleEntity: RoutineEntity){
             binding.cycleEntity = cycleEntity
         }
     }
 
     // 여기서 set 설정
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val data: CycleEntity = list[position]
+        val data: RoutineEntity = list[position]
         holder.bind(data)
 
         /**
@@ -94,7 +93,7 @@ class CycleAdapter (val context: Context, val viewModel: CycleViewModel) : Recyc
         return list.size
     }
 
-    fun setData(list: List<CycleEntity>){
+    fun setData(list: List<RoutineEntity>){
         list.let {
             this.list.run {
                 clear()

@@ -28,9 +28,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.TodoRegisterActivity" />
+        <activity android:name=".activity.ScheduleRegisterActivity" />
         <activity android:name=".activity.DetailActivity" />
-        <activity android:name=".activity.CycleRegisterActivity" />
+        <activity android:name=".activity.RoutineRegisterActivity" />
         <receiver android:name=".common.AlarmReceiver"
             android:enabled="true"
             android:exported="false">

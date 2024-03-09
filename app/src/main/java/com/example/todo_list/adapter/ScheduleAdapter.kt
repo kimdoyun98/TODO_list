@@ -8,16 +8,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.todo_list.ToDoViewModel
+import com.example.todo_list.ScheduleViewModel
 import com.example.todo_list.activity.DetailActivity
-import com.example.todo_list.adapter.TodoAdapter.MyViewHolder
+import com.example.todo_list.adapter.ScheduleAdapter.MyViewHolder
 import com.example.todo_list.common.DiffUtilCallBackTODO
-import com.example.todo_list.data.ToDoEntity
+import com.example.todo_list.data.ScheduleEntity
 import com.example.todo_list.databinding.RecyclerviewTodoItemBinding
 
-class TodoAdapter(val context: Context, val viewModel: ToDoViewModel) : RecyclerView.Adapter<MyViewHolder>(){
+class ScheduleAdapter(val context: Context, val viewModel: ScheduleViewModel) : RecyclerView.Adapter<MyViewHolder>(){
     private lateinit var binding : RecyclerviewTodoItemBinding
-    private var list : MutableList<ToDoEntity> = mutableListOf()
+    private var list : MutableList<ScheduleEntity> = mutableListOf()
 
     // Controller
     inner class MyViewHolder(v: View) : RecyclerView.ViewHolder(v){
@@ -46,14 +46,14 @@ class TodoAdapter(val context: Context, val viewModel: ToDoViewModel) : Recycler
             }
         }
 
-        fun bind(toDoEntity: ToDoEntity){
+        fun bind(toDoEntity: ScheduleEntity){
             binding.todoEntity = toDoEntity
         }
     }
 
     // 여기서 set 설정
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val data: ToDoEntity = list[position]
+        val data: ScheduleEntity = list[position]
         holder.bind(data)
     }
 
@@ -66,7 +66,7 @@ class TodoAdapter(val context: Context, val viewModel: ToDoViewModel) : Recycler
         return list.size
     }
 
-    fun setData(list: List<ToDoEntity>){
+    fun setData(list: List<ScheduleEntity>){
         list.let {
             val diffCallback = DiffUtilCallBackTODO(this.list, list)
             val diffResult = DiffUtil.calculateDiff(diffCallback)
@@ -74,7 +74,7 @@ class TodoAdapter(val context: Context, val viewModel: ToDoViewModel) : Recycler
             this.list.run {
                 clear()
                 addAll(list)
-                diffResult.dispatchUpdatesTo(this@TodoAdapter)
+                diffResult.dispatchUpdatesTo(this@ScheduleAdapter)
             }
         }
     }

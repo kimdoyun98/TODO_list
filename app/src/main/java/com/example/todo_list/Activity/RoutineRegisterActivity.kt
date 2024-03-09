@@ -1,18 +1,25 @@
 package com.example.todo_list.activity
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.CompoundButton
 import android.widget.TimePicker
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.example.todo_list.CycleViewModel
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import com.example.todo_list.RoutineViewModel
 import com.example.todo_list.common.Alarm
-import com.example.todo_list.data.CycleEntity
+import com.example.todo_list.data.RoutineEntity
 import com.example.todo_list.databinding.ActivityCycleRegisterBinding
-import java.util.*
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import java.util.Calendar
 
-class CycleRegisterActivity : AppCompatActivity(), TimePicker.OnTimeChangedListener {
-    private val viewModel : CycleViewModel by viewModels()
+@AndroidEntryPoint
+class RoutineRegisterActivity : AppCompatActivity(), TimePicker.OnTimeChangedListener {
+    private val viewModel : RoutineViewModel by viewModels()
     private lateinit var binding : ActivityCycleRegisterBinding
     private var checkedDayList = MutableList(7) {false}
     private val time = Array(2){-1}
@@ -54,7 +61,7 @@ class CycleRegisterActivity : AppCompatActivity(), TimePicker.OnTimeChangedListe
             }
             val time2 = time.map { "%02d".format(it) }
             viewModel.insert(
-                CycleEntity(
+                RoutineEntity(
                     title  = binding.title.text.toString(),
                     day = checkedDayList,
                     success = false,
@@ -62,9 +69,31 @@ class CycleRegisterActivity : AppCompatActivity(), TimePicker.OnTimeChangedListe
                 )
             )
 
-            //TODO alarmCode는 기본키로 하여 중첩 방지해야 함
-            viewModel.setAlarm(binding.title.text.toString()).observe(this){
-                if(it != null) Alarm(this).setAlarm(time2[0].toInt(), time2[1].toInt(), it, binding.title.text.toString(), checkedDayList)
+            /**
+             * 알림 등록
+             */
+            //alarmCode는 기본키로 하여 중첩 방지해야 함
+            lifecycleScope.launch {
+                lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED){
+                    launch {
+                        try{
+                            viewModel.getId(binding.title.text.toString()).collect{
+                                if(it != -1) {
+                                    Alarm(this@RoutineRegisterActivity)
+                                        .setAlarm(
+                                            time2[0].toInt(),
+                                            time2[1].toInt(),
+                                            it,
+                                            binding.title.text.toString(),
+                                            checkedDayList
+                                        )
+                                }
+                            }
+                        }catch (e: Throwable){
+                            Log.e("RoutineRegisterActivity", e.message.toString())
+                        }
+                    }
+                }
             }
 
             finish()

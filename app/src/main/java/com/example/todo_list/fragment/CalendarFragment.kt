@@ -12,26 +12,33 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.todo_list.*
+import com.example.todo_list.R
+import com.example.todo_list.ScheduleViewModel
 import com.example.todo_list.adapter.CalendarEventsAdapter
 import com.example.todo_list.common.DiffUtilCallBackTODO
-import com.example.todo_list.data.ToDoEntity
+import com.example.todo_list.data.ScheduleEntity
 import com.example.todo_list.databinding.CalendarDayBinding
 import com.example.todo_list.databinding.CalendarHeaderBinding
 import com.example.todo_list.databinding.FragmentCalendarBinding
+import com.example.todo_list.daysOfWeekFromLocale
+import com.example.todo_list.makeInVisible
+import com.example.todo_list.makeVisible
+import com.example.todo_list.setTextColorRes
 import com.kizitonwose.calendarview.model.CalendarDay
 import com.kizitonwose.calendarview.model.CalendarMonth
 import com.kizitonwose.calendarview.model.DayOwner
 import com.kizitonwose.calendarview.ui.DayBinder
 import com.kizitonwose.calendarview.ui.MonthHeaderFooterBinder
 import com.kizitonwose.calendarview.ui.ViewContainer
+import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 
+@AndroidEntryPoint
 class CalendarFragment : Fragment(){
     private lateinit var binding : FragmentCalendarBinding
-    private val viewModel : ToDoViewModel by viewModels()
+    private val viewModel : ScheduleViewModel by viewModels()
 
     private val calendarEventsAdapter = CalendarEventsAdapter()
 
@@ -185,7 +192,7 @@ class CalendarFragment : Fragment(){
     /**
      * EventAdapter 데이터 초기화
      */
-    private fun updateAdapterForDate(date: LocalDate, data : List<ToDoEntity>) {
+    private fun updateAdapterForDate(date: LocalDate, data : List<ScheduleEntity>) {
         calendarEventsAdapter.apply {
             val diffCallback = DiffUtilCallBackTODO(list, data)
             val diffResult = DiffUtil.calculateDiff(diffCallback)

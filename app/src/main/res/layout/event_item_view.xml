@@ -2,10 +2,10 @@
 <layout xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
-        <import type="com.example.todo_list.data.ToDoEntity"/>
+        <import type="com.example.todo_list.data.ScheduleEntity"/>
         <variable
             name="todoEntity"
-            type="com.example.todo_list.data.ToDoEntity" />
+            type="com.example.todo_list.data.ScheduleEntity" />
     </data>
 
     <LinearLayout
