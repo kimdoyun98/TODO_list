@@ -55,16 +55,18 @@
   src="https://chestnut-practice-2da.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F4d87eec4-c8f7-45a3-92cb-ac977fba3fd4%2F22483044-f11a-4add-9554-645c1033b1ba%2FScreenshot_20240205_155426.jpg?table=block&id=18ace93e-27b0-4e04-9fe2-46ec8fb8a97b&spaceId=4d87eec4-c8f7-45a3-92cb-ac977fba3fd4&width=2000&userId=&cache=v2"
   width="300"
   height="600"/>
+ </p>
+<p align="center" width="100%">
  <img 
  src="https://chestnut-practice-2da.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F4d87eec4-c8f7-45a3-92cb-ac977fba3fd4%2Fea628531-1699-4b23-852f-2c8df87916fd%2FScreenshot_20240205_155428.jpg?table=block&id=a42e5f47-6846-4735-a982-44d9c63839b8&spaceId=4d87eec4-c8f7-45a3-92cb-ac977fba3fd4&width=2000&userId=&cache=v2" 
  width="300"
  height="600"/>
- </p>
-<p align="center" width="100%">
 <img 
  src="https://chestnut-practice-2da.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F4d87eec4-c8f7-45a3-92cb-ac977fba3fd4%2F42839ef1-5494-49a3-b8d3-023c18c1bdeb%2FScreenshot_20240205_155440.jpg?table=block&id=d7d7b43d-e46a-4267-a08e-d9e89ddedbb7&spaceId=4d87eec4-c8f7-45a3-92cb-ac977fba3fd4&width=2000&userId=&cache=v2" 
  width="300"
  height="600"/>
+</p>
+<p align="center" width="100%">
 <img 
  src="https://chestnut-practice-2da.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F4d87eec4-c8f7-45a3-92cb-ac977fba3fd4%2F37a95bb0-8463-4436-a682-ac3ac93f7b51%2FScreenshot_20240205_155444.jpg?table=block&id=7c3ba9dc-6bf0-4379-85f3-88cf5d63bf59&spaceId=4d87eec4-c8f7-45a3-92cb-ac977fba3fd4&width=670&userId=&cache=v2" 
  width="300"
