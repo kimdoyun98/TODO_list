@@ -11,6 +11,9 @@ import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import com.example.todo_list.R
 import com.example.todo_list.common.MyApplication
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.lang.Thread.sleep
 import java.util.*
 
@@ -64,12 +67,14 @@ class AlarmReceiver : BroadcastReceiver() {
         val hour = intent.extras!!.getInt("hour")
         val minute = intent.extras!!.getInt("minute")
 
-        try{
-            sleep(60000)
-            Alarm(MyApplication.instance).setAlarm(hour, minute, requestCode, content!!, checkedDayList.toMutableList())
-        }
-        catch (e: Exception){
-            e.printStackTrace()
+        CoroutineScope(Dispatchers.IO).launch {
+            try{
+                sleep(60000)
+                Alarm(MyApplication.instance).setAlarm(hour, minute, requestCode, content!!, checkedDayList.toMutableList())
+            }
+            catch (e: Exception){
+                e.printStackTrace()
+            }
         }
     }
 }
