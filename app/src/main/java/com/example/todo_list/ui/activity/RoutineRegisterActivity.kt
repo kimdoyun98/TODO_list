@@ -1,4 +1,4 @@
-package com.example.todo_list.activity
+package com.example.todo_list.ui.activity
 
 import android.os.Bundle
 import android.util.Log
@@ -9,8 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.example.todo_list.RoutineViewModel
-import com.example.todo_list.common.Alarm
+import com.example.todo_list.ui.RoutineViewModel
+import com.example.todo_list.common.alarm.Alarm
 import com.example.todo_list.data.RoutineEntity
 import com.example.todo_list.databinding.ActivityCycleRegisterBinding
 import dagger.hilt.android.AndroidEntryPoint

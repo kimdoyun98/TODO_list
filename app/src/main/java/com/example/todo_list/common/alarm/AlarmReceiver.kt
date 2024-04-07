@@ -1,4 +1,4 @@
-package com.example.todo_list.common
+package com.example.todo_list.common.alarm
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -10,6 +10,8 @@ import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import com.example.todo_list.R
+import com.example.todo_list.common.MyApplication
+import java.lang.Thread.sleep
 import java.util.*
 
 /**
@@ -57,5 +59,17 @@ class AlarmReceiver : BroadcastReceiver() {
             .build()
 
         notificationManager.notify(1, builder)
+
+        //알림 재설정
+        val hour = intent.extras!!.getInt("hour")
+        val minute = intent.extras!!.getInt("minute")
+
+        try{
+            sleep(60000)
+            Alarm(MyApplication.instance).setAlarm(hour, minute, requestCode, content!!, checkedDayList.toMutableList())
+        }
+        catch (e: Exception){
+            e.printStackTrace()
+        }
     }
 }

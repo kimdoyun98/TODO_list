@@ -1,4 +1,4 @@
-package com.example.todo_list.fragment
+package com.example.todo_list.ui.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,17 +13,17 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todo_list.R
-import com.example.todo_list.ScheduleViewModel
+import com.example.todo_list.ui.ScheduleViewModel
 import com.example.todo_list.adapter.CalendarEventsAdapter
-import com.example.todo_list.common.DiffUtilCallBackTODO
+import com.example.todo_list.common.calendar.DiffUtilCallBackTODO
 import com.example.todo_list.data.ScheduleEntity
 import com.example.todo_list.databinding.CalendarDayBinding
 import com.example.todo_list.databinding.CalendarHeaderBinding
 import com.example.todo_list.databinding.FragmentCalendarBinding
-import com.example.todo_list.daysOfWeekFromLocale
-import com.example.todo_list.makeInVisible
-import com.example.todo_list.makeVisible
-import com.example.todo_list.setTextColorRes
+import com.example.todo_list.common.calendar.daysOfWeekFromLocale
+import com.example.todo_list.common.calendar.makeInVisible
+import com.example.todo_list.common.calendar.makeVisible
+import com.example.todo_list.common.calendar.setTextColorRes
 import com.kizitonwose.calendarview.model.CalendarDay
 import com.kizitonwose.calendarview.model.CalendarMonth
 import com.kizitonwose.calendarview.model.DayOwner

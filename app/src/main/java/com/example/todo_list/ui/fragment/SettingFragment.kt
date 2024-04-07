@@ -1,4 +1,4 @@
-package com.example.todo_list.fragment
+package com.example.todo_list.ui.fragment
 
 import android.Manifest
 import android.content.SharedPreferences

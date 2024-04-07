@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.todo_list.HomeViewModel
+import com.example.todo_list.ui.HomeViewModel
 import com.example.todo_list.data.RoutineEntity
 import com.example.todo_list.databinding.RecyclerviewHomeItemBinding
 

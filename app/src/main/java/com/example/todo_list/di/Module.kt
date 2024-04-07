@@ -1,6 +1,9 @@
-package com.example.todo_list.data
+package com.example.todo_list.di
 
 import android.content.Context
+import com.example.todo_list.data.DataBase
+import com.example.todo_list.data.RoutineDAO
+import com.example.todo_list.data.ScheduleDAO
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,11 +23,11 @@ object Module {
 
     @Singleton
     @Provides
-    fun provideRepository(database: DataBase
+    fun provideScheduleDao(database: DataBase
     ): ScheduleDAO = database.scheduleDao
 
     @Singleton
     @Provides
-    fun provideRoutineRepository(database: DataBase
+    fun provideRoutineDAO(database: DataBase
     ): RoutineDAO = database.routineDao
 }

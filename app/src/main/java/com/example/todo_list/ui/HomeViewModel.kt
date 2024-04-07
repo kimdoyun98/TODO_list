@@ -1,16 +1,14 @@
-package com.example.todo_list
+package com.example.todo_list.ui
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
-import androidx.lifecycle.viewModelScope
 import com.example.todo_list.data.RoutineEntity
 import com.example.todo_list.data.routine.RoutineRepository
 import com.example.todo_list.data.ScheduleEntity
 import com.example.todo_list.data.schedule.ScheduleRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter

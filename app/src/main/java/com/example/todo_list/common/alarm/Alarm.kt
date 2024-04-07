@@ -1,4 +1,4 @@
-package com.example.todo_list.common
+package com.example.todo_list.common.alarm
 
 import android.app.AlarmManager
 import android.app.PendingIntent
@@ -16,6 +16,8 @@ class Alarm(private val context: Context) {
             putExtra("alarm_rqCode", alarm_code)
             putExtra("content", content)
             putExtra("checkedDayList", checkedDayList.toBooleanArray())
+            putExtra("hour", hour)
+            putExtra("minute", minute)
         }
 
         val pendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S){

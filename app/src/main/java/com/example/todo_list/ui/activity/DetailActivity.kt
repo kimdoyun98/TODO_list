@@ -1,4 +1,4 @@
-package com.example.todo_list.activity
+package com.example.todo_list.ui.activity
 
 import android.os.Bundle
 import android.widget.ArrayAdapter
@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.todo_list.common.DatePicker
 import com.example.todo_list.R
-import com.example.todo_list.ScheduleViewModel
+import com.example.todo_list.ui.ScheduleViewModel
 import com.example.todo_list.data.ScheduleEntity
 import com.example.todo_list.databinding.ActivityRegisterBinding
 

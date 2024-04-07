@@ -1,4 +1,4 @@
-package com.example.todo_list
+package com.example.todo_list.ui
 
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData

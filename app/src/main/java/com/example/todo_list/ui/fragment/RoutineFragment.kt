@@ -1,16 +1,15 @@
-package com.example.todo_list.fragment
+package com.example.todo_list.ui.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.example.todo_list.activity.RoutineRegisterActivity
+import com.example.todo_list.ui.activity.RoutineRegisterActivity
 import com.example.todo_list.adapter.RoutineAdapter
-import com.example.todo_list.RoutineViewModel
+import com.example.todo_list.ui.RoutineViewModel
 import com.example.todo_list.databinding.FragmentRoutineBinding
 import dagger.hilt.android.AndroidEntryPoint
 

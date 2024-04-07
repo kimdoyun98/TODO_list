@@ -10,8 +10,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.todo_list.RoutineViewModel
-import com.example.todo_list.common.Alarm
+import com.example.todo_list.ui.RoutineViewModel
+import com.example.todo_list.common.alarm.Alarm
 import com.example.todo_list.data.RoutineEntity
 import com.example.todo_list.databinding.RecyclerviewCycleItemBinding
 

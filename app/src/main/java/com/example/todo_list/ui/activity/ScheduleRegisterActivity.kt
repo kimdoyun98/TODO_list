@@ -1,10 +1,10 @@
-package com.example.todo_list.activity
+package com.example.todo_list.ui.activity
 
 import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.example.todo_list.ScheduleViewModel
+import com.example.todo_list.ui.ScheduleViewModel
 import com.example.todo_list.data.ScheduleEntity
 import com.example.todo_list.databinding.ActivityRegisterBinding
 import com.google.android.material.datepicker.MaterialDatePicker

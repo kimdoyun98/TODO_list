@@ -8,10 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.todo_list.ScheduleViewModel
-import com.example.todo_list.activity.DetailActivity
+import com.example.todo_list.ui.ScheduleViewModel
+import com.example.todo_list.ui.activity.DetailActivity
 import com.example.todo_list.adapter.ScheduleAdapter.MyViewHolder
-import com.example.todo_list.common.DiffUtilCallBackTODO
+import com.example.todo_list.common.calendar.DiffUtilCallBackTODO
 import com.example.todo_list.data.ScheduleEntity
 import com.example.todo_list.databinding.RecyclerviewTodoItemBinding
 

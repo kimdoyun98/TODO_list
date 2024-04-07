@@ -1,4 +1,4 @@
-package com.example.todo_list.fragment
+package com.example.todo_list.ui.fragment
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.todo_list.ScheduleViewModel
-import com.example.todo_list.activity.ScheduleRegisterActivity
+import com.example.todo_list.ui.ScheduleViewModel
+import com.example.todo_list.ui.activity.ScheduleRegisterActivity
 import com.example.todo_list.adapter.ScheduleAdapter
 import com.example.todo_list.databinding.FragmentScheduleBinding
 import dagger.hilt.android.AndroidEntryPoint
