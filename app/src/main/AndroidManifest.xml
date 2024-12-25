@@ -7,7 +7,7 @@
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
     
     <application
-        android:name=".common.MyApplication"
+        android:name=".util.MyApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -19,7 +19,7 @@
         tools:targetApi="31">
 
         <activity
-            android:name=".ui.activity.MainActivity"
+            android:name=".ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,10 +27,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.ScheduleRegisterActivity" />
-        <activity android:name=".ui.activity.DetailActivity" />
-        <activity android:name=".ui.activity.RoutineRegisterActivity" />
-        <receiver android:name=".common.alarm.AlarmReceiver"
+        <activity android:name=".ui.schedule.add.ScheduleRegisterActivity" />
+        <activity android:name=".ui.schedule.DetailActivity" />
+        <activity android:name=".ui.routine.add.RoutineRegisterActivity" />
+        <receiver android:name=".alarm.AlarmReceiver"
             android:enabled="true"
             android:exported="false">
             <intent-filter>

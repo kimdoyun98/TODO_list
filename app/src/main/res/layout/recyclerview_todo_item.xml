@@ -4,10 +4,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
     <data>
-        <import type="com.example.todo_list.data.ScheduleEntity"/>
+        <import type="com.example.todo_list.data.room.ScheduleEntity"/>
         <variable
             name="todoEntity"
-            type="com.example.todo_list.data.ScheduleEntity" />
+            type="com.example.todo_list.data.room.ScheduleEntity" />
     </data>
     <LinearLayout
         android:layout_width="match_parent"

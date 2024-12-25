@@ -1,9 +1,9 @@
 package com.example.todo_list.di
 
 import android.content.Context
-import com.example.todo_list.data.DataBase
-import com.example.todo_list.data.RoutineDAO
-import com.example.todo_list.data.ScheduleDAO
+import com.example.todo_list.data.room.DataBase
+import com.example.todo_list.data.room.RoutineDAO
+import com.example.todo_list.data.room.ScheduleDAO
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

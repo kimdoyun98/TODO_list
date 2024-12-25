@@ -6,27 +6,27 @@
     app:startDestination="@id/homeFragment">
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.todo_list.ui.fragment.HomeFragment"
+        android:name="com.example.todo_list.ui.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/todoFragment"
-        android:name="com.example.todo_list.ui.fragment.ScheduleFragment"
+        android:name="com.example.todo_list.ui.schedule.ScheduleFragment"
         android:label="fragment_personal"
         tools:layout="@layout/fragment_schedule" />
     <fragment
         android:id="@+id/calendarFragment"
-        android:name="com.example.todo_list.ui.fragment.CalendarFragment"
+        android:name="com.example.todo_list.ui.calendar.CalendarFragment"
         android:label="fragment_project"
         tools:layout="@layout/fragment_calendar" />
     <fragment
         android:id="@+id/settingFragment"
-        android:name="com.example.todo_list.ui.fragment.SettingFragment"
+        android:name="com.example.todo_list.ui.setting.SettingFragment"
         android:label="fragment_calender"
         tools:layout="@layout/fragment_setting" />
     <fragment
         android:id="@+id/cycleFragment"
-        android:name="com.example.todo_list.ui.fragment.RoutineFragment"
+        android:name="com.example.todo_list.ui.routine.RoutineFragment"
         android:label="fragment_cycle"
         tools:layout="@layout/fragment_routine" />
 </navigation>

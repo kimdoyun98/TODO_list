@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
     <data>
-        <import type="com.example.todo_list.data.ScheduleEntity"/>
+        <import type="com.example.todo_list.data.room.ScheduleEntity"/>
         <variable
             name="todoEntity"
-            type="com.example.todo_list.data.ScheduleEntity" />
+            type="com.example.todo_list.data.room.ScheduleEntity" />
     </data>
 
 

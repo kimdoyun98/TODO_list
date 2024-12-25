@@ -5,7 +5,7 @@
         <import type="com.example.todo_list.R"/>
         <variable
             name="todoViewModel"
-            type="com.example.todo_list.ui.ScheduleViewModel" />
+            type="com.example.todo_list.ui.schedule.ScheduleViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
