@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     >
     <data>
         <import type="com.example.todo_list.data.room.ScheduleEntity"/>
@@ -32,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:text="@{todoEntity.title}"
-                android:textSize="15dp" />
+                android:textSize="15sp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -44,7 +43,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{todoEntity.start_date}"
-                    android:textSize="10dp"/>
+                    android:textSize="10sp"/>
 
                 <TextView
                     android:id="@+id/textView3"
@@ -52,14 +51,14 @@
                     android:layout_height="wrap_content"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:text="~" />
+                    android:text="@string/tilde" />
 
                 <TextView
                     android:id="@+id/recycler_deadline"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{todoEntity.deadline_date}"
-                    android:textSize="10dp"/>
+                    android:textSize="10sp"/>
             </LinearLayout>
 
         </LinearLayout>

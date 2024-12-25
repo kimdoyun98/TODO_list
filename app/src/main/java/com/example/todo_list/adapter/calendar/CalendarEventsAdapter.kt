@@ -10,7 +10,8 @@ import com.example.todo_list.databinding.EventItemViewBinding
 /**
  * com.kizitonwose.calendarview.CalendarView
  */
-class CalendarEventsAdapter: RecyclerView.Adapter<CalendarEventsAdapter.CalendarEventsAdapterViewHolder>() {
+class CalendarEventsAdapter
+    : RecyclerView.Adapter<CalendarEventsAdapter.CalendarEventsAdapterViewHolder>() {
 
     private lateinit var binding : EventItemViewBinding
     var list : MutableList<ScheduleEntity> = mutableListOf()

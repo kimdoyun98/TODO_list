@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
+
         <import type="androidx.core.content.ContextCompat" />
-        <import type="com.example.todo_list.R"/>
+
+        <import type="com.example.todo_list.R" />
+
         <variable
             name="todoViewModel"
             type="com.example.todo_list.ui.schedule.ScheduleViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -45,7 +47,7 @@
                 android:layout_weight="1"
                 android:background="?attr/selectableItemBackground"
                 android:onClick="@{()->todoViewModel.onClickSetFilterLATEST()}"
-                android:text="최신순"
+                android:text="@string/recent_sort"
                 android:textColor="@{todoViewModel.isSortedByLatest()? ContextCompat.getColor(context, R.color.filter):ContextCompat.getColor(context, R.color.black)}"
                 android:textStyle="bold" />
 
@@ -56,7 +58,7 @@
                 android:layout_weight="1"
                 android:background="?attr/selectableItemBackground"
                 android:onClick="@{()->todoViewModel.onClickSetFilterDEADLINE()}"
-                android:text="마감순"
+                android:text="@string/deadline_sort"
                 android:textColor="@{todoViewModel.isSortedByDeadline()? ContextCompat.getColor(context, R.color.filter):ContextCompat.getColor(context, R.color.black)}"
                 android:textStyle="bold" />
 
@@ -77,6 +79,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
+            android:contentDescription="@string/routine_register_floating_button"
+            android:focusable="true"
             android:src="@android:drawable/ic_input_add"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

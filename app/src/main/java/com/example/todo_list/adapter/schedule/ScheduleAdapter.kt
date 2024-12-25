@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.todo_list.R
 import com.example.todo_list.ui.schedule.ScheduleViewModel
 import com.example.todo_list.ui.schedule.DetailActivity
 import com.example.todo_list.adapter.schedule.ScheduleAdapter.MyViewHolder
@@ -15,7 +16,10 @@ import com.example.todo_list.adapter.DiffUtilCallBackTODO
 import com.example.todo_list.data.room.ScheduleEntity
 import com.example.todo_list.databinding.RecyclerviewTodoItemBinding
 
-class ScheduleAdapter(val context: Context, val viewModel: ScheduleViewModel) : RecyclerView.Adapter<MyViewHolder>(){
+class ScheduleAdapter(
+    val context: Context,
+    val viewModel: ScheduleViewModel
+) : RecyclerView.Adapter<MyViewHolder>(){
     private lateinit var binding : RecyclerviewTodoItemBinding
     private var list : MutableList<ScheduleEntity> = mutableListOf()
 
@@ -23,8 +27,8 @@ class ScheduleAdapter(val context: Context, val viewModel: ScheduleViewModel) : 
     inner class MyViewHolder(v: View) : RecyclerView.ViewHolder(v){
         init {
             binding.root.setOnClickListener{
-                var pos : Int = adapterPosition
-                val item : Array<String> = arrayOf("수정", "삭제", "완료")
+                val pos : Int = adapterPosition
+                val item = context.resources.getStringArray(R.array.ScheduleMenu)
 
                 val builder = AlertDialog.Builder(context)
                 builder.setItems(item) { _, which ->

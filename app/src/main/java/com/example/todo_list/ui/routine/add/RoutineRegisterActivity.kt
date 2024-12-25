@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.example.todo_list.R
 import com.example.todo_list.alarm.Alarm
 import com.example.todo_list.data.room.RoutineEntity
 import com.example.todo_list.databinding.ActivityCycleRegisterBinding
@@ -124,20 +125,12 @@ class RoutineRegisterActivity : AppCompatActivity(), TimePicker.OnTimeChangedLis
                     checkedDayList[6] = isChecked
                 }
             }
-            var text = ""
-            if (checkedDayList.count{ it } == 7) text = "매일"
+            var text = getString(R.string.empty_string)
+            if (checkedDayList.count{ it } == 7) text = getString(R.string.daily)
             else {
                 for (i in 0 until checkedDayList.size) {
                     if (checkedDayList[i]) {
-                        when (i) {
-                            0 -> text += "일 "
-                            1 -> text += "월 "
-                            2 -> text += "화 "
-                            3 -> text += "수 "
-                            4 -> text += "목 "
-                            5 -> text += "금 "
-                            6 -> text += "토 "
-                        }
+                        text += resources.getStringArray(R.array.Days)[i]
                     }
                 }
             }

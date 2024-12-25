@@ -11,7 +11,7 @@
         android:background="#7B68EE"
         android:theme="@style/MyActionBar"
         app:layout_collapseMode="pin"
-        app:title="정각에 해야지"
+        app:title="@string/app_name"
         app:titleMarginTop="15dp"
         app:titleTextColor="@color/white" />
 
@@ -33,10 +33,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="오늘 할 일 "
+                    android:text="@string/today_todo"
                     android:textColor="@color/black"
-                    android:textSize="17dp"
-                    android:textStyle="bold|italic"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
                     android:padding="10dp"/>
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -57,10 +57,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="일정 "
+                    android:text="@string/schedule"
                     android:textColor="@color/black"
-                    android:textSize="17dp"
-                    android:textStyle="bold|italic"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
                     android:padding="10dp"/>
 
                 <androidx.recyclerview.widget.RecyclerView

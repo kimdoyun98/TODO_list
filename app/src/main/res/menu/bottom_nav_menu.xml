@@ -4,19 +4,19 @@
         android:id="@+id/homeFragment"
         android:enabled="true"
         android:icon="@drawable/home"
-        android:title="Home"
+        android:title="@string/home"
         />
     <item
         android:id="@+id/todoFragment"
         android:enabled="true"
         android:icon="@drawable/project"
-        android:title="Schedule"
+        android:title="@string/schedule_eng"
         />
 
     <item
         android:id="@+id/cycleFragment"
         android:enabled="true"
-        android:title="Routine"
+        android:title="@string/routine_eng"
         android:icon="@drawable/cycle"
         />
 
@@ -25,12 +25,12 @@
         android:id="@+id/calendarFragment"
         android:enabled="true"
         android:icon="@drawable/calendar"
-        android:title="Calendar"
+        android:title="@string/calendar_eng"
         />
     <item
         android:id="@+id/settingFragment"
         android:enabled="true"
         android:icon="@drawable/settings"
-        android:title="Setting"
+        android:title="@string/setting_eng"
         />
 </menu>

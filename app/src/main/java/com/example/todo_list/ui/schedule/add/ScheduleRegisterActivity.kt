@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.example.todo_list.R
 import com.example.todo_list.data.room.ScheduleEntity
 import com.example.todo_list.databinding.ActivityRegisterBinding
 import com.example.todo_list.ui.schedule.ScheduleViewModel
@@ -28,9 +29,9 @@ class ScheduleRegisterActivity : AppCompatActivity() {
          */
         binding.calendar.setOnClickListener{
             val dateRangePicker = MaterialDatePicker.Builder.dateRangePicker()
-                .setTitleText("기간을 선택해 주세요.")
+                .setTitleText(getString(R.string.date_picker_title))
                 .build()
-            dateRangePicker.show(supportFragmentManager, "date picker")
+            dateRangePicker.show(supportFragmentManager, DATE_PICKER)
             dateRangePicker.addOnPositiveButtonClickListener {
                 val calendar = Calendar.getInstance()
                 calendar.timeInMillis = it?.first ?: 0
@@ -57,5 +58,9 @@ class ScheduleRegisterActivity : AppCompatActivity() {
             viewModel.insert(newTodo)
             finish()
         }
+    }
+
+    companion object{
+        private const val DATE_PICKER = "date picker"
     }
 }

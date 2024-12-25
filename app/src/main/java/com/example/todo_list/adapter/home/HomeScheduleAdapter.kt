@@ -9,7 +9,10 @@ import com.example.todo_list.ui.home.HomeViewModel
 import com.example.todo_list.data.room.ScheduleEntity
 import com.example.todo_list.databinding.RecyclerviewHometodoItemBinding
 
-class HomeScheduleAdapter (val context: Context, val viewModel: HomeViewModel) : RecyclerView.Adapter<HomeScheduleAdapter.MyViewHolder>() {
+class HomeScheduleAdapter (
+    val context: Context,
+    val viewModel: HomeViewModel
+) : RecyclerView.Adapter<HomeScheduleAdapter.MyViewHolder>() {
     private lateinit var binding : RecyclerviewHometodoItemBinding
     private var list : MutableList<ScheduleEntity> = mutableListOf()
 

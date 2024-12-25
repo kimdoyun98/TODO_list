@@ -1,27 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
-        <import type="com.example.todo_list.data.room.ScheduleEntity"/>
+        <import type="com.example.todo_list.data.room.ScheduleEntity" />
+
         <variable
             name="todoEntity"
             type="com.example.todo_list.data.room.ScheduleEntity" />
     </data>
 
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="10dp">
 
-<!--        <Spinner-->
-<!--            android:id="@+id/category"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:paddingLeft="20dp"-->
-<!--            android:scrollbarSize="10dp"-->
-<!--            android:spinnerMode="dropdown" />-->
+        <!--        <Spinner-->
+        <!--            android:id="@+id/category"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:paddingLeft="20dp"-->
+        <!--            android:scrollbarSize="10dp"-->
+        <!--            android:spinnerMode="dropdown" />-->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -36,14 +38,15 @@
                 android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
+                android:autofillHints="@string/schedule_title"
                 android:backgroundTint="@color/gray"
                 android:ems="10"
+                android:hint="@string/schedule_title"
                 android:inputType="textPersonName"
-                android:hint="일정 이름"
-                android:textColorHint="@color/gray"
+                android:paddingHorizontal="20dp"
+                android:text="@{todoEntity.title}"
                 android:textColor="@color/gray"
-                android:paddingLeft="20dp"
-                android:text="@{todoEntity.title}"/>
+                android:textColorHint="@color/gray" />
 
 
         </LinearLayout>
@@ -58,28 +61,30 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="5dp"
+                android:paddingHorizontal="5dp"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:text="상세 내용"
+                android:text="@string/detail_content"
                 android:textColor="@color/black"
-                android:textSize="15dp"
+                android:textSize="15sp"
                 android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/content"
                 android:layout_width="match_parent"
                 android:layout_height="139dp"
+                android:autofillHints="@string/optional_field"
                 android:background="@drawable/edittext_border"
                 android:ems="10"
                 android:inputType="textMultiLine"
                 android:lines="5"
                 android:maxLines="5"
-                android:text="@{todoEntity.content}"
-                android:textSize="15dp"
                 android:paddingLeft="20dp"
-                android:paddingRight="20dp"/>
+                android:paddingRight="20dp"
+                android:text="@{todoEntity.content}"
+                android:textSize="15sp" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -89,12 +94,12 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="5dp"
+                android:paddingHorizontal="5dp"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:text="기간"
+                android:text="@string/period"
                 android:textColor="@color/black"
-                android:textSize="15dp"
+                android:textSize="15sp"
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -107,73 +112,72 @@
                     android:id="@+id/start_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="YYYYMMDD"
+                    android:hint="@string/date_type"
                     android:text="@{todoEntity.start_date}"
-                    android:textSize="15dp" />
+                    android:textSize="15sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:layout_marginStart="20dp"
-                    android:text="~"
                     android:layout_marginEnd="20dp"
+                    android:gravity="center"
+                    android:text="@string/tilde"
                     android:textColor="#000000"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/end_date"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
 
                     android:background="@drawable/rectangle"
                     android:backgroundTint="#FFFFFF"
                     android:ems="10"
-                    android:textSize="15dp"
-                    android:hint="YYYYMMDD"
-                    android:text="@{todoEntity.deadline_date}"/>
+                    android:hint="@string/date_type"
+                    android:text="@{todoEntity.deadline_date}"
+                    android:textSize="15sp" />
 
                 <ImageView
                     android:id="@+id/calendar"
                     android:layout_width="57dp"
                     android:layout_height="match_parent"
-                    app:srcCompat="@drawable/calendar_color"
-                    android:clickable="true"/>
+                    android:clickable="true"
+                    android:contentDescription="@string/calender_icon_button"
+                    android:focusable="true"
+                    app:srcCompat="@drawable/calendar_color" />
             </LinearLayout>
-
-
-
         </LinearLayout>
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:gravity="bottom">
+            android:gravity="bottom"
+            android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/cancel_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="취소"
-                android:textSize="20dp"
-                android:textStyle="bold"
+                android:background="?attr/selectableItemBackground"
+                android:text="@string/cancel"
                 android:textColor="#202020"
-                android:background="?attr/selectableItemBackground"/>
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/register_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="등록"
-                android:textSize="20dp"
-                android:textStyle="bold"
+                android:background="?attr/selectableItemBackground"
+                android:text="@string/register"
                 android:textColor="#202020"
-                android:background="?attr/selectableItemBackground"/>
+                android:textSize="20sp"
+                android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
 </layout>

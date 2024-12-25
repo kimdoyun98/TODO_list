@@ -14,8 +14,8 @@ import com.example.todo_list.util.PreferenceUtil.Companion.PUSH_ALARM
 import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.normal.TedPermission
 
-class SettingFragment : PreferenceFragmentCompat(){
-    lateinit var prefs : SharedPreferences
+class SettingFragment : PreferenceFragmentCompat() {
+    lateinit var prefs: SharedPreferences
 
     //var pushAlertPreference: Preference? = null
 
@@ -33,16 +33,19 @@ class SettingFragment : PreferenceFragmentCompat(){
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     private val prefListener = SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
-        when(key){
+        when (key) {
             "pushAlert" -> {
-                if(MyApplication.prefs.getAlarm(PUSH_ALARM)) MyApplication.prefs.setAlarm(PUSH_ALARM, false)
+                if (MyApplication.prefs.getAlarm(PUSH_ALARM)) MyApplication.prefs.setAlarm(
+                    PUSH_ALARM,
+                    false
+                )
                 else {
                     TedPermission.create()
                         .setPermissionListener(permission)
-                        .setDeniedMessage("권한이 거부되었습니다. 설정 > 권한에서 허용해주세요.")
+                        .setDeniedMessage(getString(R.string.permission_denied_message))
                         .setPermissions(Manifest.permission.POST_NOTIFICATIONS)
                         .check()
-                    MyApplication.prefs.setAlarm("pushAlarm", true)
+                    MyApplication.prefs.setAlarm(PUSH_ALARM, true)
                 }
             }
         }
@@ -64,7 +67,11 @@ class SettingFragment : PreferenceFragmentCompat(){
         override fun onPermissionGranted() {}
 
         override fun onPermissionDenied(deniedPermissions: MutableList<String>?) {
-            Toast.makeText(MyApplication.instance.applicationContext, "권한 거부", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                MyApplication.instance.applicationContext,
+                getString(R.string.permission_denied_toast_message),
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 }
