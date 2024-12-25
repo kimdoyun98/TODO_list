@@ -10,25 +10,33 @@ import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import com.example.todo_list.R
+import com.example.todo_list.alarm.Alarm.Companion.ALARM_REQUEST_CODE
+import com.example.todo_list.alarm.Alarm.Companion.CHECKED_DAY_LIST
+import com.example.todo_list.alarm.Alarm.Companion.CONTENT
+import com.example.todo_list.alarm.Alarm.Companion.HOUR
+import com.example.todo_list.alarm.Alarm.Companion.MINUTE
 import com.example.todo_list.util.MyApplication
+import com.example.todo_list.util.PreferenceUtil.Companion.PUSH_ALARM
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.lang.Thread.sleep
-import java.util.*
+import java.util.Calendar
 
 /**
  * 알림 기능
  */
 class AlarmReceiver : BroadcastReceiver() {
-    private val CHANNEL_ID = "TodayAlarm"
-    private val CHANNEL_NAME = "Alarm"
+    companion object {
+        private const val CHANNEL_ID = "TodayAlarm"
+        private const val CHANNEL_NAME = "Alarm"
+    }
 
     override fun onReceive(context: Context?, intent: Intent?) {
         val today = Calendar.getInstance().get(Calendar.DAY_OF_WEEK)
-        val checkedDayList = intent?.extras!!.getBooleanArray("checkedDayList")
+        val checkedDayList = intent?.extras!!.getBooleanArray(CHECKED_DAY_LIST)
 
-        if(!checkedDayList!![today-1] || !MyApplication.prefs.getAlarm("pushAlarm")) return
+        if (!checkedDayList!![today - 1] || !MyApplication.prefs.getAlarm(PUSH_ALARM)) return
 
         val notificationManager: NotificationManager =
             context?.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -41,13 +49,23 @@ class AlarmReceiver : BroadcastReceiver() {
         }
 
         val intent2 = Intent(context, AlarmService::class.java)
-        val requestCode = intent.extras!!.getInt("alarm_rqCode")
-        val content = intent.extras!!.getString("content")
+        val requestCode = intent.extras!!.getInt(ALARM_REQUEST_CODE)
+        val content = intent.extras!!.getString(CONTENT)
 
         val pendingIntent =
-            if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.S)
-                PendingIntent.getActivity(context,requestCode,intent2,PendingIntent.FLAG_IMMUTABLE)
-            else PendingIntent.getActivity(context,requestCode,intent2,PendingIntent.FLAG_UPDATE_CURRENT);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)
+                PendingIntent.getActivity(
+                    context,
+                    requestCode,
+                    intent2,
+                    PendingIntent.FLAG_IMMUTABLE
+                )
+            else PendingIntent.getActivity(
+                context,
+                requestCode,
+                intent2,
+                PendingIntent.FLAG_UPDATE_CURRENT
+            );
 
 
         val builder = NotificationCompat.Builder(context, CHANNEL_ID)
@@ -64,15 +82,20 @@ class AlarmReceiver : BroadcastReceiver() {
         notificationManager.notify(1, builder)
 
         //알림 재설정
-        val hour = intent.extras!!.getInt("hour")
-        val minute = intent.extras!!.getInt("minute")
+        val hour = intent.extras!!.getInt(HOUR)
+        val minute = intent.extras!!.getInt(MINUTE)
 
         CoroutineScope(Dispatchers.IO).launch {
-            try{
+            try {
                 sleep(60000)
-                Alarm(MyApplication.instance).setAlarm(hour, minute, requestCode, content!!, checkedDayList.toMutableList())
-            }
-            catch (e: Exception){
+                Alarm(MyApplication.instance).setAlarm(
+                    hour,
+                    minute,
+                    requestCode,
+                    content!!,
+                    checkedDayList.toMutableList()
+                )
+            } catch (e: Exception) {
                 e.printStackTrace()
             }
         }

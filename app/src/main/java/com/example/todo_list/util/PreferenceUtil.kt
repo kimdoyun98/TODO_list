@@ -5,7 +5,7 @@ import android.content.SharedPreferences
 
 class PreferenceUtil (context: Context) {
     private val prefs: SharedPreferences =
-        context.getSharedPreferences("settings", Context.MODE_PRIVATE)
+        context.getSharedPreferences(SETTINGS, Context.MODE_PRIVATE)
 
     fun getAlarm(key: String): Boolean {
         return prefs.getBoolean(key, false)
@@ -13,5 +13,10 @@ class PreferenceUtil (context: Context) {
 
     fun setAlarm(key: String, boolean: Boolean) {
         prefs.edit().putBoolean(key, boolean).apply()
+    }
+
+    companion object{
+        private const val SETTINGS = "settings"
+        const val PUSH_ALARM = "pushAlarm"
     }
 }

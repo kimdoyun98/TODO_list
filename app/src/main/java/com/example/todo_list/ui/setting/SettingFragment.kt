@@ -10,6 +10,7 @@ import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
 import com.example.todo_list.R
 import com.example.todo_list.util.MyApplication
+import com.example.todo_list.util.PreferenceUtil.Companion.PUSH_ALARM
 import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.normal.TedPermission
 
@@ -34,7 +35,7 @@ class SettingFragment : PreferenceFragmentCompat(){
     private val prefListener = SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
         when(key){
             "pushAlert" -> {
-                if(MyApplication.prefs.getAlarm("pushAlarm")) MyApplication.prefs.setAlarm("pushAlarm", false)
+                if(MyApplication.prefs.getAlarm(PUSH_ALARM)) MyApplication.prefs.setAlarm(PUSH_ALARM, false)
                 else {
                     TedPermission.create()
                         .setPermissionListener(permission)

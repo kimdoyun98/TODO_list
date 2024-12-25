@@ -9,15 +9,23 @@ import java.util.Calendar
 import java.util.Date
 
 class Alarm(private val context: Context) {
+    companion object{
+        const val ALARM_REQUEST_CODE = "alarm_rqCode"
+        const val CONTENT = "content"
+        const val CHECKED_DAY_LIST = "checkedDayList"
+        const val HOUR = "hour"
+        const val MINUTE = "minute"
+    }
+
     private val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as? AlarmManager
 
     fun setAlarm(hour : Int, minute : Int, alarm_code : Int, content : String, checkedDayList:MutableList<Boolean>){
         val intent = Intent(context, AlarmReceiver::class.java).apply {
-            putExtra("alarm_rqCode", alarm_code)
-            putExtra("content", content)
-            putExtra("checkedDayList", checkedDayList.toBooleanArray())
-            putExtra("hour", hour)
-            putExtra("minute", minute)
+            putExtra(ALARM_REQUEST_CODE, alarm_code)
+            putExtra(CONTENT, content)
+            putExtra(CHECKED_DAY_LIST, checkedDayList.toBooleanArray())
+            putExtra(HOUR, hour)
+            putExtra(MINUTE, minute)
         }
 
         val pendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S){
