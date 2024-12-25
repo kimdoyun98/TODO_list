@@ -6,14 +6,16 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.todo_list.data.room.ScheduleEntity
 import com.example.todo_list.data.repository.schedule.ScheduleRepository
+import com.example.todo_list.data.room.ScheduleEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ScheduleViewModel @Inject constructor(private val repository: ScheduleRepository): ViewModel() {
+class ScheduleViewModel @Inject constructor(
+    private val repository: ScheduleRepository
+) : ViewModel() {
     var sortFilter: MutableLiveData<Int> = MutableLiveData<Int>(1)
 
     // Data Binding 을 위한 Boolean 변수들 (TextStyle, TextColor)
@@ -22,16 +24,19 @@ class ScheduleViewModel @Inject constructor(private val repository: ScheduleRepo
     var isSortedByRating: ObservableField<Boolean> = ObservableField<Boolean>(false)
 
     val getAll: LiveData<List<ScheduleEntity>> = repository.selectAll().asLiveData()
-    fun getOnDate(date: String?): LiveData<List<ScheduleEntity>> = repository.selectOnDate(date).asLiveData()
+    fun getOnDate(date: String?): LiveData<List<ScheduleEntity>> =
+        repository.selectOnDate(date).asLiveData()
 
 
-    fun insert(scheduleEntity: ScheduleEntity) = viewModelScope.launch{ repository.insert(scheduleEntity) }
+    fun insert(scheduleEntity: ScheduleEntity) =
+        viewModelScope.launch { repository.insert(scheduleEntity) }
 
-    fun delete(id : Int) = viewModelScope.launch{ repository.delete(id) }
+    fun delete(id: Int) = viewModelScope.launch { repository.delete(id) }
 
-    fun update(scheduleEntity: ScheduleEntity) = viewModelScope.launch{ repository.update(scheduleEntity) }
+    fun update(scheduleEntity: ScheduleEntity) =
+        viewModelScope.launch { repository.update(scheduleEntity) }
 
-    fun success(id : Int) = viewModelScope.launch{ repository.success(id) }
+    fun success(id: Int) = viewModelScope.launch { repository.success(id) }
 
 
     fun onClickSetFilterLATEST() {
