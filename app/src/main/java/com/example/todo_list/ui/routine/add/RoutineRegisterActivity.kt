@@ -23,7 +23,7 @@ import javax.inject.Inject
 class RoutineRegisterActivity : AppCompatActivity(), TimePicker.OnTimeChangedListener {
     private val viewModel : RoutineViewModel by viewModels()
     private lateinit var binding : ActivityCycleRegisterBinding
-    @Inject private lateinit var alarm: Alarm
+    @Inject lateinit var alarm: Alarm
     private var checkedDayList = MutableList(7) {false}
     private val time = Array(2){-1}
 

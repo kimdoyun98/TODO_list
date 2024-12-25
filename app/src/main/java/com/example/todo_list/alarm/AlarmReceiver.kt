@@ -34,7 +34,7 @@ class AlarmReceiver : BroadcastReceiver() {
         private const val CHANNEL_ID = "TodayAlarm"
         private const val CHANNEL_NAME = "Alarm"
     }
-    @Inject private lateinit var alarm: Alarm
+    @Inject lateinit var alarm: Alarm
 
     override fun onReceive(context: Context?, intent: Intent?) {
         val today = Calendar.getInstance().get(Calendar.DAY_OF_WEEK)

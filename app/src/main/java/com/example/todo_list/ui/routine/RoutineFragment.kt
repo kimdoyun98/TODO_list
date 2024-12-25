@@ -18,7 +18,7 @@ import javax.inject.Inject
 class RoutineFragment :Fragment(){
     private lateinit var binding : FragmentRoutineBinding
     private val viewModel: RoutineViewModel by viewModels()
-    @Inject private lateinit var alarm: Alarm
+    @Inject lateinit var alarm: Alarm
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
