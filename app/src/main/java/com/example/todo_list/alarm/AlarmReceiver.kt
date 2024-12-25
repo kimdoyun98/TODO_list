@@ -17,20 +17,24 @@ import com.example.todo_list.alarm.Alarm.Companion.HOUR
 import com.example.todo_list.alarm.Alarm.Companion.MINUTE
 import com.example.todo_list.util.MyApplication
 import com.example.todo_list.util.PreferenceUtil.Companion.PUSH_ALARM
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.lang.Thread.sleep
 import java.util.Calendar
+import javax.inject.Inject
 
 /**
  * 알림 기능
  */
+@AndroidEntryPoint
 class AlarmReceiver : BroadcastReceiver() {
     companion object {
         private const val CHANNEL_ID = "TodayAlarm"
         private const val CHANNEL_NAME = "Alarm"
     }
+    @Inject private lateinit var alarm: Alarm
 
     override fun onReceive(context: Context?, intent: Intent?) {
         val today = Calendar.getInstance().get(Calendar.DAY_OF_WEEK)
@@ -88,7 +92,7 @@ class AlarmReceiver : BroadcastReceiver() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 sleep(60000)
-                Alarm(MyApplication.instance).setAlarm(
+                alarm.setAlarm(
                     hour,
                     minute,
                     requestCode,

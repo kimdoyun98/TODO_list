@@ -8,7 +8,9 @@ import android.os.Build
 import java.util.Calendar
 import java.util.Date
 
-class Alarm(private val context: Context) {
+class Alarm(
+    private val context: Context
+) {
     companion object{
         const val ALARM_REQUEST_CODE = "alarm_rqCode"
         const val CONTENT = "content"

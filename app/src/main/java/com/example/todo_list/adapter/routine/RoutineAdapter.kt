@@ -18,7 +18,8 @@ import com.example.todo_list.ui.routine.RoutineViewModel
 
 class RoutineAdapter(
     val context: Context,
-    val viewModel: RoutineViewModel
+    val viewModel: RoutineViewModel,
+    val alarm: Alarm
 ) : RecyclerView.Adapter<RoutineAdapter.MyViewHolder>() {
     private lateinit var binding: RecyclerviewCycleItemBinding
     private var list: MutableList<RoutineEntity> = mutableListOf()
@@ -34,7 +35,7 @@ class RoutineAdapter(
                     .setMessage(list[pos].title)
                 builder.setPositiveButton(context.getString(R.string.dialog_positive_text)) { _, _ ->
                     viewModel.delete(list[pos].id)
-                    Alarm(context).cancelAlarm(list[pos].id)
+                    alarm.cancelAlarm(list[pos].id)
                 }
                 builder.setNegativeButton(context.getString(R.string.dialog_negative_text)) { _, _ ->
 

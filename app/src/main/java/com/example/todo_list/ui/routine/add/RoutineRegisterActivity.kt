@@ -17,11 +17,13 @@ import com.example.todo_list.ui.routine.RoutineViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.util.Calendar
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class RoutineRegisterActivity : AppCompatActivity(), TimePicker.OnTimeChangedListener {
     private val viewModel : RoutineViewModel by viewModels()
     private lateinit var binding : ActivityCycleRegisterBinding
+    @Inject private lateinit var alarm: Alarm
     private var checkedDayList = MutableList(7) {false}
     private val time = Array(2){-1}
 
@@ -80,8 +82,7 @@ class RoutineRegisterActivity : AppCompatActivity(), TimePicker.OnTimeChangedLis
                         try{
                             viewModel.getId(binding.title.text.toString()).collect{
                                 if(it != -1) {
-                                    Alarm(this@RoutineRegisterActivity)
-                                        .setAlarm(
+                                    alarm.setAlarm(
                                             time2[0].toInt(),
                                             time2[1].toInt(),
                                             it,
