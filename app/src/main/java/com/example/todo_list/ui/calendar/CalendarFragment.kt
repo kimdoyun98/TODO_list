@@ -35,7 +35,8 @@ import java.time.format.DateTimeFormatter
 
 @AndroidEntryPoint
 class CalendarFragment : Fragment() {
-    private lateinit var binding: FragmentCalendarBinding
+    private var _binding: FragmentCalendarBinding? = null
+    private val binding get() = _binding!!
     private val viewModel: ScheduleViewModel by viewModels()
 
     private val calendarEventsAdapter = CalendarEventsAdapter()
@@ -50,8 +51,6 @@ class CalendarFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentCalendarBinding.bind(view)
-
         /**
          * 날짜에 해당하는 일정 표시 Recyclerview
          */
@@ -202,6 +201,12 @@ class CalendarFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return FragmentCalendarBinding.inflate(layoutInflater).root
+        _binding = FragmentCalendarBinding.inflate(layoutInflater)
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
