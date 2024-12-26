@@ -6,48 +6,50 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.example.todo_list.adapter.home.HomeRoutineAdapter
 import com.example.todo_list.adapter.home.HomeScheduleAdapter
 import com.example.todo_list.data.room.RoutineEntity
 import com.example.todo_list.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private val viewModel: HomeViewModel by viewModels()
-    private var todayData: MutableList<RoutineEntity> = mutableListOf()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        /**
-         * 오늘 할 일
-         */
+
+        // 오늘 할 일
         val adapter = HomeRoutineAdapter()
         val todayRecyclerView = binding.todayRecyclerview
         todayRecyclerView.adapter = adapter
 
-        viewModel.getDay().observe(viewLifecycleOwner) {
-            viewModel.getRoutineAll.observe(viewLifecycleOwner) { dataList ->
-                todayData.clear()
-                for (data in dataList) {
-                    if (data.day?.get(it - 1) == true) todayData.add(data)
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
+                viewModel.getRoutineAll.collect{ routineData ->
+                    adapter.submitList(routineData.toList())
                 }
-                adapter.submitList(todayData.toList())
             }
         }
-        /**
-         * 일정
-         */
-        val personalAdapter = HomeScheduleAdapter(viewModel)
+
+        // 일정
+        val personalAdapter = HomeScheduleAdapter()
         val personalRecyclerView = binding.personalRecyclerview
         personalRecyclerView.adapter = personalAdapter
 
-        viewModel.getScheduleAll.observe(viewLifecycleOwner) { dataList ->
-            personalAdapter.submitList(dataList)
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
+                viewModel.getScheduleAll.collect{ scheduleData ->
+                    personalAdapter.submitList(scheduleData)
+                }
+            }
         }
-
     }
 
     override fun onCreateView(

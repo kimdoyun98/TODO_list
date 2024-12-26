@@ -7,11 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.todo_list.adapter.ItemDiffCallback
 import com.example.todo_list.data.room.ScheduleEntity
 import com.example.todo_list.databinding.RecyclerviewHometodoItemBinding
-import com.example.todo_list.ui.home.HomeViewModel
 
-class HomeScheduleAdapter(
-    val viewModel: HomeViewModel
-) : ListAdapter<ScheduleEntity, HomeScheduleAdapter.HomeScheduleViewHolder>(
+class HomeScheduleAdapter : ListAdapter<ScheduleEntity, HomeScheduleAdapter.HomeScheduleViewHolder>(
     ItemDiffCallback(
         onItemsTheSame = { oldItem, newItem -> oldItem.id == newItem.id },
         onContentsTheSame = { oldItem, newItem -> oldItem == newItem }
@@ -23,7 +20,6 @@ class HomeScheduleAdapter(
 
         fun bind(todoEntity: ScheduleEntity) {
             binding.toDoEntity = todoEntity
-            binding.viewModel = viewModel
         }
     }
 

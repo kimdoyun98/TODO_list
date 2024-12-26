@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <variable
             name="ToDoEntity"
             type="com.example.todo_list.data.room.ScheduleEntity" />
-        <variable
-            name="viewModel"
-            type="com.example.todo_list.ui.home.HomeViewModel" />
     </data>
 
     <LinearLayout
@@ -27,20 +23,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:padding="10dp"
                 android:text="@{ToDoEntity.title}"
                 android:textColor="@color/black"
-                android:textSize="15sp"
-                android:padding="10dp"/>
+                android:textSize="15sp" />
+
             <TextView
+                d-day="@{ToDoEntity.deadline_date}"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:text="@{viewModel.getDDay(ToDoEntity.deadline_date)}"
-                android:textColor="@color/black"
                 android:layout_gravity="center"
+                android:layout_weight="2"
                 android:gravity="center"
+                android:textColor="@color/black"
                 android:textSize="17sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
 </layout>
