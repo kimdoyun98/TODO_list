@@ -8,18 +8,16 @@ import android.widget.TextView
 import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todo_list.R
-import com.example.todo_list.ui.schedule.ScheduleViewModel
 import com.example.todo_list.adapter.calendar.CalendarEventsAdapter
-import com.example.todo_list.adapter.DiffUtilCallBackTODO
 import com.example.todo_list.data.room.ScheduleEntity
 import com.example.todo_list.databinding.CalendarDayBinding
 import com.example.todo_list.databinding.CalendarHeaderBinding
 import com.example.todo_list.databinding.FragmentCalendarBinding
+import com.example.todo_list.ui.schedule.ScheduleViewModel
 import com.example.todo_list.util.calendar.daysOfWeekFromLocale
 import com.example.todo_list.util.calendar.makeInVisible
 import com.example.todo_list.util.calendar.makeVisible
@@ -36,9 +34,9 @@ import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 
 @AndroidEntryPoint
-class CalendarFragment : Fragment(){
-    private lateinit var binding : FragmentCalendarBinding
-    private val viewModel : ScheduleViewModel by viewModels()
+class CalendarFragment : Fragment() {
+    private lateinit var binding: FragmentCalendarBinding
+    private val viewModel: ScheduleViewModel by viewModels()
 
     private val calendarEventsAdapter = CalendarEventsAdapter()
 
@@ -108,15 +106,16 @@ class CalendarFragment : Fragment(){
 
                 if (day.owner == DayOwner.THIS_MONTH) {
                     textView.makeVisible()
-                    var date : String = selectionFormatter2.format(day.date)
+                    var date: String = selectionFormatter2.format(day.date)
                     when (day.date) {
                         today -> {
                             textView.setTextColorRes(R.color.white)
                             textView.setBackgroundResource(R.drawable.today_bg)
                             viewModel.getOnDate(date).observe(viewLifecycleOwner) { data ->
-                                updateAdapterForDate(today!!, data)
+                                updateAdapterForDate(today, data)
                             }
                         }
+
                         selectedDate -> {
                             date = date.substring(0 until 8)
                             viewModel.getOnDate(date).observe(viewLifecycleOwner) { data ->
@@ -168,10 +167,11 @@ class CalendarFragment : Fragment(){
                 // Setup each header day text if we have not done that already.
                 if (container.legendLayout.tag == null) {
                     container.legendLayout.tag = month.yearMonth
-                    container.legendLayout.children.map { it as TextView }.forEachIndexed { index, tv ->
-                        tv.text = daysOfWeek[index].name.first().toString()
-                        tv.setTextColorRes(R.color.black)
-                    }
+                    container.legendLayout.children.map { it as TextView }
+                        .forEachIndexed { index, tv ->
+                            tv.text = daysOfWeek[index].name.first().toString()
+                            tv.setTextColorRes(R.color.black)
+                        }
                 }
             }
         }
@@ -192,18 +192,16 @@ class CalendarFragment : Fragment(){
     /**
      * EventAdapter 데이터 초기화
      */
-    private fun updateAdapterForDate(date: LocalDate, data : List<ScheduleEntity>) {
-        calendarEventsAdapter.apply {
-            val diffCallback = DiffUtilCallBackTODO(list, data)
-            val diffResult = DiffUtil.calculateDiff(diffCallback)
-            list.clear()
-            list.addAll(data)
-            diffResult.dispatchUpdatesTo(this@apply)
-        }
+    private fun updateAdapterForDate(date: LocalDate, data: List<ScheduleEntity>) {
+        calendarEventsAdapter.submitList(data)
         binding.exThreeSelectedDateText.text = selectionFormatter.format(date)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         return FragmentCalendarBinding.inflate(layoutInflater).root
     }
 }

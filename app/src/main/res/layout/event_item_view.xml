@@ -2,7 +2,6 @@
 <layout xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
-        <import type="com.example.todo_list.data.room.ScheduleEntity"/>
         <variable
             name="todoEntity"
             type="com.example.todo_list.data.room.ScheduleEntity" />
