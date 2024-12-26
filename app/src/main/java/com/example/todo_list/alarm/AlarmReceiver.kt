@@ -17,33 +17,22 @@ import com.example.todo_list.alarm.Alarm.Companion.HOUR
 import com.example.todo_list.alarm.Alarm.Companion.MINUTE
 import com.example.todo_list.util.MyApplication
 import com.example.todo_list.util.PreferenceUtil.Companion.PUSH_ALARM
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.lang.Thread.sleep
 import java.util.Calendar
-import javax.inject.Inject
 
-/**
- * 알림 기능
- */
-@AndroidEntryPoint
 class AlarmReceiver : BroadcastReceiver() {
-    companion object {
-        private const val CHANNEL_ID = "TodayAlarm"
-        private const val CHANNEL_NAME = "Alarm"
-    }
-    @Inject lateinit var alarm: Alarm
 
-    override fun onReceive(context: Context?, intent: Intent?) {
+    override fun onReceive(context: Context, intent: Intent?) {
         val today = Calendar.getInstance().get(Calendar.DAY_OF_WEEK)
         val checkedDayList = intent?.extras!!.getBooleanArray(CHECKED_DAY_LIST)
 
         if (!checkedDayList!![today - 1] || !MyApplication.prefs.getAlarm(PUSH_ALARM)) return
 
         val notificationManager: NotificationManager =
-            context?.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val importance = NotificationManager.IMPORTANCE_DEFAULT
@@ -92,7 +81,7 @@ class AlarmReceiver : BroadcastReceiver() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 sleep(60000)
-                alarm.setAlarm(
+                Alarm(context).setAlarm(
                     hour,
                     minute,
                     requestCode,
@@ -103,5 +92,10 @@ class AlarmReceiver : BroadcastReceiver() {
                 e.printStackTrace()
             }
         }
+    }
+
+    companion object {
+        private const val CHANNEL_ID = "TodayAlarm"
+        private const val CHANNEL_NAME = "Alarm"
     }
 }
