@@ -2,13 +2,6 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-
-        <import type="androidx.core.content.ContextCompat" />
-
-        <import type="com.example.todo_list.R" />
-
-        <import type="com.example.todo_list.data.room.RoutineEntity" />
-
         <variable
             name="homeEntity"
             type="com.example.todo_list.data.room.RoutineEntity" />
