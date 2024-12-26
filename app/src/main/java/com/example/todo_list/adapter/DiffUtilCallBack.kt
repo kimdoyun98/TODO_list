@@ -3,6 +3,21 @@ package com.example.todo_list.adapter
 import androidx.recyclerview.widget.DiffUtil
 import com.example.todo_list.data.room.ScheduleEntity
 
+class ItemDiffCallback<T : Any>(
+    val onItemsTheSame: (T, T) -> Boolean,
+    val onContentsTheSame: (T, T) -> Boolean
+) : DiffUtil.ItemCallback<T>() {
+    override fun areItemsTheSame(
+        oldItem: T,
+        newItem: T
+    ): Boolean = onItemsTheSame(oldItem, newItem)
+
+    override fun areContentsTheSame(
+        oldItem: T,
+        newItem: T
+    ): Boolean = onContentsTheSame(oldItem, newItem)
+}
+
 class DiffUtilCallBackTODO(private val oldList: List<ScheduleEntity>, private val newList: List<ScheduleEntity>)
     : DiffUtil.Callback() {
 
