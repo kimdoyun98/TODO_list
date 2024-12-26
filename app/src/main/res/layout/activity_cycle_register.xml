@@ -1,191 +1,201 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TimePicker
-        android:id="@+id/timePicker"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:layout_marginTop="20dp"
-        android:theme="@style/TimePickerStyle"
-        android:timePickerMode="spinner" />
-
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.todo_list.ui.routine.add.RoutineRegisterViewModel" />
+    </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/routine_rectangle"
-        android:orientation="vertical"
-        android:padding="10dp">
+        android:orientation="vertical">
 
-        <LinearLayout
+        <TimePicker
+            android:id="@+id/timePicker"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="250dp"
+            android:layout_marginTop="20dp"
+            android:theme="@style/TimePickerStyle"
+            android:timePickerMode="spinner" />
 
-            <TextView
-                android:id="@+id/choice_day"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="10dp"
-                android:textColor="#202020"
-                android:textStyle="bold" />
-
-            <ImageView
-                android:id="@+id/datePicker"
-                android:layout_width="25dp"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="10dp"
-                android:clickable="true"
-                android:contentDescription="@string/calender_icon_button"
-                android:focusable="true"
-                app:srcCompat="@drawable/calendar_color" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingBottom="20dp">
-
-            <ToggleButton
-                android:id="@+id/sunday"
-                android:layout_width="50dp"
-                android:layout_height="45dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/toggle"
-                android:textColor="@color/red"
-                android:textOff="일"
-                android:textOn="일"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <ToggleButton
-                android:id="@+id/monday"
-                android:layout_width="50dp"
-                android:layout_height="45dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/toggle"
-                android:textColor="#202020"
-                android:textOff="월"
-                android:textOn="월"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <ToggleButton
-                android:id="@+id/tuesday"
-                android:layout_width="50dp"
-                android:layout_height="45dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/toggle"
-                android:textColor="#202020"
-                android:textOff="화"
-                android:textOn="화"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <ToggleButton
-                android:id="@+id/wednesday"
-                android:layout_width="50dp"
-                android:layout_height="45dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/toggle"
-                android:textColor="#202020"
-                android:textOff="수"
-                android:textOn="수"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <ToggleButton
-                android:id="@+id/thursday"
-                android:layout_width="50dp"
-                android:layout_height="45dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/toggle"
-                android:textColor="#202020"
-                android:textOff="목"
-                android:textOn="목"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <ToggleButton
-                android:id="@+id/friday"
-                android:layout_width="50dp"
-                android:layout_height="45dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/toggle"
-                android:textColor="#202020"
-                android:textOff="금"
-                android:textOn="금"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <ToggleButton
-                android:id="@+id/saturday"
-                android:layout_width="50dp"
-                android:layout_height="45dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/toggle"
-                android:textColor="@color/blue"
-                android:textOff="토"
-                android:textOn="토"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-
-        <EditText
-            android:id="@+id/title"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:autofillHints="@string/title"
-            android:backgroundTint="@color/gray"
-            android:ems="10"
-            android:hint="@string/title"
-            android:inputType="textPersonName"
-            android:paddingHorizontal="20dp"
-            android:textColor="@color/gray"
-            android:textColorHint="@color/gray" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="bottom"
+            android:background="@drawable/routine_rectangle"
+            android:orientation="vertical"
             android:padding="10dp">
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/cycleCancel"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="?attr/selectableItemBackground"
-                android:text="@string/cancel"
-                android:textColor="#202020"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:orientation="horizontal">
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/cycleRegister"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/choice_day"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="10dp"
+                    android:text="@{viewModel.checkedDayText}"
+                    android:textColor="#202020"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/datePicker"
+                    android:layout_width="25dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="10dp"
+                    android:clickable="true"
+                    android:contentDescription="@string/calender_icon_button"
+                    android:focusable="true"
+                    app:srcCompat="@drawable/calendar_color" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:paddingBottom="20dp">
 
-                android:background="?attr/selectableItemBackground"
-                android:text="@string/register"
-                android:textColor="#202020"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                <ToggleButton
+                    android:id="@+id/sunday"
+                    android:layout_width="50dp"
+                    android:layout_height="45dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/toggle"
+                    android:textColor="@color/red"
+                    android:textOff="일"
+                    android:textOn="일"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <ToggleButton
+                    android:id="@+id/monday"
+                    android:layout_width="50dp"
+                    android:layout_height="45dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/toggle"
+                    android:textColor="#202020"
+                    android:textOff="월"
+                    android:textOn="월"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <ToggleButton
+                    android:id="@+id/tuesday"
+                    android:layout_width="50dp"
+                    android:layout_height="45dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/toggle"
+                    android:textColor="#202020"
+                    android:textOff="화"
+                    android:textOn="화"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <ToggleButton
+                    android:id="@+id/wednesday"
+                    android:layout_width="50dp"
+                    android:layout_height="45dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/toggle"
+                    android:textColor="#202020"
+                    android:textOff="수"
+                    android:textOn="수"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <ToggleButton
+                    android:id="@+id/thursday"
+                    android:layout_width="50dp"
+                    android:layout_height="45dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/toggle"
+                    android:textColor="#202020"
+                    android:textOff="목"
+                    android:textOn="목"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <ToggleButton
+                    android:id="@+id/friday"
+                    android:layout_width="50dp"
+                    android:layout_height="45dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/toggle"
+                    android:textColor="#202020"
+                    android:textOff="금"
+                    android:textOn="금"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <ToggleButton
+                    android:id="@+id/saturday"
+                    android:layout_width="50dp"
+                    android:layout_height="45dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/toggle"
+                    android:textColor="@color/blue"
+                    android:textOff="토"
+                    android:textOn="토"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+
+            <EditText
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:autofillHints="@string/title"
+                android:backgroundTint="@color/gray"
+                android:ems="10"
+                android:hint="@string/title"
+                android:inputType="textPersonName"
+                android:paddingHorizontal="20dp"
+                android:textColor="@color/gray"
+                android:textColorHint="@color/gray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="bottom"
+                android:padding="10dp">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/cycleCancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="?attr/selectableItemBackground"
+                    android:text="@string/cancel"
+                    android:textColor="#202020"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/cycleRegister"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+
+                    android:background="?attr/selectableItemBackground"
+                    android:text="@string/register"
+                    android:textColor="#202020"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+</layout>

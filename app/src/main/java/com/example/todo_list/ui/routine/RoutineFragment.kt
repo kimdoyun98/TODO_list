@@ -18,33 +18,34 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class RoutineFragment :Fragment(){
-    private var _binding : FragmentRoutineBinding? = null
+class RoutineFragment : Fragment() {
+    private var _binding: FragmentRoutineBinding? = null
     private val binding get() = _binding!!
     private val viewModel: RoutineViewModel by viewModels()
-    @Inject lateinit var alarm: Alarm
+    @Inject
+    lateinit var alarm: Alarm
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = RoutineAdapter{ routineEntity ->  showDeleteDialog(routineEntity) }
+        val adapter = RoutineAdapter { routineEntity -> showDeleteDialog(routineEntity) }
         val recyclerView = binding.recyclerview
         recyclerView.adapter = adapter
 
-        viewModel.getAll.observe(viewLifecycleOwner){ data ->
+        viewModel.getAll.observe(viewLifecycleOwner) { data ->
             adapter.submitList(data)
         }
 
         /***
          * 추가 버튼
          */
-        binding.addButton.setOnClickListener{
+        binding.addButton.setOnClickListener {
             val intent = Intent(context, RoutineRegisterActivity::class.java)
             startActivity(intent)
         }
     }
 
-    private fun showDeleteDialog(routineEntity: RoutineEntity){
+    private fun showDeleteDialog(routineEntity: RoutineEntity) {
         AlertDialog.Builder(requireContext()).apply {
             setTitle(context.getString(R.string.routine_delete_dialog_title))
             setMessage(routineEntity.title)
@@ -59,7 +60,11 @@ class RoutineFragment :Fragment(){
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         _binding = FragmentRoutineBinding.inflate(layoutInflater)
         return binding.root
     }
