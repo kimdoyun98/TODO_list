@@ -17,7 +17,7 @@ class DetailActivity : AppCompatActivity() {
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val data = intent.getSerializableExtra("data") as ScheduleEntity
+        val data = intent.getSerializableExtra(SCHEDULE_ENTITY) as ScheduleEntity
 
         val categoryAdapter = ArrayAdapter.createFromResource(this,
             R.array.categoryName, android.R.layout.simple_spinner_item)
@@ -47,5 +47,9 @@ class DetailActivity : AppCompatActivity() {
             )
             finish()
         }
+    }
+
+    companion object{
+        const val SCHEDULE_ENTITY = "data"
     }
 }

@@ -9,7 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.todo_list.adapter.schedule.ScheduleAdapter
 import com.example.todo_list.databinding.FragmentScheduleBinding
+import com.example.todo_list.ui.schedule.DetailActivity.Companion.SCHEDULE_ENTITY
 import com.example.todo_list.ui.schedule.add.ScheduleRegisterActivity
+import com.example.todo_list.ui.util.BottomSheetDialog
+import com.example.todo_list.ui.util.Category
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -28,14 +31,20 @@ class ScheduleFragment : Fragment() {
 
     private fun initRecyclerViewAdapter() {
         val adapter = ScheduleAdapter(
-            requireContext(),
-            { data ->
-                val intent = Intent(requireContext(), DetailActivity::class.java)
-                intent.putExtra("data", data)
-                startActivity(intent)
-            },
-            { id -> viewModel.delete(id) },
-            { id -> viewModel.success(id) }
+            showDialog = { scheduleEntity ->
+                BottomSheetDialog(
+                    context = requireContext(),
+                    entity = scheduleEntity,
+                    category = Category.SCHEDULE,
+                    onClickUpdate = {
+                        val intent = Intent(requireContext(), DetailActivity::class.java)
+                        intent.putExtra(SCHEDULE_ENTITY, scheduleEntity)
+                        startActivity(intent)
+                    },
+                    onClickDelete = { viewModel.delete(scheduleEntity.id) },
+                    onClickDone = { viewModel.success(scheduleEntity.id) }
+                )
+            }
         )
         binding.recyclerview.adapter = adapter
 
