@@ -18,8 +18,8 @@ class HomeRoutineAdapter : ListAdapter<RoutineEntity, HomeRoutineAdapter.HomeRou
         private val binding: RecyclerviewHomeItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(cycleEntity: RoutineEntity) {
-            binding.homeEntity = cycleEntity
+        fun bind(routineEntity: RoutineEntity) {
+            binding.routineEntity = routineEntity
         }
     }
 

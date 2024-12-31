@@ -27,7 +27,7 @@ class RoutineAdapter(
         }
 
         fun bind(routineEntity: RoutineEntity) {
-            binding.cycleEntity = routineEntity
+            binding.routineEntity = routineEntity
         }
     }
 
