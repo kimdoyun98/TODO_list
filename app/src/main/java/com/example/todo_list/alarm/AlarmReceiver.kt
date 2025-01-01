@@ -1,5 +1,6 @@
 package com.example.todo_list.alarm
 
+import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -28,42 +29,41 @@ class AlarmReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent?) {
         val today = Calendar.getInstance().get(Calendar.DAY_OF_WEEK)
         val checkedDayList = intent?.extras!!.getBooleanArray(CHECKED_DAY_LIST)
+        val requestCode = intent.extras!!.getInt(ALARM_REQUEST_CODE)
+        val content = intent.extras!!.getString(CONTENT)
 
         if (!checkedDayList!![today - 1] || !MyApplication.prefs.getAlarm(PUSH_ALARM)) return
 
         val notificationManager: NotificationManager =
             context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val importance = NotificationManager.IMPORTANCE_DEFAULT
-            notificationManager.createNotificationChannel(
-                NotificationChannel(CHANNEL_ID, CHANNEL_NAME, importance)
+        createChannel(notificationManager)
+
+        val pendingIntent = createPendingIntent(context, requestCode)
+        val builder = createNotificationBuilder(context, content, pendingIntent)
+
+        notificationManager.notify(1, builder)
+
+        CoroutineScope(Dispatchers.IO).launch {
+            resetAlarm(
+                context,
+                intent.extras!!.getInt(HOUR),
+                intent.extras!!.getInt(MINUTE),
+                requestCode,
+                content!!,
+                checkedDayList.toMutableList()
             )
         }
+    }
 
-        val intent2 = Intent(context, AlarmService::class.java)
-        val requestCode = intent.extras!!.getInt(ALARM_REQUEST_CODE)
-        val content = intent.extras!!.getString(CONTENT)
-
-        val pendingIntent =
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)
-                PendingIntent.getActivity(
-                    context,
-                    requestCode,
-                    intent2,
-                    PendingIntent.FLAG_IMMUTABLE
-                )
-            else PendingIntent.getActivity(
-                context,
-                requestCode,
-                intent2,
-                PendingIntent.FLAG_UPDATE_CURRENT
-            );
-
-
-        val builder = NotificationCompat.Builder(context, CHANNEL_ID)
+    private fun createNotificationBuilder(
+        context: Context,
+        content: String?,
+        pendingIntent: PendingIntent
+    ): Notification {
+        return NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.mipmap.todo_icon)
-            .setContentTitle("정각에 해야지")
+            .setContentTitle(context.getString(R.string.app_name))
             .setContentText(content)
             .setAutoCancel(false)
             .setShowWhen(true)
@@ -71,27 +71,53 @@ class AlarmReceiver : BroadcastReceiver() {
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setContentIntent(pendingIntent)
             .build()
+    }
 
-        notificationManager.notify(1, builder)
-
-        //알림 재설정
-        val hour = intent.extras!!.getInt(HOUR)
-        val minute = intent.extras!!.getInt(MINUTE)
-
-        CoroutineScope(Dispatchers.IO).launch {
-            try {
-                sleep(60000)
-                Alarm(context).setAlarm(
-                    hour,
-                    minute,
-                    requestCode,
-                    content!!,
-                    checkedDayList.toMutableList()
-                )
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
+    private fun resetAlarm(
+        context: Context,
+        hour: Int,
+        minute: Int,
+        requestCode: Int,
+        content: String,
+        checkedDayList: MutableList<Boolean>
+    ) {
+        try {
+            sleep(60000)
+            Alarm(context).setAlarm(
+                hour,
+                minute,
+                requestCode,
+                content,
+                checkedDayList.toMutableList()
+            )
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
+    }
+
+    private fun createChannel(notificationManager: NotificationManager) {
+        val importance = NotificationManager.IMPORTANCE_DEFAULT
+        notificationManager.createNotificationChannel(
+            NotificationChannel(CHANNEL_ID, CHANNEL_NAME, importance)
+        )
+    }
+
+    private fun createPendingIntent(context: Context, requestCode: Int): PendingIntent {
+        val serviceIntent = Intent(context, AlarmService::class.java)
+
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)
+            PendingIntent.getActivity(
+                context,
+                requestCode,
+                serviceIntent,
+                PendingIntent.FLAG_IMMUTABLE
+            )
+        else PendingIntent.getActivity(
+            context,
+            requestCode,
+            serviceIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT
+        )
     }
 
     companion object {
