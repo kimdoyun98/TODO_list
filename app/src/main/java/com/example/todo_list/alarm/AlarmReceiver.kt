@@ -17,7 +17,6 @@ import com.example.todo_list.alarm.Alarm.Companion.CONTENT
 import com.example.todo_list.alarm.Alarm.Companion.HOUR
 import com.example.todo_list.alarm.Alarm.Companion.MINUTE
 import com.example.todo_list.util.MyApplication
-import com.example.todo_list.util.PreferenceUtil.Companion.PUSH_ALARM
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -32,7 +31,7 @@ class AlarmReceiver : BroadcastReceiver() {
         val requestCode = intent.extras!!.getInt(ALARM_REQUEST_CODE)
         val content = intent.extras!!.getString(CONTENT)
 
-        if (!checkedDayList!![today - 1] || !MyApplication.prefs.getAlarm(PUSH_ALARM)) return
+        if (!checkedDayList!![today - 1] || !MyApplication.prefs.getAlarm()) return
 
         val notificationManager: NotificationManager =
             context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager

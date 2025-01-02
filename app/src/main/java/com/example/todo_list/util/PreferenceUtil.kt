@@ -7,12 +7,12 @@ class PreferenceUtil(context: Context) {
     private val prefs: SharedPreferences =
         context.getSharedPreferences(SETTINGS, Context.MODE_PRIVATE)
 
-    fun getAlarm(key: String): Boolean {
-        return prefs.getBoolean(key, false)
+    fun getAlarm(): Boolean {
+        return prefs.getBoolean(PUSH_ALARM, false)
     }
 
-    fun setAlarm(key: String, boolean: Boolean) {
-        prefs.edit().putBoolean(key, boolean).apply()
+    fun setAlarm(value: Boolean) {
+        prefs.edit().putBoolean(PUSH_ALARM, value).apply()
     }
 
     fun getWorkerState(): Boolean {
@@ -26,6 +26,6 @@ class PreferenceUtil(context: Context) {
     companion object {
         private const val SETTINGS = "settings"
         private const val MIDNIGHT_RESET = "midnight_reset"
-        const val PUSH_ALARM = "pushAlarm"
+        private const val PUSH_ALARM = "pushAlarm"
     }
 }
