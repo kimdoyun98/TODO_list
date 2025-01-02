@@ -10,4 +10,5 @@ interface RoutineRepository {
     suspend fun todaySuccess(id: Int)
     suspend fun insert(routineEntity: RoutineEntity)
     suspend fun delete(id: Int): Int
+    suspend fun resetSuccess(): Int
 }

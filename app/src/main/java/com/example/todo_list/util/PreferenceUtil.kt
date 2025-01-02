@@ -3,7 +3,7 @@ package com.example.todo_list.util
 import android.content.Context
 import android.content.SharedPreferences
 
-class PreferenceUtil (context: Context) {
+class PreferenceUtil(context: Context) {
     private val prefs: SharedPreferences =
         context.getSharedPreferences(SETTINGS, Context.MODE_PRIVATE)
 
@@ -15,8 +15,17 @@ class PreferenceUtil (context: Context) {
         prefs.edit().putBoolean(key, boolean).apply()
     }
 
-    companion object{
+    fun getWorkerState(): Boolean {
+        return prefs.getBoolean(MIDNIGHT_RESET, false)
+    }
+
+    fun setWorkerState(value: Boolean) {
+        prefs.edit().putBoolean(MIDNIGHT_RESET, value).apply()
+    }
+
+    companion object {
         private const val SETTINGS = "settings"
+        private const val MIDNIGHT_RESET = "midnight_reset"
         const val PUSH_ALARM = "pushAlarm"
     }
 }

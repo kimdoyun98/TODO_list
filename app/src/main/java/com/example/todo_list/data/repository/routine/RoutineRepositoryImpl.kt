@@ -19,4 +19,6 @@ class RoutineRepositoryImpl @Inject constructor(
     override suspend fun insert(routineEntity: RoutineEntity) = routineDAO.insert(routineEntity)
 
     override suspend fun delete(id: Int) = routineDAO.delete(id)
+
+    override suspend fun resetSuccess(): Int = routineDAO.resetSuccess()
 }

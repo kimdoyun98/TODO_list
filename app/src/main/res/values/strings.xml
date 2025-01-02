@@ -53,4 +53,7 @@
 
     <string name="routine_register_floating_button">루틴 등록 버튼</string>
     <string name="schedule_register_floating_button">일정 등록 버튼</string>
+
+    <string name="notification_reset_ticker">루틴 초기화</string>
+    <string name="notification_reset_content">루틴 초기화 중</string>
 </resources>
