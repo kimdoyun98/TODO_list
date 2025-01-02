@@ -16,6 +16,7 @@ import com.example.todo_list.alarm.Alarm.Companion.CHECKED_DAY_LIST
 import com.example.todo_list.alarm.Alarm.Companion.CONTENT
 import com.example.todo_list.alarm.Alarm.Companion.HOUR
 import com.example.todo_list.alarm.Alarm.Companion.MINUTE
+import com.example.todo_list.ui.MainActivity
 import com.example.todo_list.util.MyApplication
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -64,7 +65,7 @@ class AlarmReceiver : BroadcastReceiver() {
             .setSmallIcon(R.mipmap.todo_icon)
             .setContentTitle(context.getString(R.string.app_name))
             .setContentText(content)
-            .setAutoCancel(false)
+            .setAutoCancel(true)
             .setShowWhen(true)
             .setColor(ContextCompat.getColor(context, R.color.purple_200))
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
@@ -102,19 +103,19 @@ class AlarmReceiver : BroadcastReceiver() {
     }
 
     private fun createPendingIntent(context: Context, requestCode: Int): PendingIntent {
-        val serviceIntent = Intent(context, AlarmService::class.java)
+        val intent = Intent(context, MainActivity::class.java)
 
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)
             PendingIntent.getActivity(
                 context,
                 requestCode,
-                serviceIntent,
+                intent,
                 PendingIntent.FLAG_IMMUTABLE
             )
         else PendingIntent.getActivity(
             context,
             requestCode,
-            serviceIntent,
+            intent,
             PendingIntent.FLAG_UPDATE_CURRENT
         )
     }
