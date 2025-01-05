@@ -5,6 +5,7 @@ import android.app.NotificationManager
 import android.content.Context
 import android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC
 import android.os.Build
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.hilt.work.HiltWorker
 import androidx.work.CoroutineWorker
@@ -15,6 +16,7 @@ import androidx.work.WorkManager
 import androidx.work.WorkerParameters
 import com.example.todo_list.R
 import com.example.todo_list.data.repository.routine.RoutineRepository
+import com.example.todo_list.util.MyApplication.Companion.prefs
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import kotlinx.coroutines.coroutineScope
@@ -38,6 +40,7 @@ class ResetRoutineWorker @AssistedInject constructor(
         private const val NOTIFICATION_ID = 101
 
         fun runReset(context: Context) {
+            Log.d("ResetRoutineWorker", "runReset")
             val duration = getDurationTime()
 
             val workRequest = OneTimeWorkRequestBuilder<ResetRoutineWorker>()
@@ -74,8 +77,10 @@ class ResetRoutineWorker @AssistedInject constructor(
         try {
             setForeground(createForegroundInfo())
             routineRepository.resetSuccess()
+            prefs.setWorkLog("Success")
             Result.success()
         } catch (e: Exception) {
+            prefs.setWorkLog(e.message.toString())
             Result.failure()
         } finally {
             runReset(applicationContext)

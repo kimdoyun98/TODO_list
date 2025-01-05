@@ -23,6 +23,14 @@ class PreferenceUtil(context: Context) {
         prefs.edit().putBoolean(MIDNIGHT_RESET, value).apply()
     }
 
+    fun getWorkerLog(): String? {
+        return prefs.getString("Test", "Null")
+    }
+
+    fun setWorkLog(log: String){
+        prefs.edit().putString("Test", log).apply()
+    }
+
     companion object {
         private const val SETTINGS = "settings"
         private const val MIDNIGHT_RESET = "midnight_reset"

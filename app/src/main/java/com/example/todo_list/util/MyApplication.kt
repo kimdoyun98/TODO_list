@@ -1,6 +1,7 @@
 package com.example.todo_list.util
 
 import android.app.Application
+import android.util.Log
 import androidx.hilt.work.HiltWorkerFactory
 import androidx.work.Configuration
 import com.example.todo_list.worker.ResetRoutineWorker
@@ -15,6 +16,7 @@ class MyApplication : Application(), Configuration.Provider {
     override val workManagerConfiguration: Configuration
         get() = Configuration.Builder()
             .setWorkerFactory(workerFactory)
+            .setMinimumLoggingLevel(Log.DEBUG)
             .build()
 
     override fun onCreate() {
@@ -22,6 +24,8 @@ class MyApplication : Application(), Configuration.Provider {
         prefs = PreferenceUtil(applicationContext)
         instance = this
 
+        Log.e("WorkerState", prefs.getWorkerState().toString())
+        Log.e("WorkerLog", prefs.getWorkerLog().toString())
         if(!prefs.getWorkerState()){
             ResetRoutineWorker.runReset(this)
             prefs.setWorkerState(true)

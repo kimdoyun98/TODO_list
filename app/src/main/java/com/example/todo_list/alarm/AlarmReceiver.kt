@@ -21,7 +21,6 @@ import com.example.todo_list.util.MyApplication
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.lang.Thread.sleep
 import java.util.Calendar
 
 class AlarmReceiver : BroadcastReceiver() {
@@ -31,6 +30,8 @@ class AlarmReceiver : BroadcastReceiver() {
         val checkedDayList = intent?.extras!!.getBooleanArray(CHECKED_DAY_LIST)
         val requestCode = intent.extras!!.getInt(ALARM_REQUEST_CODE)
         val content = intent.extras!!.getString(CONTENT)
+        val hour = intent.extras!!.getInt(HOUR)
+        val minute = intent.extras!!.getInt(MINUTE)
 
         if (!checkedDayList!![today - 1] || !MyApplication.prefs.getAlarm()) return
 
@@ -47,8 +48,8 @@ class AlarmReceiver : BroadcastReceiver() {
         CoroutineScope(Dispatchers.IO).launch {
             resetAlarm(
                 context,
-                intent.extras!!.getInt(HOUR),
-                intent.extras!!.getInt(MINUTE),
+                hour,
+                minute,
                 requestCode,
                 content!!,
                 checkedDayList.toMutableList()
@@ -82,7 +83,6 @@ class AlarmReceiver : BroadcastReceiver() {
         checkedDayList: MutableList<Boolean>
     ) {
         try {
-            sleep(60000)
             Alarm(context).setAlarm(
                 hour,
                 minute,
